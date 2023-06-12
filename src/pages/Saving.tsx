@@ -65,6 +65,8 @@ const Saving = () => {
   );
 };
 
+export default Saving;
+
 const SavingLayout = styled.div`
   width: 100vw;
   height: 100vh;
@@ -211,5 +213,3 @@ const NavText = styled.div`
   font-size: 12px;
   margin-top: 5px;
 `;
-
-export default Saving;
