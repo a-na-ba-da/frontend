@@ -1,20 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
-import SearchIcon from '@mui/icons-material/Search';
 import QuestionAnswerOutlinedIcon from '@mui/icons-material/QuestionAnswerOutlined';
 import Header from '../components/Header';
+import Search from '../components/Search';
 
 const Saving = () => {
   return (
     <SavingLayout>
       <Header />
       <Main>
-        <SearchBox>
-          <SearchInputBox placeholder="검색어를 입력해주세요" />
-          <SearchImg>
-            <SearchIcon style={{ verticalAlign: 'middle' }} />
-          </SearchImg>
-        </SearchBox>
+        <Search />
         <MenuCol>같이 사요</MenuCol>
         <MenuCol>같이 알아요</MenuCol>
         <ContentList>
@@ -63,31 +58,6 @@ export default Saving;
 const SavingLayout = styled.div`
   width: 100vw;
   height: 100vh;
-`;
-
-const SearchBox = styled.div`
-  position: relative;
-  height: 50px;
-  background-color: #fbfbfb;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0 10px;
-`;
-
-const SearchInputBox = styled.input`
-  box-sizing: border-box;
-  width: 100%;
-  height: 34px;
-  border: solid 1px #e7e7e7;
-  background-color: white;
-  border-radius: 5px;
-  padding-left: 10px;
-`;
-
-const SearchImg = styled.div`
-  position: absolute;
-  right: 20px;
 `;
 
 const Main = styled.main``;
