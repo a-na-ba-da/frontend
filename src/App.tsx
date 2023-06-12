@@ -1,5 +1,7 @@
+import Saving from './pages/Saving';
+
 const App: React.FC = () => {
-  return <h1>아나바다</h1>;
+  return <Saving />;
 };
 
 export default App;
