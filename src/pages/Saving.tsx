@@ -1,20 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import MessageOutlinedIcon from '@mui/icons-material/MessageOutlined';
 import SearchIcon from '@mui/icons-material/Search';
 import QuestionAnswerOutlinedIcon from '@mui/icons-material/QuestionAnswerOutlined';
+import Header from '../components/Header';
 
 const Saving = () => {
   return (
     <SavingLayout>
-      <Header>
-        <HeaderBox>
-          <HeaderText>아껴쓰기</HeaderText>
-          <HeaderMessage>
-            <MessageOutlinedIcon />
-          </HeaderMessage>
-        </HeaderBox>
-      </Header>
+      <Header />
       <Main>
         <SearchBox>
           <SearchInputBox placeholder="검색어를 입력해주세요" />
@@ -70,28 +63,6 @@ export default Saving;
 const SavingLayout = styled.div`
   width: 100vw;
   height: 100vh;
-`;
-
-const Header = styled.header`
-  top: 0;
-  width: 100%;
-`;
-
-const HeaderBox = styled.div`
-  position: relative;
-  height: 77px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const HeaderText = styled.span`
-  font-size: 18px;
-`;
-
-const HeaderMessage = styled.div`
-  position: absolute;
-  right: 30px;
 `;
 
 const SearchBox = styled.div`
