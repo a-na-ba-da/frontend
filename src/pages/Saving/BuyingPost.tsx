@@ -1,24 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
-import AccountCircleTwoToneIcon from '@mui/icons-material/AccountCircleTwoTone';
 
 import Button from '../../components/Button';
 import PostComment from '../../components/Post/PostComment';
+import PostHeader from '../../components/Post/PostHeader';
 
 const BuyingPost = () => {
   return (
     <PostLayout>
       <ImageBox></ImageBox>
       <Main>
-        <HeaderSection>
-          <HeaderUserBox>
-            <HeaderUserImg>
-              <AccountCircleTwoToneIcon sx={{ fontSize: 32 }} />
-            </HeaderUserImg>
-            <HeaderUserNameText>어두운 박쥐123</HeaderUserNameText>
-          </HeaderUserBox>
+        {/* props.children으로 전달된 Button 컴포넌트를 헤더 내부에서 배치 */}
+        <PostHeader>
           <Button />
-        </HeaderSection>
+        </PostHeader>
         <ContentSection>
           <TitleBox>썬크림 1 + 1</TitleBox>
           <DateBox>2020.11.06</DateBox>
@@ -52,32 +47,6 @@ const ImageBox = styled.div`
 
 const Main = styled.main`
   padding: 0 15px 200px 15px;
-`;
-
-const HeaderSection = styled.section`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #f3f3f3;
-  padding: 15px 0;
-`;
-
-const HeaderUserBox = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`;
-
-const HeaderUserImg = styled.div`
-  margin-right: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const HeaderUserNameText = styled.span`
-  font-size: 18px;
 `;
 
 const ContentSection = styled.section`
