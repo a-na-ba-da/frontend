@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import Header from '../../components/Header';
@@ -7,13 +7,23 @@ import Content from '../../components/Content';
 import Footer from '../../components/Footer';
 
 const SavingBoard = () => {
+  const [isBuyingMenu, setIsBuyingMenu] = useState<boolean>(true);
+
+  const handleClick = () => {
+    setIsBuyingMenu(!isBuyingMenu);
+  };
+
   return (
     <SavingLayout>
       <Header />
       <Main>
         <Search />
-        <MenuCol>같이 사요</MenuCol>
-        <MenuCol>같이 알아요</MenuCol>
+        <MenuCol onClick={handleClick} isBuyingMenu={isBuyingMenu}>
+          같이 사요
+        </MenuCol>
+        <MenuCol onClick={handleClick} isBuyingMenu={!isBuyingMenu}>
+          같이 알아요
+        </MenuCol>
         <Content />
       </Main>
       <Footer />
@@ -30,9 +40,14 @@ const SavingLayout = styled.div`
 
 const Main = styled.main``;
 
-const MenuCol = styled.div`
+interface MenuColProps {
+  isBuyingMenu: boolean;
+}
+
+const MenuCol = styled.div<MenuColProps>`
   font-size: 15px;
-  border-bottom: solid 2px #8f00ff;
+  border-bottom: ${(props) =>
+    props.isBuyingMenu ? '2px solid #8f00ff' : null};
   display: inline-flex;
   width: calc(100vw / 2);
   height: 50px;
