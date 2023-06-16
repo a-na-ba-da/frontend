@@ -1,10 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { StyledEngineProvider } from '@mui/styled-engine';
-import Button from '@mui/material/Button';
 import AccountCircleTwoToneIcon from '@mui/icons-material/AccountCircleTwoTone';
 import SmsOutlinedIcon from '@mui/icons-material/SmsOutlined';
 
+import Button from '../../components/Button';
 import Send from '../../asset/img/send.png';
 
 const BuyingPost = () => {
@@ -19,9 +18,7 @@ const BuyingPost = () => {
             </HeaderUserImg>
             <HeaderUserNameText>어두운 박쥐123</HeaderUserNameText>
           </HeaderUserBox>
-          <StyledEngineProvider injectFirst>
-            <MessageSendBtn>쪽지 보내기</MessageSendBtn>
-          </StyledEngineProvider>
+          <Button />
         </HeaderSection>
         <ContentSection>
           <TitleBox>썬크림 1 + 1</TitleBox>
