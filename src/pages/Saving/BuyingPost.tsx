@@ -71,20 +71,6 @@ const BuyingPost = () => {
 
 export default BuyingPost;
 
-const MessageSendBtn = styled(Button)`
-  background-color: #8f00ff;
-  color: white;
-  height: 30px;
-  width: 86px;
-  border-radius: 5px;
-  &:hover {
-    background-color: #8f00ff;
-  }
-  &:active {
-    background-color: #8f00ff;
-  }
-`;
-
 const PostLayout = styled.div`
   width: 100vw;
   height: 100vh;
