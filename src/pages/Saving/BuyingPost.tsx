@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import AccountCircleTwoToneIcon from '@mui/icons-material/AccountCircleTwoTone';
 
 import Button from '../../components/Button';
-import Comment from '../../components/Post/Comment';
+import PostComment from '../../components/Post/PostComment';
 
 const BuyingPost = () => {
   return (
@@ -31,7 +31,7 @@ const BuyingPost = () => {
             올리브영 닥터지 썬크림 같이 사실분 구합니다.
           </MainTextBox>
         </ContentSection>
-        <Comment />
+        <PostComment />
       </Main>
     </PostLayout>
   );
