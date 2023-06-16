@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import AccountCircleTwoToneIcon from '@mui/icons-material/AccountCircleTwoTone';
 import SmsOutlinedIcon from '@mui/icons-material/SmsOutlined';
 
-import Send from '../asset/img/send.png';
+import Send from '../../asset/img/send.png';
 
 const Comment = () => {
   return (

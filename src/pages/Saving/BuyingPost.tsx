@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import AccountCircleTwoToneIcon from '@mui/icons-material/AccountCircleTwoTone';
 
 import Button from '../../components/Button';
-import Comment from '../../components/Comment';
+import Comment from '../../components/Post/Comment';
 
 const BuyingPost = () => {
   return (
