@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import MessageOutlinedIcon from '@mui/icons-material/MessageOutlined';
 
-import Header from '../../components/Header';
+import Header from '../../components/Header/Header';
 import Search from '../../components/Search';
 import Content from '../../components/Content';
 import Footer from '../../components/Footer';
+import HeaderRight from '../../components/Header/HeaderRight';
 
 const SavingBoard = () => {
   const [isBuyingMenu, setIsBuyingMenu] = useState<boolean>(true);
@@ -16,7 +18,16 @@ const SavingBoard = () => {
 
   return (
     <SavingLayout>
-      <Header />
+      {/* 
+        props.children으로 전달된 컴포넌트를 헤더 내부에서 배치 
+        HeaderRight로 감싸면 오른쪽에 배치
+        HeaderLeft로 감싸면 왼쪽에 배치
+      */}
+      <Header>
+        <HeaderRight>
+          <MessageOutlinedIcon />
+        </HeaderRight>
+      </Header>
       <Main>
         <Search />
         <MenuCol
