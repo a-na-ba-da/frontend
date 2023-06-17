@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import {
   FormControl,
@@ -14,6 +14,12 @@ import HeaderLeft from '../../components/Header/HeaderLeft';
 import HeaderRight from '../../components/Header/HeaderRight';
 
 const BuyingPostEdit = () => {
+  const [selectedMethod, SetSelectedMethod] = useState<string>('');
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    SetSelectedMethod(e.target.value);
+  };
+
   return (
     <BuyingPostEditLayout>
       <Header title="같이 사요">
@@ -34,24 +40,28 @@ const BuyingPostEdit = () => {
           <Input placeholder="글 제목"></Input>
           <Input placeholder="공구 날짜"></Input>
           <Input placeholder="상대방이 지불해야하는 돈"></Input>
-          <Input placeholder="상품 URL"></Input>
           <CheckBox>
             <div>전달 방법</div>
             <FormControl>
-              <RadioGroup row>
+              <RadioGroup row value={selectedMethod} onChange={handleChange}>
                 <FormControlLabel
-                  value="대면"
+                  value="offline"
                   control={<Radio />}
                   label="대면"
                 />
                 <FormControlLabel
-                  value="비대면"
+                  value="online"
                   control={<Radio />}
                   label="비대면"
                 />
               </RadioGroup>
             </FormControl>
           </CheckBox>
+          {selectedMethod === 'online' ? (
+            <Input placeholder="상품 URL"></Input>
+          ) : selectedMethod === 'offline' ? (
+            <Input placeholder="장소"></Input>
+          ) : null}
           <TextArea placeholder="다른 사람과 같이 구매하고 싶은 상품에 대해&#13;설명해주세요 :)"></TextArea>
         </InputBox>
       </Main>
