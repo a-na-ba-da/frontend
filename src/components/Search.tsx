@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import SearchIcon from '@mui/icons-material/Search';
 
-const Search = () => {
+export default function Search() {
   return (
     <SearchLayout>
       <SearchInputBox placeholder="검색어를 입력해주세요" />
@@ -11,9 +11,7 @@ const Search = () => {
       </SearchImg>
     </SearchLayout>
   );
-};
-
-export default Search;
+}
 
 const SearchLayout = styled.header`
   position: relative;

@@ -30,7 +30,7 @@ interface HeaderProps {
   title: string;
 }
 
-const Header = ({ children, title }: HeaderProps) => {
+export default function Header({ children, title }: HeaderProps) {
   const leftContents = getLeftContents(children);
   const rightContents = getRightContents(children);
 
@@ -45,9 +45,7 @@ const Header = ({ children, title }: HeaderProps) => {
       </HeaderBox>
     </HeaderLayout>
   );
-};
-
-export default Header;
+}
 
 const HeaderLayout = styled.header`
   top: 0;

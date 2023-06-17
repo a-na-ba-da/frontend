@@ -13,7 +13,7 @@ import Header from '../../components/Header/Header';
 import HeaderLeft from '../../components/Header/HeaderLeft';
 import HeaderRight from '../../components/Header/HeaderRight';
 
-const BuyingPostEdit = () => {
+export default function BuyingPostEdit() {
   const [selectedMethod, SetSelectedMethod] = useState<string>('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -67,9 +67,7 @@ const BuyingPostEdit = () => {
       </Main>
     </BuyingPostEditLayout>
   );
-};
-
-export default BuyingPostEdit;
+}
 
 const BuyingPostEditLayout = styled.div`
   width: 100vw;

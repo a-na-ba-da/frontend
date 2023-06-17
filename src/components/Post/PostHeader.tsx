@@ -6,7 +6,7 @@ interface PostHeaderProps {
   children: React.ReactNode;
 }
 
-const PostHeader = (props: PostHeaderProps) => {
+export default function PostHeader(props: PostHeaderProps) {
   return (
     <HeaderLayout>
       <HeaderUserBox>
@@ -18,9 +18,7 @@ const PostHeader = (props: PostHeaderProps) => {
       {props.children}
     </HeaderLayout>
   );
-};
-
-export default PostHeader;
+}
 
 const HeaderLayout = styled.section`
   width: 100%;

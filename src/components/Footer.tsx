@@ -9,7 +9,7 @@ import SyncAltOutlinedIcon from '@mui/icons-material/SyncAltOutlined';
 const UNSELECTEDCOLOR = '#a3a1a2';
 // const SELECTEDCOLOR = '#8f00ff';
 
-const Footer = () => {
+export default function Footer() {
   return (
     <FooterLayout>
       <NavItem>
@@ -36,9 +36,7 @@ const Footer = () => {
       </NavItem>
     </FooterLayout>
   );
-};
-
-export default Footer;
+}
 
 const FooterLayout = styled.footer`
   position: fixed;

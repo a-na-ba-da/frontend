@@ -4,8 +4,6 @@ interface HeaderLeftProps {
   children?: React.ReactNode;
 }
 
-const HeaderLeft = ({ children }: HeaderLeftProps) => {
+export default function HeaderLeft({ children }: HeaderLeftProps) {
   return children;
-};
-
-export default HeaderLeft;
+}

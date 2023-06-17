@@ -5,7 +5,7 @@ import Button from '../../components/Button';
 import PostComment from '../../components/Post/PostComment';
 import PostHeader from '../../components/Post/PostHeader';
 
-const BuyingPost = () => {
+export default function BuyingPost() {
   return (
     <PostLayout>
       <ImageBox></ImageBox>
@@ -30,9 +30,7 @@ const BuyingPost = () => {
       </Main>
     </PostLayout>
   );
-};
-
-export default BuyingPost;
+}
 
 const PostLayout = styled.div`
   width: 100vw;

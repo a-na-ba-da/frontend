@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import SmsOutlinedIcon from '@mui/icons-material/SmsOutlined';
 
-const Content = () => {
+export default function Content() {
   return (
     <ContentLayout>
       <ContentItem>
@@ -19,9 +19,7 @@ const Content = () => {
       </ContentItem>
     </ContentLayout>
   );
-};
-
-export default Content;
+}
 
 const ContentLayout = styled.div`
   display: flex;

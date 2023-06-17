@@ -5,7 +5,7 @@ import SmsOutlinedIcon from '@mui/icons-material/SmsOutlined';
 
 import Send from '../../asset/img/send.png';
 
-const PostComment = () => {
+export default function PostComment() {
   return (
     <CommentLayout>
       <SmsOutlinedIcon
@@ -40,9 +40,7 @@ const PostComment = () => {
       </CommentInputSection>
     </CommentLayout>
   );
-};
-
-export default PostComment;
+}
 
 const CommentLayout = styled.section``;
 

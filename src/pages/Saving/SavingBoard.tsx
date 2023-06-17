@@ -8,7 +8,7 @@ import Content from '../../components/Content';
 import Footer from '../../components/Footer';
 import HeaderRight from '../../components/Header/HeaderRight';
 
-const SavingBoard = () => {
+export default function SavingBoard() {
   const [isBuyingMenu, setIsBuyingMenu] = useState<boolean>(true);
 
   const handleClick = (whatMenu: string) => {
@@ -47,9 +47,7 @@ const SavingBoard = () => {
       <Footer />
     </SavingLayout>
   );
-};
-
-export default SavingBoard;
+}
 
 const SavingLayout = styled.div`
   width: 100vw;
