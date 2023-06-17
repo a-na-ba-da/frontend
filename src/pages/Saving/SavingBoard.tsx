@@ -23,7 +23,7 @@ const SavingBoard = () => {
         HeaderRight로 감싸면 오른쪽에 배치
         HeaderLeft로 감싸면 왼쪽에 배치
       */}
-      <Header>
+      <Header title="아껴쓰기">
         <HeaderRight>
           <MessageOutlinedIcon />
         </HeaderRight>

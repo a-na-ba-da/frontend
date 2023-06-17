@@ -27,9 +27,10 @@ function getRightContents(children: React.ReactNode) {
 
 interface HeaderProps {
   children?: React.ReactNode;
+  title: string;
 }
 
-const Header = ({ children }: HeaderProps) => {
+const Header = ({ children, title }: HeaderProps) => {
   const leftContents = getLeftContents(children);
   const rightContents = getRightContents(children);
 
@@ -37,7 +38,7 @@ const Header = ({ children }: HeaderProps) => {
     <HeaderLayout>
       <HeaderBox>
         <LeftSection>{leftContents && <div>{leftContents}</div>}</LeftSection>
-        <HeaderText>아껴쓰기</HeaderText>
+        <HeaderText>{title}</HeaderText>
         <RightSection>
           {rightContents && <div>{rightContents}</div>}
         </RightSection>
