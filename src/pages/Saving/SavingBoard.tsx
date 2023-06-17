@@ -9,8 +9,9 @@ import Footer from '../../components/Footer';
 const SavingBoard = () => {
   const [isBuyingMenu, setIsBuyingMenu] = useState<boolean>(true);
 
-  const handleClick = () => {
-    setIsBuyingMenu(!isBuyingMenu);
+  const handleClick = (whatMenu: string) => {
+    if (whatMenu === 'buying') setIsBuyingMenu(true);
+    else setIsBuyingMenu(false);
   };
 
   return (
@@ -18,10 +19,16 @@ const SavingBoard = () => {
       <Header />
       <Main>
         <Search />
-        <MenuCol onClick={handleClick} isBuyingMenu={isBuyingMenu}>
+        <MenuCol
+          onClick={() => handleClick('buying')}
+          isBuyingMenu={isBuyingMenu}
+        >
           같이 사요
         </MenuCol>
-        <MenuCol onClick={handleClick} isBuyingMenu={!isBuyingMenu}>
+        <MenuCol
+          onClick={() => handleClick('knowing')}
+          isBuyingMenu={!isBuyingMenu}
+        >
           같이 알아요
         </MenuCol>
         <Content />
