@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
+
 import ContentBuyingItem from './ContentBuyingItem';
 import ContentKnowingItem from './ContentKnowingItem';
+import { getBuyingPostList, getKnowingPostList } from '../../api/saving';
 
 interface ContentProps {
   isBuyingMenu: boolean;
@@ -52,39 +53,15 @@ export default function Content({ isBuyingMenu }: ContentProps) {
 
   useEffect(() => {
     if (isBuyingMenu) {
-      axios
-        .get('http://172.105.237.249:8080/api/v1/saving/buy-together', {
-          params: {
-            // page: 0,
-            // size: 1,
-            // sort: 'string',
-            // onlyOnlineBought: false,
-            // lat: 0,
-            // lng: 0,
-            // distance: 0,
-          },
-        })
-        .then((res) => {
-          setBuyingPostList(res.data.content);
-          console.log(res.data);
-        });
+      getBuyingPostList().then((res) => {
+        setBuyingPostList(res.data.content);
+        console.log(res.data);
+      });
     } else {
-      axios
-        .get('http://172.105.237.249:8080/api/v1/saving/know-together', {
-          params: {
-            // page: 0,
-            // size: 1,
-            // sort: 'string',
-            // onlyOnlineBought: false,
-            // lat: 0,
-            // lng: 0,
-            // distance: 0,
-          },
-        })
-        .then((res) => {
-          setKnowingPostList(res.data.content);
-          console.log(res.data);
-        });
+      getKnowingPostList().then((res) => {
+        setKnowingPostList(res.data.content);
+        console.log(res.data);
+      });
     }
   }, [isBuyingMenu]);
 
