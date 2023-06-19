@@ -1,18 +1,27 @@
 import React from 'react';
 import styled from 'styled-components';
 import SmsOutlinedIcon from '@mui/icons-material/SmsOutlined';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
 
 interface ContentKnowingItemProps {
+  id: number;
   title: string;
   date: string;
 }
 
 export default function ContentKnowingItem({
+  id,
   title,
   date,
 }: ContentKnowingItemProps) {
+  const navigate: NavigateFunction = useNavigate();
+
+  const goPost = () => {
+    navigate(`/saving/knowing/${id}`);
+  };
+
   return (
-    <ItemLayout>
+    <ItemLayout onClick={goPost}>
       <ThumbnailCol></ThumbnailCol>
       <DescriptionCol>
         <div>
