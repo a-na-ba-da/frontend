@@ -46,6 +46,7 @@ const FooterLayout = styled.footer`
   border-top: solid 1px #f0f0f0;
   display: flex;
   justify-content: space-around;
+  background-color: white;
 `;
 
 const NavItem = styled.div`
