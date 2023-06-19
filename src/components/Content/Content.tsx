@@ -116,6 +116,5 @@ const ContentLayout = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 0 15px;
-  height: calc(100vh - 179px);
   overflow: scroll;
 `;

@@ -23,12 +23,12 @@ export default function SavingBoard() {
         HeaderRight로 감싸면 오른쪽에 배치
         HeaderLeft로 감싸면 왼쪽에 배치
       */}
-      <Header title="아껴쓰기">
-        <HeaderRight>
-          <MessageOutlinedIcon />
-        </HeaderRight>
-      </Header>
-      <Main>
+      <HeaderSection>
+        <Header title="아껴쓰기">
+          <HeaderRight>
+            <MessageOutlinedIcon />
+          </HeaderRight>
+        </Header>
         <Search />
         <MenuCol
           onClick={() => handleClick('buying')}
@@ -42,8 +42,10 @@ export default function SavingBoard() {
         >
           같이 알아요
         </MenuCol>
+      </HeaderSection>
+      <ContentSection>
         <Content isBuyingMenu={isBuyingMenu} />
-      </Main>
+      </ContentSection>
       <Footer />
     </SavingLayout>
   );
@@ -54,7 +56,15 @@ const SavingLayout = styled.div`
   height: 100vh;
 `;
 
-const Main = styled.main``;
+const HeaderSection = styled.section`
+  position: fixed;
+  background-color: white;
+`;
+
+const ContentSection = styled.section`
+  padding-top: 177px;
+  padding-bottom: 79px;
+`;
 
 interface MenuColProps {
   isBuyingMenu: boolean;
