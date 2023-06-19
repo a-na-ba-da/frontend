@@ -1,8 +1,13 @@
+// 자주 사용되는 타입을 관리
+// 이 파일에서 타입을 지정해주면 각 파일 내부에서 import 없이 바로 사용 가능
+
+// 이미지 import 관련 타입 지정
 declare module '*.jpg';
 declare module '*.png';
 declare module '*.jpeg';
 declare module '*.gif';
 
+// 아껴쓰기-같이사요 게시글 타입
 interface buyingPostType {
   id: number;
   title: string;
@@ -22,7 +27,7 @@ interface buyingPostType {
     activated: boolean;
   };
 }
-
+// 아껴쓰기-같이알아요 게시글 타입
 interface knowingPostType {
   id: number;
   title: string;
