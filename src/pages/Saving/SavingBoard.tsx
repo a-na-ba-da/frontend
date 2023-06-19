@@ -12,8 +12,21 @@ export default function SavingBoard() {
   const [isBuyingMenu, setIsBuyingMenu] = useState<boolean>(true);
 
   const handleClick = (whatMenu: string) => {
-    if (whatMenu === 'buying') setIsBuyingMenu(true);
-    else setIsBuyingMenu(false);
+    // 현재 선택된 메뉴를 또 클릭시 smooth한 스크롤로 최상단 이동
+    if (
+      (whatMenu === 'buying' && isBuyingMenu) ||
+      (whatMenu === 'knowing' && !isBuyingMenu)
+    )
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    // 현재 선택되지 않은 메뉴를 클릭시 메뉴 전환 후 스크롤 최상단 이동
+    // 전환후 최상단 스크롤 이동이 없을 경우 이전 메뉴의 스크롤이 전환 후 메뉴 스크롤에도 남게됨
+    else if (whatMenu === 'buying') {
+      setIsBuyingMenu(true);
+      window.scrollTo({ top: 0 });
+    } else {
+      setIsBuyingMenu(false);
+      window.scrollTo({ top: 0 });
+    }
   };
 
   return (
