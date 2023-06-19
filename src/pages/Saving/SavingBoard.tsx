@@ -59,7 +59,7 @@ export default function SavingBoard() {
       <ContentSection>
         <Content isBuyingMenu={isBuyingMenu} />
       </ContentSection>
-      <Footer />
+      <Footer pageName="saving" />
     </SavingLayout>
   );
 }
