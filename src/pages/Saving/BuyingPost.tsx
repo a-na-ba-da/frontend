@@ -10,25 +10,6 @@ import { getBuyingPost } from '../../api/saving';
 export default function BuyingPost() {
   const { id } = useParams();
 
-  interface buyingPostType {
-    id: number;
-    title: string;
-    content: string;
-    productUrl: string | null;
-    buyPlaceLat: number | null;
-    buyPlaceLng: number | null;
-    buyDate: string;
-    pay: number;
-    createdAt: string;
-    modifiedAt: string;
-    images: string[];
-    onlineDelivery: boolean;
-    writer: {
-      id: number;
-      nickname: string;
-      activated: boolean;
-    };
-  }
   const [buyingPost, setBuyingPost] = useState<buyingPostType>();
 
   useEffect(() => {

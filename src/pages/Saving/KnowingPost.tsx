@@ -10,24 +10,6 @@ import { getKnowingPost } from '../../api/saving';
 export default function KnowingPost() {
   const { id } = useParams();
 
-  interface knowingPostType {
-    id: number;
-    title: string;
-    content: string;
-    productUrl: string | null;
-    buyPlaceLat: string | null;
-    buyPlaceLng: string | null;
-    isOnlineBought: boolean;
-    createdAt: string;
-    modifiedAt: string;
-    images: string[];
-    writer: {
-      id: number;
-      nickname: string;
-      activated: boolean;
-    };
-  }
-
   const [knowingPost, setKnowingPost] = useState<knowingPostType>();
 
   useEffect(() => {
