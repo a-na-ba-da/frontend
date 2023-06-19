@@ -1,8 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import SmsOutlinedIcon from '@mui/icons-material/SmsOutlined';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
 
 interface ContentBuyingItemProps {
+  id: number;
   title: string;
   date: string;
   isOnline: boolean;
@@ -10,13 +12,20 @@ interface ContentBuyingItemProps {
 }
 
 export default function ContentBuyingItem({
+  id,
   title,
   date,
   isOnline,
   price,
 }: ContentBuyingItemProps) {
+  const navigate: NavigateFunction = useNavigate();
+
+  const goPost = () => {
+    navigate(`/saving/buying/${id}`);
+  };
+
   return (
-    <ItemLayout>
+    <ItemLayout onClick={goPost}>
       <ThumbnailCol></ThumbnailCol>
       <DescriptionCol>
         <TitleText>{title}</TitleText>

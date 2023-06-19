@@ -71,6 +71,7 @@ export default function Content({ isBuyingMenu }: ContentProps) {
         ? buyingPostList.map((post) => (
             <ContentBuyingItem
               key={post.id}
+              id={post.id}
               title={post.title}
               date={post.createdAt}
               isOnline={post.onlineDelivery}
@@ -80,6 +81,7 @@ export default function Content({ isBuyingMenu }: ContentProps) {
         : knowingPostList.map((post) => (
             <ContentKnowingItem
               key={post.id}
+              id={post.id}
               title={post.title}
               date={post.createdAt}
             />

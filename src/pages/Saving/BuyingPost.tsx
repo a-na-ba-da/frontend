@@ -1,11 +1,43 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { useParams } from 'react-router-dom';
 
 import Button from '../../components/Button';
 import PostComment from '../../components/Post/PostComment';
 import PostHeader from '../../components/Post/PostHeader';
+import { getBuyingPost } from '../../api/saving';
 
 export default function BuyingPost() {
+  const { id } = useParams();
+
+  interface buyingPostType {
+    id: number;
+    title: string;
+    content: string;
+    productUrl: string | null;
+    buyPlaceLat: number | null;
+    buyPlaceLng: number | null;
+    buyDate: string;
+    pay: number;
+    createdAt: string;
+    modifiedAt: string;
+    images: string[];
+    onlineDelivery: boolean;
+    writer: {
+      id: number;
+      nickname: string;
+      activated: boolean;
+    };
+  }
+  const [buyingPost, setBuyingPost] = useState<buyingPostType>();
+
+  useEffect(() => {
+    getBuyingPost(id).then((res) => {
+      console.log(res.data);
+      setBuyingPost(res.data);
+    });
+  }, []);
+
   return (
     <PostLayout>
       <ImageBox></ImageBox>
@@ -15,16 +47,16 @@ export default function BuyingPost() {
           <Button />
         </PostHeader>
         <ContentSection>
-          <TitleBox>썬크림 1 + 1</TitleBox>
-          <DateBox>2020.11.06</DateBox>
-          <DescriptionBox>공구 날짜 | 2020.11.06</DescriptionBox>
-          <DescriptionBox>전달 방법 | 대면</DescriptionBox>
+          <TitleBox>{buyingPost?.title}</TitleBox>
+          <DateBox>{buyingPost?.createdAt}</DateBox>
+          <DescriptionBox>공구 날짜 | {buyingPost?.buyDate}</DescriptionBox>
           <DescriptionBox>
-            내가 내야할 금액 | <PriceText>5,000원</PriceText>
+            전달 방법 | {buyingPost?.onlineDelivery ? '비대면' : '대면'}
           </DescriptionBox>
-          <MainTextBox>
-            올리브영 닥터지 썬크림 같이 사실분 구합니다.
-          </MainTextBox>
+          <DescriptionBox>
+            내가 내야할 금액 | <PriceText>{buyingPost?.pay}원</PriceText>
+          </DescriptionBox>
+          <MainTextBox>{buyingPost?.content}</MainTextBox>
         </ContentSection>
         <PostComment />
       </Main>
