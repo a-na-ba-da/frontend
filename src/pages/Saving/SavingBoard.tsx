@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import MessageOutlinedIcon from '@mui/icons-material/MessageOutlined';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 import Header from '../../components/Header/Header';
 import Search from '../../components/Search';
@@ -59,6 +60,12 @@ export default function SavingBoard() {
       <ContentSection>
         <Content isBuyingMenu={isBuyingMenu} />
       </ContentSection>
+      <AddBox>
+        <AddCircleIcon
+          color="primary"
+          sx={{ fontSize: 50, backgroundColor: 'white', display: 'block' }}
+        />
+      </AddBox>
       <Footer pageName="saving" />
     </SavingLayout>
   );
@@ -92,4 +99,12 @@ const MenuCol = styled.div<MenuColProps>`
   height: 50px;
   justify-content: center;
   align-items: center;
+`;
+
+const AddBox = styled.div`
+  position: fixed;
+  border-radius: 50px;
+  overflow: hidden;
+  right: 15px;
+  bottom: 90px;
 `;
