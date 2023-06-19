@@ -4,7 +4,7 @@ import MessageOutlinedIcon from '@mui/icons-material/MessageOutlined';
 
 import Header from '../../components/Header/Header';
 import Search from '../../components/Search';
-import Content from '../../components/Content';
+import Content from '../../components/Content/Content';
 import Footer from '../../components/Footer';
 import HeaderRight from '../../components/Header/HeaderRight';
 
@@ -42,7 +42,7 @@ export default function SavingBoard() {
         >
           같이 알아요
         </MenuCol>
-        <Content />
+        <Content isBuyingMenu={isBuyingMenu} />
       </Main>
       <Footer />
     </SavingLayout>

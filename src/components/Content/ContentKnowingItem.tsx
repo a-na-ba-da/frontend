@@ -2,34 +2,33 @@ import React from 'react';
 import styled from 'styled-components';
 import SmsOutlinedIcon from '@mui/icons-material/SmsOutlined';
 
-export default function Content() {
+interface ContentKnowingItemProps {
+  title: string;
+  date: string;
+}
+
+export default function ContentKnowingItem({
+  title,
+  date,
+}: ContentKnowingItemProps) {
   return (
-    <ContentLayout>
-      <ContentItem>
-        <ThumbnailCol></ThumbnailCol>
-        <DescriptionCol>
-          <TitleText>썬크림 1 + 1</TitleText>
-          <DateText>2020.11.06 | 비대면</DateText>
-          <PriceText>5,000원</PriceText>
-          <ChatBox>
-            <SmsOutlinedIcon fontSize="small" />
-            <ChatCountText>2</ChatCountText>
-          </ChatBox>
-        </DescriptionCol>
-      </ContentItem>
-    </ContentLayout>
+    <ItemLayout>
+      <ThumbnailCol></ThumbnailCol>
+      <DescriptionCol>
+        <div>
+          <TitleText>{title}</TitleText>
+          <DateText>{date}</DateText>
+        </div>
+        <ChatBox>
+          <SmsOutlinedIcon fontSize="small" />
+          <ChatCountText>2</ChatCountText>
+        </ChatBox>
+      </DescriptionCol>
+    </ItemLayout>
   );
 }
 
-const ContentLayout = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 0 15px;
-  height: calc(100vh - 179px);
-`;
-
-const ContentItem = styled.div`
+const ItemLayout = styled.div`
   box-sizing: border-box;
   width: 100%;
   display: flex;
@@ -54,16 +53,12 @@ const DescriptionCol = styled.div`
 
 const TitleText = styled.div`
   font-size: 15px;
+  margin-bottom: 5px;
 `;
 
 const DateText = styled.div`
   font-size: 13px;
   color: #999999;
-`;
-
-const PriceText = styled.div`
-  font-size: 15px;
-  color: #8f00ff;
 `;
 
 const ChatBox = styled.div`
