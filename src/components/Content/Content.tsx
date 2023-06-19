@@ -117,4 +117,7 @@ const ContentLayout = styled.div`
   align-items: center;
   padding: 0 15px;
   overflow: scroll;
+  & :last-child {
+    border: 0;
+  }
 `;
