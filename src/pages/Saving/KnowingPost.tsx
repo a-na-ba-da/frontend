@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 
+import PostBack from '../../components/Post/PostBack';
 import Button from '../../components/Button';
 import PostComment from '../../components/Post/PostComment';
 import PostHeader from '../../components/Post/PostHeader';
@@ -9,7 +10,6 @@ import { getKnowingPost } from '../../api/saving';
 
 export default function KnowingPost() {
   const { id } = useParams();
-
   const [knowingPost, setKnowingPost] = useState<knowingPostType>();
 
   useEffect(() => {
@@ -28,6 +28,7 @@ export default function KnowingPost() {
 
   return (
     <PostLayout>
+      <PostBack color="white" />
       <ImageBox></ImageBox>
       <Main>
         {/* props.children으로 전달된 Button 컴포넌트를 헤더 내부에서 배치 */}
