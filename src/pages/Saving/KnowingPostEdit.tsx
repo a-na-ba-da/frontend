@@ -7,11 +7,11 @@ import {
   RadioGroup,
 } from '@mui/material';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
-import CloseIcon from '@mui/icons-material/Close';
 
 import Header from '../../components/Header/Header';
 import HeaderLeft from '../../components/Header/HeaderLeft';
 import HeaderRight from '../../components/Header/HeaderRight';
+import PostBack from '../../components/Post/PostBack';
 
 export default function KnowingPostEdit() {
   const [selectedMethod, SetSelectedMethod] = useState<string>('');
@@ -24,7 +24,7 @@ export default function KnowingPostEdit() {
     <KnowingPostEditLayout>
       <Header title="같이 알아요">
         <HeaderLeft>
-          <CloseIcon color="primary" />
+          <PostBack color="#8F00FF" whatShape="cross" />
         </HeaderLeft>
         <HeaderRight>
           <ConfirmText>확인</ConfirmText>

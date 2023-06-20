@@ -28,7 +28,7 @@ export default function KnowingPost() {
 
   return (
     <PostLayout>
-      <PostBack color="white" />
+      <PostBack color="white" whatShape="back" />
       <ImageBox></ImageBox>
       <Main>
         {/* props.children으로 전달된 Button 컴포넌트를 헤더 내부에서 배치 */}
