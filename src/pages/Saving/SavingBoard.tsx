@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
 import MessageOutlinedIcon from '@mui/icons-material/MessageOutlined';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 
@@ -11,6 +12,13 @@ import HeaderRight from '../../components/Header/HeaderRight';
 
 export default function SavingBoard() {
   const [isBuyingMenu, setIsBuyingMenu] = useState<boolean>(true);
+  const navigate: NavigateFunction = useNavigate();
+
+  const goWrite = () => {
+    isBuyingMenu
+      ? navigate('/saving/buying/write')
+      : navigate('/saving/knowing/write');
+  };
 
   const handleClick = (whatMenu: string) => {
     // 현재 선택된 메뉴를 또 클릭시 smooth한 스크롤로 최상단 이동
@@ -60,7 +68,7 @@ export default function SavingBoard() {
       <ContentSection>
         <Content isBuyingMenu={isBuyingMenu} />
       </ContentSection>
-      <AddBox>
+      <AddBox onClick={goWrite}>
         <AddCircleIcon
           color="primary"
           sx={{ fontSize: 50, backgroundColor: 'white', display: 'block' }}
