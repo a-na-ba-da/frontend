@@ -46,11 +46,18 @@ module.exports = {
       template: './public/index.html',
     }),
   ],
+  // devServer: {
+  //   historyApiFallback: {
+  //     index: 'index.html',
+  //   },
+  //   port: 3000,
+  //   hot: true,
+  // },
   devServer: {
-    historyApiFallback: {
-      index: 'index.html',
-    },
+    host: 'localhost',
     port: 3000,
+    historyApiFallback: true,
     hot: true,
-  },
+    open: true
+  }  
 };
