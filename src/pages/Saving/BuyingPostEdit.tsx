@@ -1,20 +1,22 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { ImageListType } from 'react-images-uploading';
 import {
   FormControl,
   FormControlLabel,
   Radio,
   RadioGroup,
 } from '@mui/material';
-import CameraAltIcon from '@mui/icons-material/CameraAlt';
 
 import Header from '../../components/Header/Header';
 import HeaderLeft from '../../components/Header/HeaderLeft';
 import HeaderRight from '../../components/Header/HeaderRight';
 import PostBack from '../../components/Post/PostBack';
+import EditImgUpload from '../../components/Post/Edit/EditImgUpload';
 
 export default function BuyingPostEdit() {
   const [selectedMethod, SetSelectedMethod] = useState<string>('');
+  const [images, setImages] = useState<ImageListType>([]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     SetSelectedMethod(e.target.value);
@@ -32,10 +34,7 @@ export default function BuyingPostEdit() {
       </Header>
       <Line />
       <Main>
-        <ImgBox>
-          <CameraAltIcon />
-          <ImgCountBox>0 / 10</ImgCountBox>
-        </ImgBox>
+        <EditImgUpload images={images} setImages={setImages} />
         <InputBox>
           <Input placeholder="글 제목"></Input>
           <Input placeholder="공구 날짜"></Input>
@@ -88,23 +87,6 @@ const Line = styled.hr`
 
 const Main = styled.main`
   padding: 0 15px;
-`;
-
-const ImgBox = styled.div`
-  width: 60px;
-  height: 60px;
-  border: 1px solid #dedde2;
-  border-radius: 5px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 15px 0;
-`;
-
-const ImgCountBox = styled.div`
-  font-size: 12px;
-  margin-top: 2px;
 `;
 
 const InputBox = styled.div`
