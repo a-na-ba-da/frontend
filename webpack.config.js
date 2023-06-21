@@ -1,4 +1,8 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 module.exports = {
   entry: './src/index.tsx',
@@ -48,7 +52,12 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './public/index.html',
+      env: process.env, // index.html에서 detenv 사용을 위한 설정
     }),
+    // dotenv 사용을 위한 설정
+    new webpack.DefinePlugin({
+      'process.env': JSON.stringify(process.env),
+    })
   ],
   // devServer: {
   //   historyApiFallback: {
