@@ -4,6 +4,8 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import styled from 'styled-components';
 
+import baseURL from '../../api/basURL';
+
 const sliderSettings = {
   arrows: false,
   dots: true,
@@ -22,9 +24,7 @@ export default function PostImgSlider({ images }: PostImgSliderProps) {
     <PostImgSliderLayout isExist={images ? images.length > 0 : false}>
       <Slider {...sliderSettings}>
         {images &&
-          images.map((item) => (
-            <Image src={'http://172.105.237.249:8080/api/v1/image/' + item} />
-          ))}
+          images.map((item) => <Image src={baseURL + '/image/' + item} />)}
       </Slider>
     </PostImgSliderLayout>
   );
