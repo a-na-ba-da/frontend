@@ -7,6 +7,9 @@ declare module '*.png';
 declare module '*.jpeg';
 declare module '*.gif';
 
+// react-slick 라이브러리 타입
+declare module 'react-slick';
+
 // 아껴쓰기-같이사요 게시글 타입
 interface buyingPostType {
   id: number;

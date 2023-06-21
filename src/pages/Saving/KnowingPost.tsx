@@ -7,6 +7,7 @@ import Button from '../../components/Button';
 import PostComment from '../../components/Post/PostComment';
 import PostHeader from '../../components/Post/PostHeader';
 import { getKnowingPost } from '../../api/saving';
+import PostImgSlider from '../../components/Post/PostImgSlider';
 
 export default function KnowingPost() {
   const { id } = useParams();
@@ -29,7 +30,7 @@ export default function KnowingPost() {
   return (
     <PostLayout>
       <PostBack color="white" whatShape="back" />
-      <ImageBox></ImageBox>
+      <PostImgSlider images={knowingPost?.images} />
       <Main>
         {/* props.children으로 전달된 Button 컴포넌트를 헤더 내부에서 배치 */}
         <PostHeader>
@@ -57,12 +58,6 @@ export default function KnowingPost() {
 const PostLayout = styled.div`
   width: 100vw;
   height: 100vh;
-`;
-
-const ImageBox = styled.div`
-  width: 100vw;
-  height: 100vw;
-  background-color: #d9d9d9;
 `;
 
 const Main = styled.main`
