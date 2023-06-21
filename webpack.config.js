@@ -9,6 +9,10 @@ module.exports = {
         use: ['babel-loader', 'ts-loader'],
       }, 
       {
+        test:/\.css$/,
+        use:['style-loader','css-loader'],
+      },
+      {
         // 이미지 import 관련 웹팩 설정
         // 파일이 10k 보다 작을 경우 url-loader 문자열 번들링, 클 경우 file-loader로 파일 복사
         test: /\.(jpg|jpeg|gif|png|svg|ico)?$/,
