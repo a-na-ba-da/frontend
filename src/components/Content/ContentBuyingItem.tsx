@@ -2,10 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import SmsOutlinedIcon from '@mui/icons-material/SmsOutlined';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
+import baseURL from '../../api/basURL';
 
 interface ContentBuyingItemProps {
   id: number;
   title: string;
+  thumbnail: string | boolean;
   date: string;
   isOnline: boolean;
   price: number;
@@ -14,6 +16,7 @@ interface ContentBuyingItemProps {
 export default function ContentBuyingItem({
   id,
   title,
+  thumbnail,
   date,
   isOnline,
   price,
@@ -26,7 +29,9 @@ export default function ContentBuyingItem({
 
   return (
     <ItemLayout onClick={goPost}>
-      <ThumbnailCol></ThumbnailCol>
+      <ThumbnailCol
+        src={thumbnail ? baseURL + '/image/' + thumbnail : undefined}
+      />
       <DescriptionCol>
         <TitleText>{title}</TitleText>
         <DateText>
@@ -50,11 +55,12 @@ const ItemLayout = styled.div`
   border-bottom: solid 1px #e1e1e1;
 `;
 
-const ThumbnailCol = styled.div`
+const ThumbnailCol = styled.img`
   width: 100px;
   height: 100px;
   background-color: #d9d9d9;
   border-radius: 10px;
+  object-fit: cover;
 `;
 
 const DescriptionCol = styled.div`

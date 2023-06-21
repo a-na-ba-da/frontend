@@ -35,6 +35,7 @@ export default function Content({ isBuyingMenu }: ContentProps) {
               key={post.id}
               id={post.id}
               title={post.title}
+              thumbnail={post.images.length > 0 && post.images[0]}
               date={post.createdAt}
               isOnline={post.onlineDelivery}
               price={post.pay}
@@ -45,6 +46,7 @@ export default function Content({ isBuyingMenu }: ContentProps) {
               key={post.id}
               id={post.id}
               title={post.title}
+              thumbnail={post.images.length > 0 && post.images[0]}
               date={post.createdAt}
             />
           ))}
