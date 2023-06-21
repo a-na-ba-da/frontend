@@ -4,6 +4,7 @@ import AccountCircleTwoToneIcon from '@mui/icons-material/AccountCircleTwoTone';
 
 interface PostHeaderProps {
   children: React.ReactNode;
+  userName: string | undefined;
 }
 
 export default function PostHeader(props: PostHeaderProps) {
@@ -13,7 +14,7 @@ export default function PostHeader(props: PostHeaderProps) {
         <HeaderUserImg>
           <AccountCircleTwoToneIcon sx={{ fontSize: 32 }} />
         </HeaderUserImg>
-        <HeaderUserNameText>어두운 박쥐123</HeaderUserNameText>
+        <HeaderUserNameText>{props.userName}</HeaderUserNameText>
       </HeaderUserBox>
       {props.children}
     </HeaderLayout>

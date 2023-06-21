@@ -33,7 +33,7 @@ export default function KnowingPost() {
       <PostImgSlider images={knowingPost?.images} />
       <Main>
         {/* props.children으로 전달된 Button 컴포넌트를 헤더 내부에서 배치 */}
-        <PostHeader>
+        <PostHeader userName={knowingPost?.writer.nickname}>
           <Button />
         </PostHeader>
         <ContentSection>
