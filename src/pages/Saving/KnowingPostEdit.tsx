@@ -38,7 +38,7 @@ export default function KnowingPostEdit() {
         <InputBox>
           <Input placeholder="글 제목"></Input>
           <CheckBox>
-            <div>구매처</div>
+            <BuyPlaceText>구매처</BuyPlaceText>
             <FormControl>
               <RadioGroup row value={selectedMethod} onChange={handleChange}>
                 <FormControlLabel
@@ -50,6 +50,7 @@ export default function KnowingPostEdit() {
                   value="online"
                   control={<Radio />}
                   label="온라인"
+                  sx={{ marginRight: 0 }}
                 />
               </RadioGroup>
             </FormControl>
@@ -57,7 +58,10 @@ export default function KnowingPostEdit() {
           {selectedMethod === 'online' ? (
             <Input placeholder="행사 URL"></Input>
           ) : selectedMethod === 'offline' ? (
-            <Input placeholder="행사 위치"></Input>
+            <EventPositionBox>
+              <span>행사 위치</span>
+              <button>위치 선택</button>
+            </EventPositionBox>
           ) : null}
           <TextArea placeholder="다른 사람과 같이 구매하고 싶은 상품에 대해&#13;설명해주세요 :)"></TextArea>
         </InputBox>
@@ -112,6 +116,18 @@ const Input = styled.input`
   }
 `;
 
+const EventPositionBox = styled.div`
+  width: 100%;
+  height: 50px;
+  box-sizing: border-box;
+  font-size: 15px;
+  color: #d1d3d7;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px 2px 1px 2px;
+`;
+
 const CheckBox = styled.div`
   font-size: 15px;
   display: flex;
@@ -120,6 +136,10 @@ const CheckBox = styled.div`
   width: 100%;
   height: 50px;
   border: 0;
+`;
+
+const BuyPlaceText = styled.span`
+  padding: 2px 2px 1px 2px;
 `;
 
 const TextArea = styled.textarea`
