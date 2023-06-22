@@ -13,6 +13,7 @@ import HeaderLeft from '../../components/Header/HeaderLeft';
 import HeaderRight from '../../components/Header/HeaderRight';
 import PostBack from '../../components/Post/PostBack';
 import EditImgUpload from '../../components/Post/Edit/EditImgUpload';
+import Button from '../../components/Button';
 
 export default function KnowingPostEdit() {
   const [selectedMethod, SetSelectedMethod] = useState<string>('');
@@ -60,7 +61,12 @@ export default function KnowingPostEdit() {
           ) : selectedMethod === 'offline' ? (
             <EventPositionBox>
               <span>행사 위치</span>
-              <button>위치 선택</button>
+              <Button
+                content="위치 선택"
+                textColor="black"
+                backgroundColor="white"
+                borderColor="#d2d2d2"
+              />
             </EventPositionBox>
           ) : null}
           <TextArea placeholder="다른 사람과 같이 구매하고 싶은 상품에 대해&#13;설명해주세요 :)"></TextArea>
