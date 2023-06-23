@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { NavigateFunction, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import MessageOutlinedIcon from '@mui/icons-material/MessageOutlined';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 
@@ -16,7 +16,7 @@ export default function SavingBoard() {
   const [isBuyingMenu, setIsBuyingMenu] = useState<boolean>(true);
   const [buyingPostList, setBuyingPostList] = useState<buyingPostType[]>([]);
   const [knowingPostList, setKnowingPostList] = useState<knowingPostType[]>([]);
-  const navigate: NavigateFunction = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (isBuyingMenu) {

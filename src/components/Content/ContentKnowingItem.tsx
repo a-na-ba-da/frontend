@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import SmsOutlinedIcon from '@mui/icons-material/SmsOutlined';
-import { NavigateFunction, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import * as S from './styles';
 import baseURL from '../../api/basURL';
@@ -19,7 +19,7 @@ export default function ContentKnowingItem({
   thumbnail,
   date,
 }: ContentKnowingItemProps) {
-  const navigate: NavigateFunction = useNavigate();
+  const navigate = useNavigate();
 
   const goPost = () => {
     navigate(`/saving/knowing/${id}`);
