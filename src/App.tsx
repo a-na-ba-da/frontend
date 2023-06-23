@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { theme } from './theme';
 import { ThemeProvider } from '@mui/material';
 
+import ScrollTop from './utils/ScrollTop';
 import BuyingPost from './pages/Saving/BuyingPost';
 import BuyingPostEdit from './pages/Saving/BuyingPostEdit';
 import KnowingPost from './pages/Saving/KnowingPost';
@@ -13,6 +14,7 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
+        <ScrollTop />
         <Routes>
           <Route path="/" element={<SavingBoard />} />
           <Route path="/saving" element={<SavingBoard />} />
