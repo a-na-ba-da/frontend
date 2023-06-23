@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import SmsOutlinedIcon from '@mui/icons-material/SmsOutlined';
 import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
 
 import * as S from './styles';
 import baseURL from '../../api/basURL';
@@ -33,7 +34,7 @@ export default function ContentKnowingItem({
       <S.DescriptionCol>
         <div>
           <TitleText>{title}</TitleText>
-          <S.DateText>{date}</S.DateText>
+          <S.DateText>{moment(date).format('YYYY.MM.DD hh:mm')}</S.DateText>
         </div>
         <S.ChatBox>
           <SmsOutlinedIcon fontSize="small" />

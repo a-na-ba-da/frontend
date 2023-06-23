@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
+import moment from 'moment';
 
 import PostBack from '../../components/Post/PostBack';
 import Button from '../../components/Button';
@@ -31,7 +32,9 @@ export default function BuyingPost() {
         </PostHeader>
         <ContentSection>
           <TitleBox>{buyingPost?.title}</TitleBox>
-          <DateBox>{buyingPost?.createdAt}</DateBox>
+          <DateBox>
+            {moment(buyingPost?.createdAt).format('YYYY.MM.DD hh:mm')}
+          </DateBox>
           <DescriptionBox>공구 날짜 | {buyingPost?.buyDate}</DescriptionBox>
           <DescriptionBox>
             전달 방법 | {buyingPost?.onlineDelivery ? '비대면' : '대면'}

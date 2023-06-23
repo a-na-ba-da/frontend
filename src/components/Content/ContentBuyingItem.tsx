@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import SmsOutlinedIcon from '@mui/icons-material/SmsOutlined';
 import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
 
 import * as S from './styles';
 import baseURL from '../../api/basURL';
@@ -37,7 +38,8 @@ export default function ContentBuyingItem({
       <S.DescriptionCol>
         <TitleText>{title}</TitleText>
         <S.DateText>
-          {date} | {isOnline ? '비대면' : '대면'}
+          {moment(date).format('YYYY.MM.DD hh:mm')} |
+          {isOnline ? '비대면' : '대면'}
         </S.DateText>
         <PriceText>{price}원</PriceText>
         <S.ChatBox>

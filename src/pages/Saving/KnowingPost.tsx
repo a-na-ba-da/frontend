@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
+import moment from 'moment';
 
 import PostBack from '../../components/Post/PostBack';
 import Button from '../../components/Button';
@@ -38,7 +39,9 @@ export default function KnowingPost() {
         </PostHeader>
         <ContentSection>
           <TitleBox>{knowingPost?.title}</TitleBox>
-          <DateBox>{knowingPost?.createdAt}</DateBox>
+          <DateBox>
+            {moment(knowingPost?.createdAt).format('YYYY.MM.DD hh:mm')}
+          </DateBox>
           <DescriptionBox>
             {knowingPost?.isOnlineBought ? '온라인 · ' : '오프라인 · '}
             {knowingPost?.isOnlineBought ? (
