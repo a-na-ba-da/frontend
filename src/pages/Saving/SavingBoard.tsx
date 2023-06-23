@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import MessageOutlinedIcon from '@mui/icons-material/MessageOutlined';
@@ -6,13 +6,31 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 import Header from '../../components/Header/Header';
 import Search from '../../components/Search';
-import Content from '../../components/Content/Content';
 import Footer from '../../components/Footer';
 import HeaderRight from '../../components/Header/HeaderRight';
+import ContentBuyingItem from '../../components/Content/ContentBuyingItem';
+import ContentKnowingItem from '../../components/Content/ContentKnowingItem';
+import { getBuyingPostList, getKnowingPostList } from '../../api/saving';
 
 export default function SavingBoard() {
   const [isBuyingMenu, setIsBuyingMenu] = useState<boolean>(true);
+  const [buyingPostList, setBuyingPostList] = useState<buyingPostType[]>([]);
+  const [knowingPostList, setKnowingPostList] = useState<knowingPostType[]>([]);
   const navigate: NavigateFunction = useNavigate();
+
+  useEffect(() => {
+    if (isBuyingMenu) {
+      getBuyingPostList().then((res) => {
+        setBuyingPostList(res.data.content);
+        console.log(res.data);
+      });
+    } else {
+      getKnowingPostList().then((res) => {
+        setKnowingPostList(res.data.content);
+        console.log(res.data);
+      });
+    }
+  }, [isBuyingMenu]);
 
   const goWrite = () => {
     isBuyingMenu
@@ -66,7 +84,29 @@ export default function SavingBoard() {
         </MenuCol>
       </HeaderSection>
       <ContentSection>
-        <Content isBuyingMenu={isBuyingMenu} />
+        <ContentList>
+          {isBuyingMenu
+            ? buyingPostList.map((post) => (
+                <ContentBuyingItem
+                  key={post.id}
+                  id={post.id}
+                  title={post.title}
+                  thumbnail={post.images.length > 0 && post.images[0]}
+                  date={post.createdAt}
+                  isOnline={post.onlineDelivery}
+                  price={post.pay}
+                />
+              ))
+            : knowingPostList.map((post) => (
+                <ContentKnowingItem
+                  key={post.id}
+                  id={post.id}
+                  title={post.title}
+                  thumbnail={post.images.length > 0 && post.images[0]}
+                  date={post.createdAt}
+                />
+              ))}
+        </ContentList>
       </ContentSection>
       <AddBox onClick={goWrite}>
         <AddCircleIcon
@@ -92,6 +132,18 @@ const HeaderSection = styled.section`
 const ContentSection = styled.section`
   padding-top: 177px;
   padding-bottom: 79px;
+`;
+
+const ContentList = styled.ul`
+  all: unset;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 15px;
+  overflow: scroll;
+  & :last-child {
+    border: 0;
+  }
 `;
 
 interface MenuColProps {
