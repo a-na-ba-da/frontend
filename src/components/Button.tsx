@@ -7,6 +7,7 @@ interface ButtonProps {
   textSize?: string;
   backgroundColor?: string;
   borderColor?: string;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 export default function Button({
@@ -15,9 +16,11 @@ export default function Button({
   textSize,
   backgroundColor,
   borderColor,
+  onClick,
 }: ButtonProps) {
   return (
     <MuiButton
+      onClick={onClick}
       sx={{
         height: 30,
         borderRadius: '5px',
