@@ -14,8 +14,10 @@ import HeaderRight from '../../components/Header/HeaderRight';
 import PostBack from '../../components/Post/PostBack';
 import EditImgUpload from '../../components/Post/Edit/EditImgUpload';
 import Button from '../../components/Button';
+import { useNavigate } from 'react-router-dom';
 
 export default function KnowingPostEdit() {
+  const navigate = useNavigate();
   const [selectedMethod, SetSelectedMethod] = useState<string>('');
   const [images, setImages] = useState<ImageListType>([]);
 
@@ -66,6 +68,7 @@ export default function KnowingPostEdit() {
                 textColor="black"
                 backgroundColor="white"
                 borderColor="#d2d2d2"
+                onClick={() => navigate('/saving/place')}
               />
             </EventPositionBox>
           ) : null}
