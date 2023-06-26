@@ -1,3 +1,3 @@
-const baseURL = 'http://172.105.237.249:8080/api/v1';
+const baseURL = process.env.BACKEND_SERVER_ADDRESS;
 
 export default baseURL;
