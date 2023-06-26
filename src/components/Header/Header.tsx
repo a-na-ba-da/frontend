@@ -16,6 +16,7 @@ function getLeftContents(children: ReactNode) {
     )
     .slice(0, 2);
 }
+
 // HeaderRight 요소만 필터링해서 반환
 function getRightContents(children: React.ReactNode) {
   const childrenArray = Children.toArray(children);

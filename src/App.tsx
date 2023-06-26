@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { theme } from './theme';
 import { ThemeProvider } from '@mui/material';
 
+import { theme } from './theme';
 import ScrollTop from './utils/ScrollTop';
 import BuyingPost from './pages/Saving/BuyingPost';
 import BuyingPostEdit from './pages/Saving/BuyingPostEdit';

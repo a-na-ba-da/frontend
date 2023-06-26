@@ -30,6 +30,7 @@ interface buyingPostType {
     activated: boolean;
   };
 }
+
 // 아껴쓰기-같이알아요 게시글 타입
 interface knowingPostType {
   id: number;
