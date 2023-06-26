@@ -8,9 +8,22 @@
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.13.4",
     "@mui/styled-engine-sc": "^5.12.0",
+    "@types/react-slick": "^0.23.10",
+    "axios": "^1.4.0",
+    "css-loader": "^6.8.1",
+    "dotenv": "^16.3.1",
+    "file-loader": "^6.2.0",
+    "moment": "^2.29.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "styled-components": "^5.3.11"
+    "react-images-uploading": "^3.1.7",
+    "react-kakao-maps-sdk": "^1.1.9",
+    "react-router-dom": "^6.13.0",
+    "react-slick": "^0.29.0",
+    "slick-carousel": "^1.8.1",
+    "style-loader": "^3.3.3",
+    "styled-components": "^5.3.11",
+    "url-loader": "^4.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.22.1",
