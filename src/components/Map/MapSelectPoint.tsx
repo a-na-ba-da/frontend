@@ -43,7 +43,7 @@ export default function MapSelectPoint() {
 
   const loadGpsPosition = () => {
     if (navigator.geolocation) {
-      // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+      // GeoLocation을 이용해서 접속 위치를 가져옴
       navigator.geolocation.getCurrentPosition(
         (position) => {
           setGpsPosition({
@@ -70,7 +70,7 @@ export default function MapSelectPoint() {
         },
       );
     } else {
-      // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+      // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정
       setMarker((prev) => ({
         ...prev,
         errMsg: 'geolocation을 사용할수 없어요..',
@@ -84,7 +84,7 @@ export default function MapSelectPoint() {
   }, []);
 
   useEffect(() => {
-    // 좌표를 기반으로 주소 불러오기
+    // 좌표를 기반으로 지번, 도로명 주소를 가져오는 기능
     const geocoder = new kakao.maps.services.Geocoder();
     geocoder.coord2Address(
       marker.position.lng,
