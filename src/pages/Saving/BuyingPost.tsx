@@ -27,7 +27,7 @@ export default function BuyingPost() {
       <PostImgSlider images={buyingPost?.images} />
       <Main>
         {/* props.children으로 전달된 Button 컴포넌트를 헤더 내부에서 배치 */}
-        <PostHeader userName={buyingPost?.writer.nickname}>
+        <PostHeader userName={buyingPost?.writer?.nickname}>
           <Button content="쪽지 보내기" />
         </PostHeader>
         <ContentSection>
