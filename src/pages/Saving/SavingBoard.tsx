@@ -21,12 +21,12 @@ export default function SavingBoard() {
   useEffect(() => {
     if (isBuyingMenu) {
       getBuyingPostList().then((res) => {
-        setBuyingPostList(res.data.content);
+        setBuyingPostList(res.data.detail.content);
         console.log(res.data);
       });
     } else {
       getKnowingPostList().then((res) => {
-        setKnowingPostList(res.data.content);
+        setKnowingPostList(res.data.detail.content);
         console.log(res.data);
       });
     }
