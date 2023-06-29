@@ -57,21 +57,21 @@ export default function EditImgUpload({
 }
 
 const CameraImgBox = styled.div`
-  flex-shrink: 0;
-  width: 60px;
-  height: 60px;
-  border: 1px solid #dedde2;
-  box-sizing: border-box;
-  border-radius: 5px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  width: 60px;
+  height: 60px;
+  border: 1px solid #dedde2;
+  border-radius: 5px;
 `;
 
 const ImgCountBox = styled.div`
-  font-size: 12px;
   margin-top: 2px;
+  font-size: 12px;
 `;
 
 const CurrentCountText = styled.span`
@@ -86,9 +86,9 @@ const UploadImagesBox = styled.div`
 `;
 
 const UploadImg = styled.img`
+  object-fit: cover;
   width: 60px;
   height: 60px;
-  object-fit: cover;
   border-radius: 5px;
 `;
 

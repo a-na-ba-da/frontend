@@ -55,18 +55,18 @@ const HeaderLayout = styled.header`
 `;
 
 const HeaderBox = styled.div`
-  position: relative;
-  height: 77px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
+  height: 77px;
 `;
 
 const HeaderText = styled.span`
   position: absolute;
   width: 100%;
-  text-align: center;
   font-size: 18px;
+  text-align: center;
 `;
 
 const LeftSection = styled.section`

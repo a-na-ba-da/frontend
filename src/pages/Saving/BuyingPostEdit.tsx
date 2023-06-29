@@ -74,15 +74,15 @@ const BuyingPostEditLayout = styled.div`
 `;
 
 const ConfirmText = styled.span`
-  font-size: 18px;
   color: #8f00ff;
+  font-size: 18px;
 `;
 
 const Line = styled.hr`
-  background: #eaeaeb;
   height: 1px;
-  border: 0;
   margin: 0;
+  border: 0;
+  background: #eaeaeb;
 `;
 
 const Main = styled.main`
@@ -103,10 +103,10 @@ const InputBox = styled.div`
 `;
 
 const Input = styled.input`
-  width: 100%;
-  border: 0;
-  height: 50px;
   box-sizing: border-box;
+  width: 100%;
+  height: 50px;
+  border: 0;
   outline: none;
   font-size: 15px;
   &::placeholder {
@@ -115,23 +115,23 @@ const Input = styled.input`
 `;
 
 const CheckBox = styled.div`
-  font-size: 15px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
   height: 50px;
   border: 0;
+  font-size: 15px;
 `;
 
 const TextArea = styled.textarea`
-  resize: none;
-  outline: none;
   box-sizing: border-box;
   width: 100%;
   height: 200px;
-  border: 0;
   margin-top: 15px;
+  border: 0;
+  outline: none;
+  resize: none;
   ::placeholder {
     font-size: 15px;
     color: #d1d3d7;

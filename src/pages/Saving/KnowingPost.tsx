@@ -77,14 +77,14 @@ const TitleBox = styled.div`
 
 const DateBox = styled.div`
   color: #999999;
-  font-size: 13px;
   padding: 5px 0 10px 0;
+  font-size: 13px;
 `;
 
 const DescriptionBox = styled.div`
   color: #8f8f8f;
-  font-size: 14px;
   padding: 3px 0;
+  font-size: 14px;
 `;
 
 const MainTextBox = styled.div`

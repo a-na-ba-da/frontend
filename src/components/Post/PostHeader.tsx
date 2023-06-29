@@ -22,12 +22,12 @@ export default function PostHeader(props: PostHeaderProps) {
 }
 
 const HeaderLayout = styled.section`
-  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #f3f3f3;
+  width: 100%;
   padding: 15px 0;
+  border-bottom: 1px solid #f3f3f3;
 `;
 
 const HeaderUserBox = styled.div`
@@ -37,10 +37,10 @@ const HeaderUserBox = styled.div`
 `;
 
 const HeaderUserImg = styled.div`
-  margin-right: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-right: 10px;
 `;
 
 const HeaderUserNameText = styled.span`

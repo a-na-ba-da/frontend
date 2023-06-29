@@ -160,16 +160,16 @@ const MapSelectPointLayout = styled.div`
 `;
 
 const TopSection = styled.section`
-  padding: 10px;
   box-sizing: border-box;
-  height: 56px;
   width: 100%;
+  height: 56px;
+  padding: 10px;
   background-color: #fbfbfb;
 `;
 
 const CurrentLocationBox = styled.div`
   position: absolute;
-  z-index: 1;
-  right: 10px;
   top: 70px;
+  right: 10px;
+  z-index: 1;
 `;

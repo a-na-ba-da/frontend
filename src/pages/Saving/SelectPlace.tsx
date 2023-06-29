@@ -29,6 +29,6 @@ const SelectPlaceLayout = styled.div`
 `;
 
 const ConfirmText = styled.span`
-  font-size: 18px;
   color: #8f00ff;
+  font-size: 18px;
 `;

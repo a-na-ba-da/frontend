@@ -66,13 +66,13 @@ export default function Footer({ pageName }: FooterProps) {
 }
 
 const FooterLayout = styled.footer`
+  display: flex;
+  justify-content: space-around;
   position: fixed;
   bottom: 0;
   width: 100%;
   height: 78px;
   border-top: solid 1px #f0f0f0;
-  display: flex;
-  justify-content: space-around;
   background-color: white;
 `;
 
@@ -84,7 +84,7 @@ const NavItem = styled.div`
 `;
 
 const NavText = styled.div<{ isSelected: boolean }>`
-  font-size: 12px;
   margin-top: 5px;
   color: ${(props) => (props.isSelected ? '#8f00ff' : '#a3a1a2')};
+  font-size: 12px;
 `;

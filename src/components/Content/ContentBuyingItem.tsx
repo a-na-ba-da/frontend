@@ -56,6 +56,6 @@ const TitleText = styled.div`
 `;
 
 const PriceText = styled.div`
-  font-size: 15px;
   color: #8f00ff;
+  font-size: 15px;
 `;

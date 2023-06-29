@@ -151,20 +151,20 @@ interface MenuColProps {
 }
 
 const MenuCol = styled.div<MenuColProps>`
-  font-size: 15px;
-  border-bottom: ${(props) =>
-    props.isBuyingMenu ? '2px solid #8f00ff' : null};
   display: inline-flex;
-  width: calc(100vw / 2);
-  height: 50px;
   justify-content: center;
   align-items: center;
+  width: calc(100vw / 2);
+  height: 50px;
+  border-bottom: ${(props) =>
+    props.isBuyingMenu ? '2px solid #8f00ff' : null};
+  font-size: 15px;
 `;
 
 const AddBox = styled.div`
   position: fixed;
+  bottom: 90px;
+  right: 15px;
   border-radius: 50px;
   overflow: hidden;
-  right: 15px;
-  bottom: 90px;
 `;

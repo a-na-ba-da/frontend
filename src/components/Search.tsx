@@ -14,23 +14,23 @@ export default function Search() {
 }
 
 const SearchLayout = styled.header`
-  position: relative;
-  height: 50px;
-  background-color: #fbfbfb;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+  height: 50px;
   padding: 0 15px;
+  background-color: #fbfbfb;
 `;
 
 const SearchInputBox = styled.input`
   box-sizing: border-box;
   width: 100%;
   height: 34px;
-  border: solid 1px #e7e7e7;
-  background-color: white;
-  border-radius: 5px;
   padding-left: 10px;
+  border: solid 1px #e7e7e7;
+  border-radius: 5px;
+  background-color: white;
 `;
 
 const SearchImg = styled.div`

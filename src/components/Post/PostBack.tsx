@@ -25,7 +25,7 @@ export default function PostBack({ color, whatShape }: PostBackProps) {
 
 const PostBackLayout = styled.div`
   position: absolute;
-  left: 20px;
   top: 25px;
+  left: 20px;
   z-index: 1;
 `;

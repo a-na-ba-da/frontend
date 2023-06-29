@@ -48,7 +48,7 @@ const PostImgSliderLayout = styled.div<{ isExist: boolean }>`
 `;
 
 const Image = styled.img`
+  object-fit: cover;
   width: 100vw;
   height: 100vw;
-  object-fit: cover;
 `;
