@@ -40,7 +40,8 @@ export default function BuyingPost() {
             전달 방법 | {buyingPost?.onlineDelivery ? '비대면' : '대면'}
           </DescriptionBox>
           <DescriptionBox>
-            내가 내야할 금액 | <PriceText>{buyingPost?.pay}원</PriceText>
+            내가 내야할 금액 |{' '}
+            <PriceText>{buyingPost?.pay.toLocaleString('en')}원</PriceText>
           </DescriptionBox>
           <MainTextBox>{buyingPost?.content}</MainTextBox>
         </ContentSection>
