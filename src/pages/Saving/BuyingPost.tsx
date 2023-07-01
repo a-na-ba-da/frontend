@@ -16,7 +16,6 @@ export default function BuyingPost() {
 
   useEffect(() => {
     getBuyingPost(id).then((res) => {
-      console.log(res.data.detail);
       setBuyingPost(res.data.detail);
     });
   }, []);

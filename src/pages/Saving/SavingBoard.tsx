@@ -22,12 +22,10 @@ export default function SavingBoard() {
     if (isBuyingMenu) {
       getBuyingPostList().then((res) => {
         setBuyingPostList(res.data.detail.content);
-        console.log(res.data);
       });
     } else {
       getKnowingPostList().then((res) => {
         setKnowingPostList(res.data.detail.content);
-        console.log(res.data);
       });
     }
   }, [isBuyingMenu]);

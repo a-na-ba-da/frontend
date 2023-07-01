@@ -17,10 +17,10 @@ export default function EditImgUpload({
 
   const handleImageChange = (
     imageList: ImageListType,
-    addUpdateIndex: number[] | undefined,
+    // addUpdateIndex: number[] | undefined,
   ) => {
     // data for submit
-    console.log(imageList, addUpdateIndex);
+    // console.log(imageList, addUpdateIndex);
     setImages(imageList);
   };
 

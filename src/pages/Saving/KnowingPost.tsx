@@ -16,7 +16,6 @@ export default function KnowingPost() {
 
   useEffect(() => {
     getKnowingPost(id).then((res) => {
-      console.log(res.data.detail);
       setKnowingPost(res.data.detail);
     });
   }, []);
