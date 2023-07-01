@@ -55,9 +55,9 @@ const HeaderLayout = styled.header`
 `;
 
 const HeaderBox = styled.div`
+  display: flex;
   position: relative;
   height: 77px;
-  display: flex;
   justify-content: space-between;
   align-items: center;
 `;
@@ -65,8 +65,8 @@ const HeaderBox = styled.div`
 const HeaderText = styled.span`
   position: absolute;
   width: 100%;
-  text-align: center;
   font-size: 18px;
+  text-align: center;
 `;
 
 const LeftSection = styled.section`

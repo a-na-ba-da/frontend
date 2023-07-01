@@ -45,9 +45,9 @@ export default function PostComment() {
 const CommentLayout = styled.section``;
 
 const CommentCountText = styled.span`
+  margin-left: 5px;
   color: #216583;
   font-size: 13px;
-  margin-left: 5px;
 `;
 
 const CommentList = styled.ul`
@@ -85,18 +85,18 @@ const CommentDateText = styled.span`
   position: absolute;
   top: 10px;
   right: 10px;
-  color: #999999;
   font-size: 13px;
+  color: #999999;
 `;
 
 const CommentInputSection = styled.section`
+  display: flex;
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
   height: 56px;
   background-color: #fbfbfb;
-  display: flex;
   align-items: center;
   justify-content: center;
 `;
@@ -107,11 +107,11 @@ const CommentSendImg = styled.img`
 `;
 
 const CommentInput = styled.input`
-  box-sizing: border-box;
-  padding-left: 10px;
-  border: 1px solid #e7e7e7;
-  border-radius: 7px;
   width: 100%;
   height: 34px;
   margin: 0 15px;
+  padding-left: 10px;
+  border: 1px solid #e7e7e7;
+  border-radius: 7px;
+  box-sizing: border-box;
 `;

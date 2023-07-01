@@ -41,7 +41,7 @@ export default function ContentBuyingItem({
           {moment(date).format('YYYY.MM.DD hh:mm')} |
           {isOnline ? ' 비대면' : ' 대면'}
         </S.DateText>
-        <PriceText>{price}원</PriceText>
+        <PriceText>{price.toLocaleString('en')}원</PriceText>
         <S.ChatBox>
           <SmsOutlinedIcon fontSize="small" />
           <S.ChatCountText>2</S.ChatCountText>

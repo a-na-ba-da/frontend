@@ -16,8 +16,7 @@ export default function BuyingPost() {
 
   useEffect(() => {
     getBuyingPost(id).then((res) => {
-      console.log(res.data);
-      setBuyingPost(res.data);
+      setBuyingPost(res.data.detail);
     });
   }, []);
 
@@ -27,7 +26,7 @@ export default function BuyingPost() {
       <PostImgSlider images={buyingPost?.images} />
       <Main>
         {/* props.children으로 전달된 Button 컴포넌트를 헤더 내부에서 배치 */}
-        <PostHeader userName={buyingPost?.writer.nickname}>
+        <PostHeader userName={buyingPost?.writer?.nickname}>
           <Button content="쪽지 보내기" />
         </PostHeader>
         <ContentSection>
@@ -40,7 +39,8 @@ export default function BuyingPost() {
             전달 방법 | {buyingPost?.onlineDelivery ? '비대면' : '대면'}
           </DescriptionBox>
           <DescriptionBox>
-            내가 내야할 금액 | <PriceText>{buyingPost?.pay}원</PriceText>
+            내가 내야할 금액 |{' '}
+            <PriceText>{buyingPost?.pay.toLocaleString('en')}원</PriceText>
           </DescriptionBox>
           <MainTextBox>{buyingPost?.content}</MainTextBox>
         </ContentSection>
@@ -68,15 +68,15 @@ const TitleBox = styled.div`
 `;
 
 const DateBox = styled.div`
-  color: #999999;
-  font-size: 13px;
   padding: 5px 0 10px 0;
+  font-size: 13px;
+  color: #999999;
 `;
 
 const DescriptionBox = styled.div`
-  color: #8f8f8f;
-  font-size: 14px;
   padding: 3px 0;
+  font-size: 14px;
+  color: #8f8f8f;
 `;
 
 const MainTextBox = styled.div`
@@ -85,8 +85,8 @@ const MainTextBox = styled.div`
 `;
 
 const PriceText = styled.span`
-  color: #8f00ff;
-  font-size: 16px;
   display: inline;
+  font-size: 16px;
+  color: #8f00ff;
   vertical-align: middle;
 `;

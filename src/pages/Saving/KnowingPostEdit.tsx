@@ -90,10 +90,10 @@ const ConfirmText = styled.span`
 `;
 
 const Line = styled.hr`
-  background: #eaeaeb;
   height: 1px;
-  border: 0;
   margin: 0;
+  border: 0;
+  background: #eaeaeb;
 `;
 
 const Main = styled.main`
@@ -115,36 +115,36 @@ const InputBox = styled.div`
 
 const Input = styled.input`
   width: 100%;
-  border: 0;
   height: 50px;
-  box-sizing: border-box;
+  border: 0;
   outline: none;
   font-size: 15px;
+  box-sizing: border-box;
   &::placeholder {
     color: #d1d3d7;
   }
 `;
 
 const EventPositionBox = styled.div`
+  display: flex;
   width: 100%;
   height: 50px;
-  box-sizing: border-box;
+  padding: 2px 2px 1px 2px;
   font-size: 15px;
   color: #d1d3d7;
-  display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 2px 2px 1px 2px;
+  box-sizing: border-box;
 `;
 
 const CheckBox = styled.div`
-  font-size: 15px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   width: 100%;
   height: 50px;
   border: 0;
+  font-size: 15px;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const BuyPlaceText = styled.span`
@@ -152,13 +152,13 @@ const BuyPlaceText = styled.span`
 `;
 
 const TextArea = styled.textarea`
+  width: 100%;
+  height: 200px;
+  margin-top: 15px;
+  border: 0;
   resize: none;
   outline: none;
   box-sizing: border-box;
-  width: 100%;
-  height: 200px;
-  border: 0;
-  margin-top: 15px;
   ::placeholder {
     font-size: 15px;
     color: #d1d3d7;

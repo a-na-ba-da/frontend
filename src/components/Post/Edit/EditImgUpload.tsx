@@ -17,10 +17,10 @@ export default function EditImgUpload({
 
   const handleImageChange = (
     imageList: ImageListType,
-    addUpdateIndex: number[] | undefined,
+    // addUpdateIndex: number[] | undefined,
   ) => {
     // data for submit
-    console.log(imageList, addUpdateIndex);
+    // console.log(imageList, addUpdateIndex);
     setImages(imageList);
   };
 
@@ -57,21 +57,21 @@ export default function EditImgUpload({
 }
 
 const CameraImgBox = styled.div`
-  flex-shrink: 0;
+  display: flex;
+  box-sizing: border-box;
   width: 60px;
   height: 60px;
   border: 1px solid #dedde2;
-  box-sizing: border-box;
   border-radius: 5px;
-  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  flex-shrink: 0;
 `;
 
 const ImgCountBox = styled.div`
-  font-size: 12px;
   margin-top: 2px;
+  font-size: 12px;
 `;
 
 const CurrentCountText = styled.span`
@@ -80,16 +80,16 @@ const CurrentCountText = styled.span`
 
 const UploadImagesBox = styled.div`
   display: flex;
-  gap: 15px;
   padding: 15px 0;
   overflow-x: scroll;
+  gap: 15px;
 `;
 
 const UploadImg = styled.img`
   width: 60px;
   height: 60px;
-  object-fit: cover;
   border-radius: 5px;
+  object-fit: cover;
 `;
 
 const Imgbox = styled.div`

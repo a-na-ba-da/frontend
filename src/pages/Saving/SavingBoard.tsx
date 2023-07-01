@@ -21,13 +21,11 @@ export default function SavingBoard() {
   useEffect(() => {
     if (isBuyingMenu) {
       getBuyingPostList().then((res) => {
-        setBuyingPostList(res.data.content);
-        console.log(res.data);
+        setBuyingPostList(res.data.detail.content);
       });
     } else {
       getKnowingPostList().then((res) => {
-        setKnowingPostList(res.data.content);
-        console.log(res.data);
+        setKnowingPostList(res.data.detail.content);
       });
     }
   }, [isBuyingMenu]);
@@ -137,9 +135,9 @@ const ContentSection = styled.section`
 const ContentList = styled.ul`
   all: unset;
   display: flex;
+  padding: 0 15px;
   flex-direction: column;
   align-items: center;
-  padding: 0 15px;
   overflow: scroll;
   & :last-child {
     border: 0;
@@ -151,20 +149,20 @@ interface MenuColProps {
 }
 
 const MenuCol = styled.div<MenuColProps>`
-  font-size: 15px;
-  border-bottom: ${(props) =>
-    props.isBuyingMenu ? '2px solid #8f00ff' : null};
   display: inline-flex;
   width: calc(100vw / 2);
   height: 50px;
+  border-bottom: ${(props) =>
+    props.isBuyingMenu ? '2px solid #8f00ff' : null};
+  font-size: 15px;
   justify-content: center;
   align-items: center;
 `;
 
 const AddBox = styled.div`
   position: fixed;
+  bottom: 90px;
+  right: 15px;
   border-radius: 50px;
   overflow: hidden;
-  right: 15px;
-  bottom: 90px;
 `;

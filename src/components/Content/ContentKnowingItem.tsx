@@ -46,6 +46,6 @@ export default function ContentKnowingItem({
 }
 
 const TitleText = styled.div`
-  font-size: 15px;
   margin-bottom: 5px;
+  font-size: 15px;
 `;

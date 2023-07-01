@@ -16,8 +16,7 @@ export default function KnowingPost() {
 
   useEffect(() => {
     getKnowingPost(id).then((res) => {
-      console.log(res.data);
-      setKnowingPost(res.data);
+      setKnowingPost(res.data.detail);
     });
   }, []);
 
@@ -34,7 +33,7 @@ export default function KnowingPost() {
       <PostImgSlider images={knowingPost?.images} />
       <Main>
         {/* props.children으로 전달된 Button 컴포넌트를 헤더 내부에서 배치 */}
-        <PostHeader userName={knowingPost?.writer.nickname}>
+        <PostHeader userName={knowingPost?.writer?.nickname}>
           <Button content="쪽지 보내기" />
         </PostHeader>
         <ContentSection>
@@ -76,18 +75,18 @@ const TitleBox = styled.div`
 `;
 
 const DateBox = styled.div`
-  color: #999999;
-  font-size: 13px;
   padding: 5px 0 10px 0;
+  font-size: 13px;
+  color: #999999;
 `;
 
 const DescriptionBox = styled.div`
-  color: #8f8f8f;
-  font-size: 14px;
   padding: 3px 0;
+  font-size: 14px;
+  color: #8f8f8f;
 `;
 
 const MainTextBox = styled.div`
-  font-size: 16px;
   padding: 15px 0;
+  font-size: 16px;
 `;
