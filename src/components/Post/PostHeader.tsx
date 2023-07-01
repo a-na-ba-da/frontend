@@ -23,11 +23,11 @@ export default function PostHeader(props: PostHeaderProps) {
 
 const HeaderLayout = styled.section`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   width: 100%;
   padding: 15px 0;
   border-bottom: 1px solid #f3f3f3;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const HeaderUserBox = styled.div`
@@ -38,9 +38,9 @@ const HeaderUserBox = styled.div`
 
 const HeaderUserImg = styled.div`
   display: flex;
+  margin-right: 10px;
   justify-content: center;
   align-items: center;
-  margin-right: 10px;
 `;
 
 const HeaderUserNameText = styled.span`

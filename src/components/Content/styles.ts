@@ -2,26 +2,26 @@ import styled from 'styled-components';
 
 export const ItemLayout = styled.div`
   display: flex;
-  box-sizing: border-box;
   width: 100%;
   padding: 15px 0;
   border-bottom: solid 1px #e1e1e1;
+  box-sizing: border-box;
 `;
 
 export const ThumbnailCol = styled.img`
-  object-fit: cover;
   width: 100px;
   height: 100px;
   border-radius: 10px;
   background-color: #d9d9d9;
+  object-fit: cover;
 `;
 
 export const DescriptionCol = styled.div`
   display: flex;
+  padding: 5px 0 5px 10px;
   flex-direction: column;
   justify-content: space-between;
   flex-grow: 1;
-  padding: 5px 0 5px 10px;
 `;
 
 export const DateText = styled.div`

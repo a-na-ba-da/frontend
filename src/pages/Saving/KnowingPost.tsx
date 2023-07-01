@@ -76,18 +76,18 @@ const TitleBox = styled.div`
 `;
 
 const DateBox = styled.div`
-  color: #999999;
   padding: 5px 0 10px 0;
   font-size: 13px;
+  color: #999999;
 `;
 
 const DescriptionBox = styled.div`
-  color: #8f8f8f;
   padding: 3px 0;
   font-size: 14px;
+  color: #8f8f8f;
 `;
 
 const MainTextBox = styled.div`
-  font-size: 16px;
   padding: 15px 0;
+  font-size: 16px;
 `;

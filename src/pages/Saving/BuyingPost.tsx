@@ -70,14 +70,14 @@ const TitleBox = styled.div`
 
 const DateBox = styled.div`
   padding: 5px 0 10px 0;
-  color: #999999;
   font-size: 13px;
+  color: #999999;
 `;
 
 const DescriptionBox = styled.div`
   padding: 3px 0;
-  color: #8f8f8f;
   font-size: 14px;
+  color: #8f8f8f;
 `;
 
 const MainTextBox = styled.div`
@@ -87,7 +87,7 @@ const MainTextBox = styled.div`
 
 const PriceText = styled.span`
   display: inline;
-  color: #8f00ff;
   font-size: 16px;
+  color: #8f00ff;
   vertical-align: middle;
 `;

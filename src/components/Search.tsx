@@ -15,22 +15,22 @@ export default function Search() {
 
 const SearchLayout = styled.header`
   display: flex;
-  justify-content: center;
-  align-items: center;
   position: relative;
   height: 50px;
   padding: 0 15px;
   background-color: #fbfbfb;
+  justify-content: center;
+  align-items: center;
 `;
 
 const SearchInputBox = styled.input`
-  box-sizing: border-box;
   width: 100%;
   height: 34px;
   padding-left: 10px;
   border: solid 1px #e7e7e7;
   border-radius: 5px;
   background-color: white;
+  box-sizing: border-box;
 `;
 
 const SearchImg = styled.div`

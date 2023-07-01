@@ -114,12 +114,12 @@ const InputBox = styled.div`
 `;
 
 const Input = styled.input`
-  box-sizing: border-box;
   width: 100%;
   height: 50px;
   border: 0;
   outline: none;
   font-size: 15px;
+  box-sizing: border-box;
   &::placeholder {
     color: #d1d3d7;
   }
@@ -127,24 +127,24 @@ const Input = styled.input`
 
 const EventPositionBox = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-sizing: border-box;
   width: 100%;
   height: 50px;
   padding: 2px 2px 1px 2px;
-  color: #d1d3d7;
   font-size: 15px;
+  color: #d1d3d7;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
 `;
 
 const CheckBox = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   width: 100%;
   height: 50px;
   border: 0;
   font-size: 15px;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const BuyPlaceText = styled.span`
@@ -152,13 +152,13 @@ const BuyPlaceText = styled.span`
 `;
 
 const TextArea = styled.textarea`
-  box-sizing: border-box;
   width: 100%;
   height: 200px;
   margin-top: 15px;
   border: 0;
   resize: none;
   outline: none;
+  box-sizing: border-box;
   ::placeholder {
     font-size: 15px;
     color: #d1d3d7;

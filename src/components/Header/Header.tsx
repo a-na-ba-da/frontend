@@ -56,10 +56,10 @@ const HeaderLayout = styled.header`
 
 const HeaderBox = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   position: relative;
   height: 77px;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const HeaderText = styled.span`

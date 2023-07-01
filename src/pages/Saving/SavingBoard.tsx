@@ -137,9 +137,9 @@ const ContentSection = styled.section`
 const ContentList = styled.ul`
   all: unset;
   display: flex;
+  padding: 0 15px;
   flex-direction: column;
   align-items: center;
-  padding: 0 15px;
   overflow: scroll;
   & :last-child {
     border: 0;
@@ -152,13 +152,13 @@ interface MenuColProps {
 
 const MenuCol = styled.div<MenuColProps>`
   display: inline-flex;
-  justify-content: center;
-  align-items: center;
   width: calc(100vw / 2);
   height: 50px;
   border-bottom: ${(props) =>
     props.isBuyingMenu ? '2px solid #8f00ff' : null};
   font-size: 15px;
+  justify-content: center;
+  align-items: center;
 `;
 
 const AddBox = styled.div`
