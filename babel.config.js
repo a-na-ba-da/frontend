@@ -4,4 +4,5 @@ module.exports = {
     '@babel/preset-react',
     '@babel/preset-typescript',
   ],
+  plugins: process.env.NODE_ENV === 'production' ? ['transform-remove-console'] : []
 };
