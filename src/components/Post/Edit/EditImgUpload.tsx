@@ -3,16 +3,19 @@ import styled from 'styled-components';
 import ImageUploading, { ImageListType } from 'react-images-uploading';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import CancelIcon from '@mui/icons-material/Cancel';
+import { useAppDispatch } from '../../../hooks/redux';
+import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 
 interface EditImgUploadProps {
   images: ImageListType;
-  setImages: React.Dispatch<React.SetStateAction<ImageListType>>;
+  setImages: ActionCreatorWithPayload<unknown>;
 }
 
 export default function EditImgUpload({
   images,
   setImages,
 }: EditImgUploadProps) {
+  const dispatch = useAppDispatch();
   const maxNumber = 10;
 
   const handleImageChange = (
@@ -21,7 +24,7 @@ export default function EditImgUpload({
   ) => {
     // data for submit
     // console.log(imageList, addUpdateIndex);
-    setImages(imageList);
+    dispatch(setImages(imageList));
   };
 
   return (
