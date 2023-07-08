@@ -28,4 +28,5 @@ const PostBackLayout = styled.div`
   position: absolute;
   top: 25px;
   left: 20px;
+  z-index: 1;
 `;
