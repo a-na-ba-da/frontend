@@ -8,7 +8,7 @@ import PostBack from '../../components/Post/PostBack';
 import MapSelectPoint from '../../components/Map/MapSelectPoint';
 import HeaderRight from '../../components/Header/HeaderRight';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { setBuyLocation as setBuyingBuyLocation } from '../../context/reducer/buyingEditReducer';
+import { setLocation as setBuyingLocation } from '../../context/reducer/buyingEditReducer';
 import { setBuyLocation as setKnowingBuyLocation } from '../../context/reducer/knowingEditReducer';
 import { setInit } from '../../context/reducer/mapReducer';
 
@@ -23,7 +23,7 @@ export default function SelectPlace() {
   const handleConfirmClick = () => {
     if (whatPage === 'buying') {
       dispatch(
-        setBuyingBuyLocation({
+        setBuyingLocation({
           address: address?.address,
           lat: marker.position.lat,
           lng: marker.position.lng,

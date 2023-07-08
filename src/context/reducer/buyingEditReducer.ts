@@ -3,12 +3,13 @@ import { ImageListType } from 'react-images-uploading';
 
 interface buyingEditState {
   images: ImageListType;
-  selectedMethod: string;
+  buyingMethod: string;
+  deliveryMethod: string;
   title: string;
   buyDate: string;
   pay: string;
   productUrl?: string;
-  buyLocation?: {
+  location?: {
     address: string;
     lat: number;
     lng: number;
@@ -18,13 +19,14 @@ interface buyingEditState {
 
 const initialState: buyingEditState = {
   images: [],
-  selectedMethod: '',
+  buyingMethod: '',
+  deliveryMethod: '',
   title: '',
   buyDate: '',
   pay: '',
   content: '',
   productUrl: undefined,
-  buyLocation: undefined,
+  location: undefined,
 };
 
 const buyingEditSlice = createSlice({
@@ -34,13 +36,19 @@ const buyingEditSlice = createSlice({
     setImages: (state, action) => {
       state.images = action.payload;
     },
-    setSelectedMethod: (state, action) => {
+    setBuyingMethod: (state, action) => {
       if (action.payload === 'offline') {
         state.productUrl = undefined;
+        state.deliveryMethod = '';
+        state.location = undefined;
       } else {
-        state.buyLocation = undefined;
+        state.location = undefined;
       }
-      state.selectedMethod = action.payload;
+      state.buyingMethod = action.payload;
+    },
+    setDeliveryMethod: (state, action) => {
+      if (action.payload === 'online') state.location = undefined;
+      state.deliveryMethod = action.payload;
     },
     setTitle: (state, action) => {
       state.title = action.payload;
@@ -54,8 +62,8 @@ const buyingEditSlice = createSlice({
     setProductUrl: (state, action) => {
       state.productUrl = action.payload;
     },
-    setBuyLocation: (state, action) => {
-      state.buyLocation = { ...state.buyLocation, ...action.payload };
+    setLocation: (state, action) => {
+      state.location = { ...state.location, ...action.payload };
     },
     setContent: (state, action) => {
       state.content = action.payload;
@@ -68,12 +76,13 @@ const buyingEditSlice = createSlice({
 
 export const {
   setImages,
-  setSelectedMethod,
   setTitle,
   setBuyDate,
   setPay,
+  setBuyingMethod,
+  setDeliveryMethod,
   setProductUrl,
-  setBuyLocation,
+  setLocation,
   setContent,
   setInit,
 } = buyingEditSlice.actions;

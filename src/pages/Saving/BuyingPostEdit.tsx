@@ -17,12 +17,13 @@ import Button from '../../components/Button';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import {
   setBuyDate,
+  setBuyingMethod,
+  setDeliveryMethod,
   setContent,
   setImages,
   setInit,
   setPay,
   setProductUrl,
-  setSelectedMethod,
   setTitle,
 } from '../../context/reducer/buyingEditReducer';
 
@@ -33,11 +34,12 @@ export default function BuyingPostEdit() {
   const title = useAppSelector((state) => state.buyingEdit.title);
   const buyDate = useAppSelector((state) => state.buyingEdit.buyDate);
   const pay = useAppSelector((state) => state.buyingEdit.pay);
-  const selectedMethod = useAppSelector(
-    (state) => state.buyingEdit.selectedMethod,
+  const buyingMethod = useAppSelector((state) => state.buyingEdit.buyingMethod);
+  const deliveryMethod = useAppSelector(
+    (state) => state.buyingEdit.deliveryMethod,
   );
   const productUrl = useAppSelector((state) => state.buyingEdit.productUrl);
-  const buyLocation = useAppSelector((state) => state.buyingEdit.buyLocation);
+  const location = useAppSelector((state) => state.buyingEdit.location);
   const content = useAppSelector((state) => state.buyingEdit.content);
 
   const handleConfirmClick = () => {
@@ -53,6 +55,59 @@ export default function BuyingPostEdit() {
     navigate('/saving/place', {
       state: { whatPage: 'buying' },
     });
+  };
+
+  const SelctedPlace = () => {
+    return (
+      <PlacePositionBox>
+        {location ? <PlaceText>{location.address}</PlaceText> : '장소'}
+        <Button
+          content="위치 선택"
+          textColor="black"
+          backgroundColor="white"
+          borderColor="#d2d2d2"
+          onClick={handleSelectedPlaceClick}
+        />
+      </PlacePositionBox>
+    );
+  };
+
+  const generateCheckBox = () => {
+    if (buyingMethod === 'offline') {
+      return <SelctedPlace />;
+    } else if (buyingMethod === 'online') {
+      return (
+        <>
+          <Input
+            placeholder="상품 URL"
+            value={productUrl}
+            onChange={(e) => dispatch(setProductUrl(e.target.value))}
+          ></Input>
+          <CheckBox>
+            <div>전달 방법</div>
+            <FormControl>
+              <RadioGroup
+                row
+                value={deliveryMethod}
+                onChange={(e) => dispatch(setDeliveryMethod(e.target.value))}
+              >
+                <FormControlLabel
+                  value="offline"
+                  control={<Radio />}
+                  label="대면"
+                />
+                <FormControlLabel
+                  value="online"
+                  control={<Radio />}
+                  label="비대면"
+                />
+              </RadioGroup>
+            </FormControl>
+          </CheckBox>
+          {deliveryMethod === 'offline' ? <SelctedPlace /> : null}
+        </>
+      );
+    }
   };
 
   return (
@@ -91,48 +146,27 @@ export default function BuyingPostEdit() {
             pattern="^[0-9]*"
           ></Input>
           <CheckBox>
-            <div>전달 방법</div>
+            <div>구매 방식</div>
             <FormControl>
               <RadioGroup
                 row
-                value={selectedMethod}
-                onChange={(e) => dispatch(setSelectedMethod(e.target.value))}
+                value={buyingMethod}
+                onChange={(e) => dispatch(setBuyingMethod(e.target.value))}
               >
                 <FormControlLabel
                   value="offline"
                   control={<Radio />}
-                  label="대면"
+                  label="오프라인"
                 />
                 <FormControlLabel
                   value="online"
                   control={<Radio />}
-                  label="비대면"
+                  label="온라인"
                 />
               </RadioGroup>
             </FormControl>
           </CheckBox>
-          {selectedMethod === 'online' ? (
-            <Input
-              placeholder="상품 URL"
-              value={productUrl}
-              onChange={(e) => dispatch(setProductUrl(e.target.value))}
-            ></Input>
-          ) : selectedMethod === 'offline' ? (
-            <EventPositionBox>
-              {buyLocation ? (
-                <PlaceText>{buyLocation.address}</PlaceText>
-              ) : (
-                '장소'
-              )}
-              <Button
-                content="위치 선택"
-                textColor="black"
-                backgroundColor="white"
-                borderColor="#d2d2d2"
-                onClick={handleSelectedPlaceClick}
-              />
-            </EventPositionBox>
-          ) : null}
+          {generateCheckBox()}
           <TextArea
             placeholder="다른 사람과 같이 구매하고 싶은 상품에 대해&#13;설명해주세요 :)"
             value={content}
@@ -190,7 +224,7 @@ const Input = styled.input`
   }
 `;
 
-const EventPositionBox = styled.div`
+const PlacePositionBox = styled.div`
   display: flex;
   width: 100%;
   height: 50px;
