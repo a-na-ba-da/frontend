@@ -67,6 +67,7 @@ const HeaderText = styled.span`
   width: 100%;
   font-size: 18px;
   text-align: center;
+  z-index: -1;
 `;
 
 const LeftSection = styled.section`
