@@ -9,7 +9,7 @@ import MapSelectPoint from '../../components/Map/MapSelectPoint';
 import HeaderRight from '../../components/Header/HeaderRight';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { setLocation as setBuyingLocation } from '../../context/reducer/buyingEditReducer';
-import { setBuyLocation as setKnowingBuyLocation } from '../../context/reducer/knowingEditReducer';
+import { setLocation as setKnowingLocation } from '../../context/reducer/knowingEditReducer';
 import { setInit } from '../../context/reducer/mapReducer';
 
 export default function SelectPlace() {
@@ -31,7 +31,7 @@ export default function SelectPlace() {
       );
     } else if (whatPage === 'knowing') {
       dispatch(
-        setKnowingBuyLocation({
+        setKnowingLocation({
           address: address?.address,
           lat: marker.position.lat,
           lng: marker.position.lng,

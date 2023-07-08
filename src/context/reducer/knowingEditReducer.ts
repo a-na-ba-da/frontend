@@ -6,7 +6,7 @@ interface knowingEditState {
   selectedMethod: string;
   title: string;
   productUrl?: string;
-  buyLocation?: {
+  location?: {
     address: string;
     lat: number;
     lng: number;
@@ -20,7 +20,7 @@ const initialState: knowingEditState = {
   title: '',
   content: '',
   productUrl: undefined,
-  buyLocation: undefined,
+  location: undefined,
 };
 
 const knowingEditSlice = createSlice({
@@ -34,7 +34,7 @@ const knowingEditSlice = createSlice({
       if (action.payload === 'offline') {
         state.productUrl = undefined;
       } else {
-        state.buyLocation = undefined;
+        state.location = undefined;
       }
       state.selectedMethod = action.payload;
     },
@@ -44,8 +44,8 @@ const knowingEditSlice = createSlice({
     setProductUrl: (state, action) => {
       state.productUrl = action.payload;
     },
-    setBuyLocation: (state, action) => {
-      state.buyLocation = { ...state.buyLocation, ...action.payload };
+    setLocation: (state, action) => {
+      state.location = { ...state.location, ...action.payload };
     },
     setContent: (state, action) => {
       state.content = action.payload;
@@ -61,7 +61,7 @@ export const {
   setSelectedMethod,
   setTitle,
   setProductUrl,
-  setBuyLocation,
+  setLocation,
   setContent,
   setInit,
 } = knowingEditSlice.actions;

@@ -33,7 +33,7 @@ export default function KnowingPostEdit() {
     (state) => state.knowingEdit.selectedMethod,
   );
   const productUrl = useAppSelector((state) => state.knowingEdit.productUrl);
-  const buyLocation = useAppSelector((state) => state.knowingEdit.buyLocation);
+  const location = useAppSelector((state) => state.knowingEdit.location);
   const content = useAppSelector((state) => state.knowingEdit.content);
 
   const handleConfirmClick = () => {
@@ -104,8 +104,8 @@ export default function KnowingPostEdit() {
             ></Input>
           ) : selectedMethod === 'offline' ? (
             <EventPositionBox>
-              {buyLocation ? (
-                <PlaceText>{buyLocation.address}</PlaceText>
+              {location ? (
+                <PlaceText>{location.address}</PlaceText>
               ) : (
                 '행사 위치'
               )}
