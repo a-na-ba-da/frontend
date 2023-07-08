@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { ImageListType } from 'react-images-uploading';
+import { useNavigate } from 'react-router-dom';
 import {
   FormControl,
   FormControlLabel,
@@ -14,36 +14,74 @@ import HeaderRight from '../../components/Header/HeaderRight';
 import PostBack from '../../components/Post/PostBack';
 import EditImgUpload from '../../components/Post/Edit/EditImgUpload';
 import Button from '../../components/Button';
-import { useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import {
+  setContent,
+  setImages,
+  setInit,
+  setProductUrl,
+  setSelectedMethod,
+  setTitle,
+} from '../../context/reducer/knowingEditReducer';
 
 export default function KnowingPostEdit() {
   const navigate = useNavigate();
-  const [selectedMethod, SetSelectedMethod] = useState<string>('');
-  const [images, setImages] = useState<ImageListType>([]);
+  const dispatch = useAppDispatch();
+  const images = useAppSelector((state) => state.knowingEdit.images);
+  const title = useAppSelector((state) => state.knowingEdit.title);
+  const selectedMethod = useAppSelector(
+    (state) => state.knowingEdit.selectedMethod,
+  );
+  const productUrl = useAppSelector((state) => state.knowingEdit.productUrl);
+  const buyLocation = useAppSelector((state) => state.knowingEdit.buyLocation);
+  const content = useAppSelector((state) => state.knowingEdit.content);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    SetSelectedMethod(e.target.value);
+  const handleConfirmClick = () => {
+    dispatch(setInit());
+  };
+
+  const handleCancelClick = () => {
+    dispatch(setInit());
+    navigate(-1);
+  };
+
+  const handleSelectedPlaceClick = () => {
+    navigate('/saving/place', {
+      state: { whatPage: 'knowing' },
+    });
   };
 
   return (
     <KnowingPostEditLayout>
       <Header title="같이 알아요">
         <HeaderLeft>
-          <PostBack color="#8F00FF" whatShape="cross" />
+          <PostBack
+            color="#8F00FF"
+            whatShape="cross"
+            onClick={handleCancelClick}
+          />
         </HeaderLeft>
         <HeaderRight>
-          <ConfirmText>확인</ConfirmText>
+          <ConfirmText onClick={handleConfirmClick}>확인</ConfirmText>
         </HeaderRight>
       </Header>
       <Line />
       <Main>
         <EditImgUpload images={images} setImages={setImages} />
         <InputBox>
-          <Input placeholder="글 제목"></Input>
+          <Input
+            placeholder="글 제목"
+            value={title}
+            onChange={(e) => dispatch(setTitle(e.target.value))}
+          ></Input>
           <CheckBox>
             <BuyPlaceText>구매처</BuyPlaceText>
             <FormControl>
-              <RadioGroup row value={selectedMethod} onChange={handleChange}>
+              <RadioGroup
+                row
+                value={selectedMethod}
+                onChange={(e) => dispatch(setSelectedMethod(e.target.value))}
+              >
                 <FormControlLabel
                   value="offline"
                   control={<Radio />}
@@ -59,20 +97,32 @@ export default function KnowingPostEdit() {
             </FormControl>
           </CheckBox>
           {selectedMethod === 'online' ? (
-            <Input placeholder="행사 URL"></Input>
+            <Input
+              placeholder="행사 URL"
+              value={productUrl}
+              onChange={(e) => dispatch(setProductUrl(e.target.value))}
+            ></Input>
           ) : selectedMethod === 'offline' ? (
             <EventPositionBox>
-              <span>행사 위치</span>
+              {buyLocation ? (
+                <PlaceText>{buyLocation.address}</PlaceText>
+              ) : (
+                '행사 위치'
+              )}
               <Button
                 content="위치 선택"
                 textColor="black"
                 backgroundColor="white"
                 borderColor="#d2d2d2"
-                onClick={() => navigate('/saving/place')}
+                onClick={handleSelectedPlaceClick}
               />
             </EventPositionBox>
           ) : null}
-          <TextArea placeholder="다른 사람과 같이 구매하고 싶은 상품에 대해&#13;설명해주세요 :)"></TextArea>
+          <TextArea
+            placeholder="다른 사람과 같이 구매하고 싶은 상품에 대해&#13;설명해주세요 :)"
+            value={content}
+            onChange={(e) => dispatch(setContent(e.target.value))}
+          ></TextArea>
         </InputBox>
       </Main>
     </KnowingPostEditLayout>
@@ -135,6 +185,10 @@ const EventPositionBox = styled.div`
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
+`;
+
+const PlaceText = styled.span`
+  color: black;
 `;
 
 const CheckBox = styled.div`

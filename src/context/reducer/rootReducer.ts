@@ -1,8 +1,13 @@
 import { combineReducers } from '@reduxjs/toolkit';
 
+import buyingEditReducer from './buyingEditReducer';
+import mapReducer from './mapReducer';
+import knowingEditReducer from './knowingEditReducer';
+
 const rootReducer = combineReducers({
-  // counter: counterReducer,
-  // 추가 리듀서
+  buyingEdit: buyingEditReducer,
+  knowingEdit: knowingEditReducer,
+  map: mapReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
