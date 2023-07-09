@@ -23,6 +23,11 @@ import {
   setSelectedMethod,
   setTitle,
 } from '../../context/reducer/knowingEditReducer';
+import {
+  createOfflineKnowingPost,
+  createOnlineKnowingPost,
+} from '../../api/saving';
+import { uploadImages } from '../../api/image';
 
 export default function KnowingPostEdit() {
   const navigate = useNavigate();
@@ -36,8 +41,42 @@ export default function KnowingPostEdit() {
   const location = useAppSelector((state) => state.knowingEdit.location);
   const content = useAppSelector((state) => state.knowingEdit.content);
 
-  const handleConfirmClick = () => {
-    dispatch(setInit());
+  const handleConfirmClick = async () => {
+    if (title.length > 0 && content.length > 0 && images.length > 0) {
+      if (selectedMethod === 'online' && productUrl) {
+        const res = await uploadImages({
+          images,
+          type: 'KNOW_TOGETHER',
+        });
+        const imageNameList = res.data.detail;
+        await createOnlineKnowingPost({
+          title,
+          content,
+          images: imageNameList,
+          productUrl,
+        });
+        alert('작성에 성공했습니다.');
+        dispatch(setInit());
+        navigate(-1);
+      } else if (selectedMethod === 'offline' && location) {
+        const res = await uploadImages({
+          images,
+          type: 'KNOW_TOGETHER',
+        });
+        const imageNameList = res.data.detail;
+        await createOfflineKnowingPost({
+          title,
+          content,
+          images: imageNameList,
+          buyPlaceLng: location.lng,
+          buyPlaceLat: location.lat,
+          buyPlaceDetail: location.address,
+        });
+        alert('작성에 성공했습니다.');
+        dispatch(setInit());
+        navigate(-1);
+      } else alert('내용을 작성해주세요.');
+    } else alert('내용을 작성해주세요.');
   };
 
   const handleCancelClick = () => {

@@ -55,3 +55,63 @@ export const getKnowingPost = (id: string | undefined) => {
     },
   });
 };
+
+interface createOnlineKnowingPostProps {
+  title: string;
+  content: string;
+  images: string[];
+  productUrl: string;
+}
+
+export const createOnlineKnowingPost = ({
+  title,
+  content,
+  images,
+  productUrl,
+}: createOnlineKnowingPostProps) => {
+  return axios.post(
+    '/saving/know-together/online',
+    {
+      title,
+      content,
+      images,
+      productUrl,
+    },
+    {
+      headers: { Authorization: 'Bearer ' + process.env.AUTH_TOKEN },
+    },
+  );
+};
+
+interface createOfflineKnowingPostProps {
+  title: string;
+  content: string;
+  images: string[];
+  buyPlaceLat: number;
+  buyPlaceLng: number;
+  buyPlaceDetail: string;
+}
+
+export const createOfflineKnowingPost = ({
+  title,
+  content,
+  images,
+  buyPlaceDetail,
+  buyPlaceLat,
+  buyPlaceLng,
+}: createOfflineKnowingPostProps) => {
+  return axios.post(
+    '/saving/know-together/offline',
+    {
+      title,
+      content,
+      images,
+      buyPlaceDetail,
+      buyPlaceLat,
+      buyPlaceLng,
+    },
+    {
+      headers: { Authorization: 'Bearer ' + process.env.AUTH_TOKEN },
+    },
+  );
+};
