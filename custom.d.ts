@@ -40,9 +40,11 @@ interface knowingPostType {
   title: string;
   content: string;
   productUrl: string | null;
-  buyPlaceLat: string | null;
+  buyPlaceDetail: string;
+  deliveryPlaceLat: string | null;
+  deliveryPlaceLng: string | null;
   buyPlaceLng: string | null;
-  isOnlineBought: boolean;
+  isOnline: boolean;
   createdAt: string;
   modifiedAt: string;
   images: string[];
