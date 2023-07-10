@@ -11,9 +11,12 @@ import HeaderRight from '../../components/Header/HeaderRight';
 import ContentBuyingItem from '../../components/Content/ContentBuyingItem';
 import ContentKnowingItem from '../../components/Content/ContentKnowingItem';
 import { getBuyingPostList, getKnowingPostList } from '../../api/saving';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { setIsBuyingMenu } from '../../context/reducer/buyingReducer';
 
 export default function SavingBoard() {
-  const [isBuyingMenu, setIsBuyingMenu] = useState<boolean>(true);
+  const dispatch = useAppDispatch();
+  const isBuyingMenu = useAppSelector((state) => state.buying.isBuyingMenu);
   const [buyingPostList, setBuyingPostList] = useState<buyingPostType[]>([]);
   const [knowingPostList, setKnowingPostList] = useState<knowingPostType[]>([]);
   const navigate = useNavigate();
@@ -46,10 +49,10 @@ export default function SavingBoard() {
     // 현재 선택되지 않은 메뉴를 클릭시 메뉴 전환 후 스크롤 최상단 이동
     // 전환후 최상단 스크롤 이동이 없을 경우 이전 메뉴의 스크롤이 전환 후 메뉴 스크롤에도 남게됨
     else if (whatMenu === 'buying') {
-      setIsBuyingMenu(true);
+      dispatch(setIsBuyingMenu(true));
       window.scrollTo({ top: 0 });
     } else {
-      setIsBuyingMenu(false);
+      dispatch(setIsBuyingMenu(false));
       window.scrollTo({ top: 0 });
     }
   };
