@@ -29,7 +29,9 @@ export default function ContentKnowingItem({
   return (
     <S.ItemLayout onClick={goPost}>
       <S.ThumbnailCol
-        src={thumbnail ? baseURL + '/image/' + thumbnail : undefined}
+        src={
+          thumbnail ? baseURL + '/image/' + 'thumbnail_' + thumbnail : undefined
+        }
       />
       <S.DescriptionCol>
         <div>

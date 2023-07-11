@@ -33,7 +33,9 @@ export default function ContentBuyingItem({
   return (
     <S.ItemLayout onClick={goPost}>
       <S.ThumbnailCol
-        src={thumbnail ? baseURL + '/image/' + thumbnail : undefined}
+        src={
+          thumbnail ? baseURL + '/image/' + 'thumbnail_' + thumbnail : undefined
+        }
       />
       <S.DescriptionCol>
         <TitleText>{title}</TitleText>
