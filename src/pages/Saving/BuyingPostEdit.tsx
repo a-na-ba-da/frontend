@@ -72,8 +72,8 @@ export default function BuyingPostEdit() {
             buyDate,
             pay,
             productUrl,
-            deliveryPlaceLat: location.lat,
-            deliveryPlaceLng: location.lng,
+            buyPlaceLat: location.lat,
+            buyPlaceLng: location.lng,
           });
           alert('작성에 성공했습니다.');
           dispatch(setInit());
@@ -92,8 +92,8 @@ export default function BuyingPostEdit() {
           buyDate,
           pay,
           buyPlaceDetail: location.address,
-          deliveryPlaceLat: location.lat,
-          deliveryPlaceLng: location.lng,
+          buyPlaceLat: location.lat,
+          buyPlaceLng: location.lng,
         });
         alert('작성에 성공했습니다.');
         dispatch(setInit());

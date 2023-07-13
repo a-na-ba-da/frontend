@@ -41,8 +41,7 @@ interface knowingPostType {
   content: string;
   productUrl: string | null;
   buyPlaceDetail: string;
-  deliveryPlaceLat: string | null;
-  deliveryPlaceLng: string | null;
+  buyPlaceLat: string | null;
   buyPlaceLng: string | null;
   isOnline: boolean;
   createdAt: string;

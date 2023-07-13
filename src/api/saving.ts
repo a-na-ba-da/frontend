@@ -160,8 +160,8 @@ interface createMeetBuyingPostProps {
   buyPlaceDetail?: string;
   buyDate: string;
   pay: number;
-  deliveryPlaceLat: number;
-  deliveryPlaceLng: number;
+  buyPlaceLat: number;
+  buyPlaceLng: number;
 }
 
 export const createMeetBuyingPost = ({
@@ -172,8 +172,8 @@ export const createMeetBuyingPost = ({
   buyPlaceDetail,
   buyDate,
   pay,
-  deliveryPlaceLat,
-  deliveryPlaceLng,
+  buyPlaceLat,
+  buyPlaceLng,
 }: createMeetBuyingPostProps) => {
   return axios.post(
     '/saving/buy-together/meet-delivery',
@@ -185,8 +185,8 @@ export const createMeetBuyingPost = ({
       buyPlaceDetail,
       buyDate,
       pay,
-      deliveryPlaceLat,
-      deliveryPlaceLng,
+      buyPlaceLat,
+      buyPlaceLng,
     },
     {
       headers: { Authorization: 'Bearer ' + process.env.AUTH_TOKEN },
