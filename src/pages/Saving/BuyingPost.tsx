@@ -73,7 +73,7 @@ export default function BuyingPost() {
           </DescriptionBox>
           <MainTextBox>{buyingPost?.content}</MainTextBox>
         </ContentSection>
-        <PostComment />
+        <PostComment postType="buy-together" postId={buyingPost?.id} />
       </Main>
     </PostLayout>
   );

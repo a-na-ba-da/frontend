@@ -1,11 +1,39 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import AccountCircleTwoToneIcon from '@mui/icons-material/AccountCircleTwoTone';
 import SmsOutlinedIcon from '@mui/icons-material/SmsOutlined';
 
 import Send from '../../asset/img/send.png';
+import { getComment } from '../../api/comment';
 
-export default function PostComment() {
+interface PostCommentProps {
+  postType: string;
+  postId: number | undefined;
+}
+
+export default function PostComment({ postType, postId }: PostCommentProps) {
+  interface parentCommentType {
+    createdAt: string;
+    modifiedAt: string;
+    id: number;
+    writer: writerType;
+    content: string;
+  }
+
+  interface commentType {
+    parentComment: parentCommentType;
+    childComments: parentCommentType[];
+  }
+  const [commentList, setCommentList] = useState<commentType[]>([]);
+
+  useEffect(() => {
+    if (postId) {
+      getComment(postType, postId).then((res) => {
+        setCommentList(res.data.detail);
+      });
+    }
+  }, [postId]);
+
   return (
     <CommentLayout>
       <SmsOutlinedIcon
@@ -13,26 +41,18 @@ export default function PostComment() {
       />
       <CommentCountText>2</CommentCountText>
       <CommentList>
-        <CommentItem>
-          <CommentUserBox>
-            <CommentUserImg>
-              <AccountCircleTwoToneIcon sx={{ fontSize: 16 }} />
-            </CommentUserImg>
-            <CommentText>파란하늘932</CommentText>
-          </CommentUserBox>
-          <CommentDateText>2020.11.06</CommentDateText>
-          <CommentText>저 살래요</CommentText>
-        </CommentItem>
-        <CommentItem>
-          <CommentUserBox>
-            <CommentUserImg>
-              <AccountCircleTwoToneIcon sx={{ fontSize: 16 }} />
-            </CommentUserImg>
-            <CommentText>파란하늘932</CommentText>
-          </CommentUserBox>
-          <CommentDateText>2020.11.06</CommentDateText>
-          <CommentText>저 살래요</CommentText>
-        </CommentItem>
+        {commentList.map((item) => (
+          <CommentItem>
+            <CommentUserBox>
+              <CommentUserImg>
+                <AccountCircleTwoToneIcon sx={{ fontSize: 16 }} />
+              </CommentUserImg>
+              <CommentText>{item.parentComment.writer.nickname}</CommentText>
+            </CommentUserBox>
+            <CommentDateText>{item.parentComment.createdAt}</CommentDateText>
+            <CommentText>{item.parentComment.content}</CommentText>
+          </CommentItem>
+        ))}
       </CommentList>
       <CommentInputSection>
         <CommentSendImg alt="cooment_send" src={Send} />
