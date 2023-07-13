@@ -82,9 +82,9 @@ const CommentItem = styled.li`
   margin: 0;
   &:first-child {
     border-top: 1px solid #e1e1e1;
+    border-bottom: 1px solid #e1e1e1;
   }
   &:not(:first-child) {
-    border-top: 1px solid #e1e1e1;
     border-bottom: 1px solid #e1e1e1;
   }
 `;
