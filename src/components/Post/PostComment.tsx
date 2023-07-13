@@ -49,8 +49,13 @@ export default function PostComment({ postType, postId }: PostCommentProps) {
               </CommentUserImg>
               <CommentText>{item.parentComment.writer.nickname}</CommentText>
             </CommentUserBox>
-            <CommentDateText>{item.parentComment.createdAt}</CommentDateText>
             <CommentText>{item.parentComment.content}</CommentText>
+            <CommentDateBox>{item.parentComment.createdAt}</CommentDateBox>
+            <ChildCommentBtnBox>
+              <SmsOutlinedIcon
+                sx={{ fontSize: 13, color: '#b7b7b7', verticalAlign: 'middle' }}
+              />
+            </ChildCommentBtnBox>
           </CommentItem>
         ))}
       </CommentList>
@@ -101,12 +106,19 @@ const CommentText = styled.span`
   font-size: 13px;
 `;
 
-const CommentDateText = styled.span`
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 13px;
+const CommentDateBox = styled.div`
+  margin-top: 5px;
+  font-size: 10px;
   color: #999999;
+`;
+
+const ChildCommentBtnBox = styled.div`
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  background-color: #f9f9f9;
+  padding: 0 10px;
+  border-radius: 3px;
 `;
 
 const CommentInputSection = styled.section`
