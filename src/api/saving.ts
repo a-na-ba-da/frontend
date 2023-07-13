@@ -115,3 +115,81 @@ export const createOfflineKnowingPost = ({
     },
   );
 };
+
+interface createParcelBuyingPostProps {
+  title: string;
+  content: string;
+  images: string[];
+  productUrl: string;
+  buyPlaceDetail?: string;
+  buyDate: string;
+  pay: number;
+}
+
+export const createParcelBuyingPost = ({
+  title,
+  content,
+  images,
+  productUrl,
+  buyPlaceDetail,
+  buyDate,
+  pay,
+}: createParcelBuyingPostProps) => {
+  return axios.post(
+    '/saving/buy-together/parcel-delivery',
+    {
+      title,
+      content,
+      images,
+      productUrl,
+      buyPlaceDetail,
+      buyDate,
+      pay,
+    },
+    {
+      headers: { Authorization: 'Bearer ' + process.env.AUTH_TOKEN },
+    },
+  );
+};
+
+interface createMeetBuyingPostProps {
+  title: string;
+  content: string;
+  images: string[];
+  productUrl?: string;
+  buyPlaceDetail?: string;
+  buyDate: string;
+  pay: number;
+  deliveryPlaceLat: number;
+  deliveryPlaceLng: number;
+}
+
+export const createMeetBuyingPost = ({
+  title,
+  content,
+  images,
+  productUrl,
+  buyPlaceDetail,
+  buyDate,
+  pay,
+  deliveryPlaceLat,
+  deliveryPlaceLng,
+}: createMeetBuyingPostProps) => {
+  return axios.post(
+    '/saving/buy-together/meet-delivery',
+    {
+      title,
+      content,
+      images,
+      productUrl,
+      buyPlaceDetail,
+      buyDate,
+      pay,
+      deliveryPlaceLat,
+      deliveryPlaceLng,
+    },
+    {
+      headers: { Authorization: 'Bearer ' + process.env.AUTH_TOKEN },
+    },
+  );
+};

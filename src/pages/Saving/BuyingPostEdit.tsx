@@ -26,6 +26,8 @@ import {
   setProductUrl,
   setTitle,
 } from '../../context/reducer/buyingEditReducer';
+import { uploadImages } from '../../api/image';
+import { createMeetBuyingPost, createParcelBuyingPost } from '../../api/saving';
 
 export default function BuyingPostEdit() {
   const navigate = useNavigate();
@@ -42,8 +44,62 @@ export default function BuyingPostEdit() {
   const location = useAppSelector((state) => state.buyingEdit.location);
   const content = useAppSelector((state) => state.buyingEdit.content);
 
-  const handleConfirmClick = () => {
-    dispatch(setInit());
+  const handleConfirmClick = async () => {
+    if (title.length > 0 && content.length > 0 && images.length > 0) {
+      if (buyingMethod === 'online' && productUrl) {
+        const res = await uploadImages({
+          images,
+          type: 'BUY_TOGETHER',
+        });
+        const imageNameList = res.data.detail;
+        if (deliveryMethod === 'online') {
+          await createParcelBuyingPost({
+            title,
+            content,
+            images: imageNameList,
+            productUrl,
+            buyDate,
+            pay,
+          });
+          alert('작성에 성공했습니다.');
+          dispatch(setInit());
+          navigate(-1);
+        } else if (deliveryMethod === 'offline' && location) {
+          await createMeetBuyingPost({
+            title,
+            content,
+            images: imageNameList,
+            buyDate,
+            pay,
+            productUrl,
+            deliveryPlaceLat: location.lat,
+            deliveryPlaceLng: location.lng,
+          });
+          alert('작성에 성공했습니다.');
+          dispatch(setInit());
+          navigate(-1);
+        } else alert('내용을 작성해주세요.');
+      } else if (buyingMethod === 'offline' && location) {
+        const res = await uploadImages({
+          images,
+          type: 'BUY_TOGETHER',
+        });
+        const imageNameList = res.data.detail;
+        await createMeetBuyingPost({
+          title,
+          content,
+          images: imageNameList,
+          buyDate,
+          pay,
+          buyPlaceDetail: location.address,
+          deliveryPlaceLat: location.lat,
+          deliveryPlaceLng: location.lng,
+        });
+        alert('작성에 성공했습니다.');
+        dispatch(setInit());
+        navigate(-1);
+      } else alert('내용을 작성해주세요.');
+    } else alert('내용을 작성해주세요.');
   };
 
   const handleCancelClick = () => {
