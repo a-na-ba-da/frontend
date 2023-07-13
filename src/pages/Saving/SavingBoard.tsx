@@ -94,7 +94,7 @@ export default function SavingBoard() {
                   title={post.title}
                   thumbnail={post.images.length > 0 && post.images[0]}
                   date={post.createdAt}
-                  isOnline={post.onlineDelivery}
+                  isOnline={post.parcelDelivery}
                   price={post.pay}
                 />
               ))

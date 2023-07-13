@@ -26,7 +26,7 @@ interface buyingPostType {
   createdAt: string;
   modifiedAt: string;
   images: string[];
-  onlineDelivery: boolean;
+  parcelDelivery: boolean;
   writer: {
     id: number;
     nickname: string;
