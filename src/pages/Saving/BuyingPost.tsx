@@ -13,12 +13,32 @@ import PostImgSlider from '../../components/Post/PostImgSlider';
 export default function BuyingPost() {
   const { id } = useParams();
   const [buyingPost, setBuyingPost] = useState<buyingPostType>();
+  const [address, setAddress] = useState<string>('');
 
   useEffect(() => {
     getBuyingPost(id).then((res) => {
       setBuyingPost(res.data.detail);
+      if (res.data.detail.buyPlaceLat && res.data.detail.buyPlaceLng) {
+        const geocoder = new kakao.maps.services.Geocoder();
+        geocoder.coord2Address(
+          res.data.detail.buyPlaceLng,
+          res.data.detail.buyPlaceLat,
+          (result: { [key: string]: any }, status: any) => {
+            if (status === kakao.maps.services.Status.OK) {
+              setAddress(result[0].address?.address_name);
+            }
+          },
+        );
+      }
     });
   }, []);
+
+  const handleClick = () => {
+    if (buyingPost?.productUrl !== null) {
+      const url: string | undefined = buyingPost?.productUrl;
+      window.open(url, '_blank');
+    }
+  };
 
   return (
     <PostLayout>
@@ -36,7 +56,16 @@ export default function BuyingPost() {
           </DateBox>
           <DescriptionBox>공구 날짜 | {buyingPost?.buyDate}</DescriptionBox>
           <DescriptionBox>
-            전달 방법 | {buyingPost?.onlineDelivery ? '비대면' : '대면'}
+            구매 방식 |{' '}
+            {buyingPost?.productUrl === null ? '오프라인 · ' : `온라인 · `}
+            {buyingPost?.productUrl === null ? (
+              address
+            ) : (
+              <span onClick={handleClick}>접속링크</span>
+            )}
+          </DescriptionBox>
+          <DescriptionBox>
+            전달 방법 | {buyingPost?.parcelDelivery ? '택배전달' : '직접전달'}
           </DescriptionBox>
           <DescriptionBox>
             내가 내야할 금액 |{' '}
