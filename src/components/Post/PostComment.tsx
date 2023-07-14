@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import AccountCircleTwoToneIcon from '@mui/icons-material/AccountCircleTwoTone';
 import SmsOutlinedIcon from '@mui/icons-material/SmsOutlined';
+import TurnLeftIcon from '@mui/icons-material/TurnLeft';
 
 import Send from '../../asset/img/send.png';
 import { getComment } from '../../api/comment';
@@ -34,8 +35,34 @@ export default function PostComment({ postType, postId }: PostCommentProps) {
     }
   }, [postId]);
 
+  const ChildComment = ({ writer, content, createdAt }: parentCommentType) => {
+    return (
+      <ChildCommentLayout>
+        <TurnLeftIcon
+          sx={{
+            marginTop: '10px',
+            color: '#999999',
+            transform: 'rotate( 180deg )',
+          }}
+        />
+        <ChildCommentSection>
+          <ChildCommentBox>
+            <CommentUserBox>
+              <CommentUserImg>
+                <AccountCircleTwoToneIcon sx={{ fontSize: 16 }} />
+              </CommentUserImg>
+              <CommentText>{writer.nickname}</CommentText>
+            </CommentUserBox>
+            <CommentText>{content}</CommentText>
+            <CommentDateBox>{createdAt}</CommentDateBox>
+          </ChildCommentBox>
+        </ChildCommentSection>
+      </ChildCommentLayout>
+    );
+  };
+
   return (
-    <CommentLayout>
+    <section>
       <SmsOutlinedIcon
         sx={{ fontSize: 16, color: '#216583', verticalAlign: 'middle' }}
       />
@@ -43,19 +70,26 @@ export default function PostComment({ postType, postId }: PostCommentProps) {
       <CommentList>
         {commentList.map((item) => (
           <CommentItem>
-            <CommentUserBox>
-              <CommentUserImg>
-                <AccountCircleTwoToneIcon sx={{ fontSize: 16 }} />
-              </CommentUserImg>
-              <CommentText>{item.parentComment.writer.nickname}</CommentText>
-            </CommentUserBox>
-            <CommentText>{item.parentComment.content}</CommentText>
-            <CommentDateBox>{item.parentComment.createdAt}</CommentDateBox>
-            <ChildCommentBtnBox>
-              <SmsOutlinedIcon
-                sx={{ fontSize: 13, color: '#b7b7b7', verticalAlign: 'middle' }}
-              />
-            </ChildCommentBtnBox>
+            <CommentBox>
+              <CommentUserBox>
+                <CommentUserImg>
+                  <AccountCircleTwoToneIcon sx={{ fontSize: 16 }} />
+                </CommentUserImg>
+                <CommentText>{item.parentComment.writer.nickname}</CommentText>
+              </CommentUserBox>
+              <CommentText>{item.parentComment.content}</CommentText>
+              <CommentDateBox>{item.parentComment.createdAt}</CommentDateBox>
+              <ChildCommentBtnBox>
+                <SmsOutlinedIcon
+                  sx={{
+                    fontSize: 13,
+                    color: '#b7b7b7',
+                    verticalAlign: 'middle',
+                  }}
+                />
+              </ChildCommentBtnBox>
+            </CommentBox>
+            {item.childComments.map((child) => ChildComment(child))}
           </CommentItem>
         ))}
       </CommentList>
@@ -63,16 +97,29 @@ export default function PostComment({ postType, postId }: PostCommentProps) {
         <CommentSendImg alt="cooment_send" src={Send} />
         <CommentInput placeholder="댓글을 입력하세요." />
       </CommentInputSection>
-    </CommentLayout>
+    </section>
   );
 }
 
-const CommentLayout = styled.section``;
+const CommentItem = styled.li`
+  padding-bottom: 5px;
+  list-style: none;
+  &:first-child {
+    border-top: 1px solid #f2f2f2;
+    border-bottom: 1px solid #f2f2f2;
+  }
+  &:not(:first-child) {
+    border-bottom: 1px solid #f2f2f2;
+  }
+  &:last-child {
+    border-bottom: 0;
+  }
+`;
 
 const CommentCountText = styled.span`
   margin-left: 5px;
-  color: #216583;
   font-size: 13px;
+  color: #216583;
 `;
 
 const CommentList = styled.ul`
@@ -80,18 +127,16 @@ const CommentList = styled.ul`
   margin-top: 10px;
 `;
 
-const CommentItem = styled.li`
-  all: inherit;
+const CommentBox = styled.div`
   position: relative;
   padding: 10px;
   margin: 0;
-  &:first-child {
-    border-top: 1px solid #e1e1e1;
-    border-bottom: 1px solid #e1e1e1;
-  }
-  &:not(:first-child) {
-    border-bottom: 1px solid #e1e1e1;
-  }
+`;
+
+const ChildCommentBox = styled(CommentBox)`
+  margin: 5px 0 5px 5px;
+  border-radius: 10px;
+  background-color: #f9f9f9;
 `;
 
 const CommentUserBox = styled.div`
@@ -116,9 +161,17 @@ const ChildCommentBtnBox = styled.div`
   position: absolute;
   right: 10px;
   top: 10px;
-  background-color: #f9f9f9;
   padding: 0 10px;
   border-radius: 3px;
+  background-color: #f9f9f9;
+`;
+
+const ChildCommentLayout = styled.div`
+  display: flex;
+`;
+
+const ChildCommentSection = styled.div`
+  flex-grow: 1;
 `;
 
 const CommentInputSection = styled.section`
