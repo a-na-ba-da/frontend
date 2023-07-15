@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, KeyboardEvent } from 'react';
 import styled from 'styled-components';
 import AccountCircleTwoToneIcon from '@mui/icons-material/AccountCircleTwoTone';
 import SmsOutlinedIcon from '@mui/icons-material/SmsOutlined';
 import TurnLeftIcon from '@mui/icons-material/TurnLeft';
 
 import Send from '../../asset/img/send.png';
-import { getComment } from '../../api/comment';
+import { createComment, getComment } from '../../api/comment';
 
 interface PostCommentProps {
   postType: string;
@@ -26,6 +26,7 @@ export default function PostComment({ postType, postId }: PostCommentProps) {
     childComments: parentCommentType[];
   }
   const [commentList, setCommentList] = useState<commentType[]>([]);
+  const [commentInput, setCommentInput] = useState<string>('');
 
   useEffect(() => {
     if (postId) {
@@ -34,6 +35,23 @@ export default function PostComment({ postType, postId }: PostCommentProps) {
       });
     }
   }, [postId]);
+
+  const handleSendClick = async () => {
+    await createComment(postType, postId, commentInput);
+    const res = await getComment(postType, postId);
+    setCommentList(res.data.detail);
+    setCommentInput('');
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: 'smooth',
+    });
+  };
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleSendClick();
+    }
+  };
 
   const ChildComment = ({ writer, content, createdAt }: parentCommentType) => {
     return (
@@ -94,8 +112,17 @@ export default function PostComment({ postType, postId }: PostCommentProps) {
         ))}
       </CommentList>
       <CommentInputSection>
-        <CommentSendImg alt="cooment_send" src={Send} />
-        <CommentInput placeholder="댓글을 입력하세요." />
+        <CommentSendImg
+          alt="cooment_send"
+          src={Send}
+          onClick={handleSendClick}
+        />
+        <CommentInput
+          placeholder="댓글을 입력하세요."
+          value={commentInput}
+          onChange={(e) => setCommentInput(e.target.value)}
+          onKeyDown={handleKeyDown}
+        />
       </CommentInputSection>
     </section>
   );
