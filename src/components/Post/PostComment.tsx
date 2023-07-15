@@ -107,7 +107,15 @@ export default function PostComment({ postType, postId }: PostCommentProps) {
                 />
               </ChildCommentBtnBox>
             </CommentBox>
-            {item.childComments.map((child) => ChildComment(child))}
+            {item.childComments.map((child) => (
+              <ChildComment
+                writer={child.writer}
+                content={child.content}
+                createdAt={child.createdAt}
+                modifiedAt={child.modifiedAt}
+                id={child.id}
+              />
+            ))}
           </CommentItem>
         ))}
       </CommentList>
