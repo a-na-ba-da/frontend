@@ -50,7 +50,7 @@ export default function PostComment({ postType, postId }: PostCommentProps) {
     });
   };
 
-  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyUp = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       handleSendClick();
     }
@@ -147,7 +147,7 @@ export default function PostComment({ postType, postId }: PostCommentProps) {
           placeholder="댓글을 입력하세요."
           value={commentInput}
           onChange={(e) => setCommentInput(e.target.value)}
-          onKeyDown={handleKeyDown}
+          onKeyUp={handleKeyUp}
           onBlur={handleInputFocusOut}
           ref={inputFocus}
         />
