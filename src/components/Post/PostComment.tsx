@@ -39,15 +39,17 @@ export default function PostComment({ postType, postId }: PostCommentProps) {
   }, [postId]);
 
   const handleSendClick = async () => {
-    await createComment(postType, postId, commentInput, focusCommentId);
-    const res = await getComment(postType, postId);
-    setCommentList(res.data.detail);
-    setCommentInput('');
-    setFocusCommentId(undefined);
-    window.scrollTo({
-      top: document.documentElement.scrollHeight,
-      behavior: 'smooth',
-    });
+    if (commentInput.length > 1) {
+      await createComment(postType, postId, commentInput, focusCommentId);
+      const res = await getComment(postType, postId);
+      setCommentList(res.data.detail);
+      setCommentInput('');
+      setFocusCommentId(undefined);
+      window.scrollTo({
+        top: document.documentElement.scrollHeight,
+        behavior: 'smooth',
+      });
+    } else alert('댓글은 2글자 이상부터 생성가능합니다.');
   };
 
   const handleKeyUp = (e: KeyboardEvent<HTMLInputElement>) => {
