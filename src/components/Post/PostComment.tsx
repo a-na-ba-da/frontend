@@ -1,4 +1,4 @@
-import React, { useEffect, useState, KeyboardEvent } from 'react';
+import React, { useEffect, useState, KeyboardEvent, useRef } from 'react';
 import styled from 'styled-components';
 import AccountCircleTwoToneIcon from '@mui/icons-material/AccountCircleTwoTone';
 import SmsOutlinedIcon from '@mui/icons-material/SmsOutlined';
@@ -27,6 +27,8 @@ export default function PostComment({ postType, postId }: PostCommentProps) {
   }
   const [commentList, setCommentList] = useState<commentType[]>([]);
   const [commentInput, setCommentInput] = useState<string>('');
+  const [focusCommentId, setFocusCommentId] = useState<number | undefined>();
+  const inputFocus = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (postId) {
@@ -37,10 +39,11 @@ export default function PostComment({ postType, postId }: PostCommentProps) {
   }, [postId]);
 
   const handleSendClick = async () => {
-    await createComment(postType, postId, commentInput);
+    await createComment(postType, postId, commentInput, focusCommentId);
     const res = await getComment(postType, postId);
     setCommentList(res.data.detail);
     setCommentInput('');
+    setFocusCommentId(undefined);
     window.scrollTo({
       top: document.documentElement.scrollHeight,
       behavior: 'smooth',
@@ -51,6 +54,39 @@ export default function PostComment({ postType, postId }: PostCommentProps) {
     if (e.key === 'Enter') {
       handleSendClick();
     }
+  };
+
+  const handleInputFocusOut = () => {
+    setFocusCommentId(undefined);
+  };
+
+  const Comment = ({ item }: { item: commentType }) => {
+    const handleChildCommentClick = () => {
+      setFocusCommentId(item.parentComment.id);
+      inputFocus.current && inputFocus.current.focus();
+    };
+
+    return (
+      <CommentBox isSelected={item.parentComment.id === focusCommentId}>
+        <CommentUserBox>
+          <CommentUserImg>
+            <AccountCircleTwoToneIcon sx={{ fontSize: 16 }} />
+          </CommentUserImg>
+          <CommentText>{item.parentComment.writer.nickname}</CommentText>
+        </CommentUserBox>
+        <CommentText>{item.parentComment.content}</CommentText>
+        <CommentDateBox>{item.parentComment.createdAt}</CommentDateBox>
+        <ChildCommentBtnBox onClick={handleChildCommentClick}>
+          <SmsOutlinedIcon
+            sx={{
+              fontSize: 13,
+              color: '#b7b7b7',
+              verticalAlign: 'middle',
+            }}
+          />
+        </ChildCommentBtnBox>
+      </CommentBox>
+    );
   };
 
   const ChildComment = ({ writer, content, createdAt }: parentCommentType) => {
@@ -88,25 +124,7 @@ export default function PostComment({ postType, postId }: PostCommentProps) {
       <CommentList>
         {commentList.map((item) => (
           <CommentItem>
-            <CommentBox>
-              <CommentUserBox>
-                <CommentUserImg>
-                  <AccountCircleTwoToneIcon sx={{ fontSize: 16 }} />
-                </CommentUserImg>
-                <CommentText>{item.parentComment.writer.nickname}</CommentText>
-              </CommentUserBox>
-              <CommentText>{item.parentComment.content}</CommentText>
-              <CommentDateBox>{item.parentComment.createdAt}</CommentDateBox>
-              <ChildCommentBtnBox>
-                <SmsOutlinedIcon
-                  sx={{
-                    fontSize: 13,
-                    color: '#b7b7b7',
-                    verticalAlign: 'middle',
-                  }}
-                />
-              </ChildCommentBtnBox>
-            </CommentBox>
+            <Comment key={item.parentComment.id} item={item} />
             {item.childComments.map((child) => (
               <ChildComment
                 writer={child.writer}
@@ -130,6 +148,8 @@ export default function PostComment({ postType, postId }: PostCommentProps) {
           value={commentInput}
           onChange={(e) => setCommentInput(e.target.value)}
           onKeyDown={handleKeyDown}
+          onBlur={handleInputFocusOut}
+          ref={inputFocus}
         />
       </CommentInputSection>
     </section>
@@ -137,7 +157,6 @@ export default function PostComment({ postType, postId }: PostCommentProps) {
 }
 
 const CommentItem = styled.li`
-  padding-bottom: 5px;
   list-style: none;
   &:first-child {
     border-top: 1px solid #f2f2f2;
@@ -162,10 +181,11 @@ const CommentList = styled.ul`
   margin-top: 10px;
 `;
 
-const CommentBox = styled.div`
+const CommentBox = styled.div<{ isSelected?: boolean }>`
   position: relative;
   padding: 10px;
   margin: 0;
+  background-color: ${(props) => (props.isSelected ? '#f4eeff' : 'initial')};
 `;
 
 const ChildCommentBox = styled(CommentBox)`
