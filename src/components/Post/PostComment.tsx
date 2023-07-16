@@ -29,6 +29,7 @@ export default function PostComment({ postType, postId }: PostCommentProps) {
   const [commentInput, setCommentInput] = useState<string>('');
   const [focusCommentId, setFocusCommentId] = useState<number | undefined>();
   const inputFocus = useRef<HTMLInputElement>(null);
+  const [isKeyDown, setIsKeyDown] = useState(false);
 
   useEffect(() => {
     if (postId) {
@@ -52,9 +53,16 @@ export default function PostComment({ postType, postId }: PostCommentProps) {
     } else alert('댓글은 2글자 이상부터 생성가능합니다.');
   };
 
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && !e.nativeEvent.isComposing && !isKeyDown) {
+      setIsKeyDown(true);
+      handleSendClick();
+    }
+  };
+
   const handleKeyUp = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      handleSendClick();
+      setIsKeyDown(false);
     }
   };
 
@@ -149,6 +157,7 @@ export default function PostComment({ postType, postId }: PostCommentProps) {
           placeholder="댓글을 입력하세요."
           value={commentInput}
           onChange={(e) => setCommentInput(e.target.value)}
+          onKeyDown={handleKeyDown}
           onKeyUp={handleKeyUp}
           onBlur={handleInputFocusOut}
           ref={inputFocus}
