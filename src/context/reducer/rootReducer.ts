@@ -3,10 +3,10 @@ import { combineReducers } from '@reduxjs/toolkit';
 import buyingEditReducer from './buyingEditReducer';
 import mapReducer from './mapReducer';
 import knowingEditReducer from './knowingEditReducer';
-import buyingReducer from './buyingReducer';
+import savingReducer from './savingReducer';
 
 const rootReducer = combineReducers({
-  buying: buyingReducer,
+  saving: savingReducer,
   buyingEdit: buyingEditReducer,
   knowingEdit: knowingEditReducer,
   map: mapReducer,

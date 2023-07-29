@@ -1,17 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-interface buyingState {
+interface savingState {
   isBuyingMenu: boolean;
   scroll: number;
 }
 
-const initialState: buyingState = {
+const initialState: savingState = {
   isBuyingMenu: true,
   scroll: 0,
 };
 
-const buyingSlice = createSlice({
-  name: 'buying',
+const savingSlice = createSlice({
+  name: 'saving',
   initialState,
   reducers: {
     setIsBuyingMenu: (state, action) => {
@@ -23,5 +23,5 @@ const buyingSlice = createSlice({
   },
 });
 
-export const { setIsBuyingMenu, setScroll } = buyingSlice.actions;
-export default buyingSlice.reducer;
+export const { setIsBuyingMenu, setScroll } = savingSlice.actions;
+export default savingSlice.reducer;

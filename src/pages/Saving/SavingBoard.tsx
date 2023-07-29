@@ -15,14 +15,14 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import {
   setIsBuyingMenu,
   setScroll,
-} from '../../context/reducer/buyingReducer';
+} from '../../context/reducer/savingReducer';
 
 export default function SavingBoard() {
   const dispatch = useAppDispatch();
-  const isBuyingMenu = useAppSelector((state) => state.buying.isBuyingMenu);
+  const isBuyingMenu = useAppSelector((state) => state.saving.isBuyingMenu);
+  const scroll = useAppSelector((state) => state.saving.scroll);
   const [buyingPostList, setBuyingPostList] = useState<buyingPostType[]>([]);
   const [knowingPostList, setKnowingPostList] = useState<knowingPostType[]>([]);
-  const scroll = useAppSelector((state) => state.buying.scroll);
   const navigate = useNavigate();
 
   const handle = () => {
