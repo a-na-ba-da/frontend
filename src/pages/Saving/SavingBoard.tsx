@@ -12,14 +12,30 @@ import ContentBuyingItem from '../../components/Content/ContentBuyingItem';
 import ContentKnowingItem from '../../components/Content/ContentKnowingItem';
 import { getBuyingPostList, getKnowingPostList } from '../../api/saving';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { setIsBuyingMenu } from '../../context/reducer/buyingReducer';
+import {
+  setIsBuyingMenu,
+  setScroll,
+} from '../../context/reducer/buyingReducer';
 
 export default function SavingBoard() {
   const dispatch = useAppDispatch();
   const isBuyingMenu = useAppSelector((state) => state.buying.isBuyingMenu);
   const [buyingPostList, setBuyingPostList] = useState<buyingPostType[]>([]);
   const [knowingPostList, setKnowingPostList] = useState<knowingPostType[]>([]);
+  const scroll = useAppSelector((state) => state.buying.scroll);
   const navigate = useNavigate();
+
+  const handle = () => {
+    // 현재 스크롤을 추적
+    dispatch(setScroll(window.scrollY));
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handle);
+    return () => {
+      window.removeEventListener('scroll', handle);
+    };
+  }, []);
 
   useEffect(() => {
     if (isBuyingMenu) {
@@ -32,6 +48,11 @@ export default function SavingBoard() {
       });
     }
   }, [isBuyingMenu]);
+
+  useEffect(() => {
+    // 게시글 목록 로드가 끝난뒤 저장된 이전 스크롤 수치를 적용
+    window.scrollTo(0, scroll);
+  }, [buyingPostList, knowingPostList]);
 
   const goWrite = () => {
     isBuyingMenu
