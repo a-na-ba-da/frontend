@@ -51,11 +51,7 @@ export default function KnowingPost() {
           </DescriptionBox>
           <MainTextBox>{knowingPost?.content}</MainTextBox>
         </ContentSection>
-        <PostComment
-          postType="know-together"
-          postId={knowingPost?.id}
-          commentCount={knowingPost?.commentCount}
-        />
+        <PostComment postType="know-together" postId={knowingPost?.id} />
       </Main>
     </PostLayout>
   );

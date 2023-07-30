@@ -10,14 +10,9 @@ import { createComment, getComment } from '../../api/comment';
 interface PostCommentProps {
   postType: string;
   postId: number | undefined;
-  commentCount: number | undefined;
 }
 
-export default function PostComment({
-  postType,
-  postId,
-  commentCount,
-}: PostCommentProps) {
+export default function PostComment({ postType, postId }: PostCommentProps) {
   interface parentCommentType {
     createdAt: string;
     modifiedAt: string;
@@ -31,6 +26,7 @@ export default function PostComment({
     childComments: parentCommentType[];
   }
   const [commentList, setCommentList] = useState<commentType[]>([]);
+  const [commentCount, setCommentCount] = useState<number>(0);
   const [commentInput, setCommentInput] = useState<string>('');
   const [focusCommentId, setFocusCommentId] = useState<number | undefined>();
   const inputFocus = useRef<HTMLInputElement>(null);
@@ -40,15 +36,23 @@ export default function PostComment({
     if (postId) {
       getComment(postType, postId).then((res) => {
         setCommentList(res.data.detail);
+        setCommentCount(calCommentCount(res.data.detail));
       });
     }
   }, [postId]);
+
+  const calCommentCount = (list: commentType[]) => {
+    let count = list.length;
+    list.forEach((item: commentType) => (count += item.childComments.length));
+    return count;
+  };
 
   const handleSendClick = async () => {
     if (commentInput.length > 1) {
       await createComment(postType, postId, commentInput, focusCommentId);
       const res = await getComment(postType, postId);
       setCommentList(res.data.detail);
+      setCommentCount(calCommentCount(res.data.detail));
       setCommentInput('');
       setFocusCommentId(undefined);
       window.scrollTo({
