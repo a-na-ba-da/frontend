@@ -69,7 +69,7 @@ export default function BuyingPost() {
           </DescriptionBox>
           <DescriptionBox>
             내가 내야할 금액 |{' '}
-            <PriceText>{buyingPost?.pay.toLocaleString('en')}원</PriceText>
+            <PriceText>{buyingPost?.pay?.toLocaleString('en')}원</PriceText>
           </DescriptionBox>
           <MainTextBox>{buyingPost?.content}</MainTextBox>
         </ContentSection>
