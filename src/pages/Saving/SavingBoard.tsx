@@ -117,6 +117,7 @@ export default function SavingBoard() {
                   date={post.createdAt}
                   isOnline={post.parcelDelivery}
                   price={post.pay}
+                  commentCount={post.commentCount}
                 />
               ))
             : knowingPostList.map((post) => (
@@ -126,6 +127,7 @@ export default function SavingBoard() {
                   title={post.title}
                   thumbnail={post.images.length > 0 && post.images[0]}
                   date={post.createdAt}
+                  commentCount={post.commentCount}
                 />
               ))}
         </ContentList>

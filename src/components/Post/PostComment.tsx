@@ -10,9 +10,14 @@ import { createComment, getComment } from '../../api/comment';
 interface PostCommentProps {
   postType: string;
   postId: number | undefined;
+  commentCount: number | undefined;
 }
 
-export default function PostComment({ postType, postId }: PostCommentProps) {
+export default function PostComment({
+  postType,
+  postId,
+  commentCount,
+}: PostCommentProps) {
   interface parentCommentType {
     createdAt: string;
     modifiedAt: string;
@@ -130,7 +135,7 @@ export default function PostComment({ postType, postId }: PostCommentProps) {
       <SmsOutlinedIcon
         sx={{ fontSize: 16, color: '#216583', verticalAlign: 'middle' }}
       />
-      <CommentCountText>2</CommentCountText>
+      <CommentCountText>{commentCount}</CommentCountText>
       <CommentList>
         {commentList.map((item) => (
           <CommentItem>

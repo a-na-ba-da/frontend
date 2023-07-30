@@ -35,6 +35,7 @@ interface buyingPostType {
   images: string[];
   parcelDelivery: boolean;
   writer: writerType;
+  commentCount: number;
 }
 
 // 아껴쓰기-같이알아요 게시글 타입
@@ -51,4 +52,5 @@ interface knowingPostType {
   modifiedAt: string;
   images: string[];
   writer: writerType;
+  commentCount: number;
 }
