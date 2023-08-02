@@ -14,6 +14,7 @@ interface ContentBuyingItemProps {
   date: string;
   isOnline: boolean;
   price: number;
+  commentCount: number;
 }
 
 export default function ContentBuyingItem({
@@ -23,6 +24,7 @@ export default function ContentBuyingItem({
   date,
   isOnline,
   price,
+  commentCount,
 }: ContentBuyingItemProps) {
   const navigate = useNavigate();
 
@@ -33,7 +35,9 @@ export default function ContentBuyingItem({
   return (
     <S.ItemLayout onClick={goPost}>
       <S.ThumbnailCol
-        src={thumbnail ? baseURL + '/image/' + thumbnail : undefined}
+        src={
+          thumbnail ? baseURL + '/image/' + 'thumbnail_' + thumbnail : undefined
+        }
       />
       <S.DescriptionCol>
         <TitleText>{title}</TitleText>
@@ -41,10 +45,10 @@ export default function ContentBuyingItem({
           {moment(date).format('YYYY.MM.DD hh:mm')} |
           {isOnline ? ' 비대면' : ' 대면'}
         </S.DateText>
-        <PriceText>{price.toLocaleString('en')}원</PriceText>
+        <PriceText>{price?.toLocaleString('en')}원</PriceText>
         <S.ChatBox>
           <SmsOutlinedIcon fontSize="small" />
-          <S.ChatCountText>2</S.ChatCountText>
+          <S.ChatCountText>{commentCount}</S.ChatCountText>
         </S.ChatBox>
       </S.DescriptionCol>
     </S.ItemLayout>

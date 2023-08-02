@@ -13,6 +13,13 @@ declare module 'react-slick';
 // env 전역 설정
 declare const process;
 
+// 글쓴이 타입
+interface writerType {
+  id: number;
+  nickname: string;
+  activated: boolean;
+}
+
 // 아껴쓰기-같이사요 게시글 타입
 interface buyingPostType {
   id: number;
@@ -26,12 +33,9 @@ interface buyingPostType {
   createdAt: string;
   modifiedAt: string;
   images: string[];
-  onlineDelivery: boolean;
-  writer: {
-    id: number;
-    nickname: string;
-    activated: boolean;
-  };
+  parcelDelivery: boolean;
+  writer: writerType;
+  commentCount: number;
 }
 
 // 아껴쓰기-같이알아요 게시글 타입
@@ -40,15 +44,13 @@ interface knowingPostType {
   title: string;
   content: string;
   productUrl: string | null;
+  buyPlaceDetail: string;
   buyPlaceLat: string | null;
   buyPlaceLng: string | null;
-  isOnlineBought: boolean;
+  isOnline: boolean;
   createdAt: string;
   modifiedAt: string;
   images: string[];
-  writer: {
-    id: number;
-    nickname: string;
-    activated: boolean;
-  };
+  writer: writerType;
+  commentCount: number;
 }

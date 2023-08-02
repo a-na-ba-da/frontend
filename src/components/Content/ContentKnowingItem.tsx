@@ -12,6 +12,7 @@ interface ContentKnowingItemProps {
   title: string;
   thumbnail: string | boolean;
   date: string;
+  commentCount: number;
 }
 
 export default function ContentKnowingItem({
@@ -19,6 +20,7 @@ export default function ContentKnowingItem({
   title,
   thumbnail,
   date,
+  commentCount,
 }: ContentKnowingItemProps) {
   const navigate = useNavigate();
 
@@ -29,7 +31,9 @@ export default function ContentKnowingItem({
   return (
     <S.ItemLayout onClick={goPost}>
       <S.ThumbnailCol
-        src={thumbnail ? baseURL + '/image/' + thumbnail : undefined}
+        src={
+          thumbnail ? baseURL + '/image/' + 'thumbnail_' + thumbnail : undefined
+        }
       />
       <S.DescriptionCol>
         <div>
@@ -38,7 +42,7 @@ export default function ContentKnowingItem({
         </div>
         <S.ChatBox>
           <SmsOutlinedIcon fontSize="small" />
-          <S.ChatCountText>2</S.ChatCountText>
+          <S.ChatCountText>{commentCount}</S.ChatCountText>
         </S.ChatBox>
       </S.DescriptionCol>
     </S.ItemLayout>

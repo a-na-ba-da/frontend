@@ -55,3 +55,141 @@ export const getKnowingPost = (id: string | undefined) => {
     },
   });
 };
+
+interface createOnlineKnowingPostProps {
+  title: string;
+  content: string;
+  images: string[];
+  productUrl: string;
+}
+
+export const createOnlineKnowingPost = ({
+  title,
+  content,
+  images,
+  productUrl,
+}: createOnlineKnowingPostProps) => {
+  return axios.post(
+    '/saving/know-together/online',
+    {
+      title,
+      content,
+      images,
+      productUrl,
+    },
+    {
+      headers: { Authorization: 'Bearer ' + process.env.AUTH_TOKEN },
+    },
+  );
+};
+
+interface createOfflineKnowingPostProps {
+  title: string;
+  content: string;
+  images: string[];
+  buyPlaceLat: number;
+  buyPlaceLng: number;
+  buyPlaceDetail: string;
+}
+
+export const createOfflineKnowingPost = ({
+  title,
+  content,
+  images,
+  buyPlaceDetail,
+  buyPlaceLat,
+  buyPlaceLng,
+}: createOfflineKnowingPostProps) => {
+  return axios.post(
+    '/saving/know-together/offline',
+    {
+      title,
+      content,
+      images,
+      buyPlaceDetail,
+      buyPlaceLat,
+      buyPlaceLng,
+    },
+    {
+      headers: { Authorization: 'Bearer ' + process.env.AUTH_TOKEN },
+    },
+  );
+};
+
+interface createParcelBuyingPostProps {
+  title: string;
+  content: string;
+  images: string[];
+  productUrl: string;
+  buyPlaceDetail?: string;
+  buyDate: string;
+  pay: number;
+}
+
+export const createParcelBuyingPost = ({
+  title,
+  content,
+  images,
+  productUrl,
+  buyPlaceDetail,
+  buyDate,
+  pay,
+}: createParcelBuyingPostProps) => {
+  return axios.post(
+    '/saving/buy-together/parcel-delivery',
+    {
+      title,
+      content,
+      images,
+      productUrl,
+      buyPlaceDetail,
+      buyDate,
+      pay,
+    },
+    {
+      headers: { Authorization: 'Bearer ' + process.env.AUTH_TOKEN },
+    },
+  );
+};
+
+interface createMeetBuyingPostProps {
+  title: string;
+  content: string;
+  images: string[];
+  productUrl?: string;
+  buyPlaceDetail?: string;
+  buyDate: string;
+  pay: number;
+  buyPlaceLat: number;
+  buyPlaceLng: number;
+}
+
+export const createMeetBuyingPost = ({
+  title,
+  content,
+  images,
+  productUrl,
+  buyPlaceDetail,
+  buyDate,
+  pay,
+  buyPlaceLat,
+  buyPlaceLng,
+}: createMeetBuyingPostProps) => {
+  return axios.post(
+    '/saving/buy-together/meet-delivery',
+    {
+      title,
+      content,
+      images,
+      productUrl,
+      buyPlaceDetail,
+      buyDate,
+      pay,
+      buyPlaceLat,
+      buyPlaceLng,
+    },
+    {
+      headers: { Authorization: 'Bearer ' + process.env.AUTH_TOKEN },
+    },
+  );
+};

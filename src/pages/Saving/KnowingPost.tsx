@@ -42,16 +42,16 @@ export default function KnowingPost() {
             {moment(knowingPost?.createdAt).format('YYYY.MM.DD hh:mm')}
           </DateBox>
           <DescriptionBox>
-            {knowingPost?.isOnlineBought ? '온라인 · ' : '오프라인 · '}
-            {knowingPost?.isOnlineBought ? (
+            {knowingPost?.isOnline ? '온라인 · ' : '오프라인 · '}
+            {knowingPost?.isOnline ? (
               <span onClick={handleClick}>접속링크</span>
             ) : (
-              `${knowingPost?.buyPlaceLat} ${knowingPost?.buyPlaceLng}`
+              `${knowingPost?.buyPlaceDetail}`
             )}
           </DescriptionBox>
           <MainTextBox>{knowingPost?.content}</MainTextBox>
         </ContentSection>
-        <PostComment />
+        <PostComment postType="know-together" postId={knowingPost?.id} />
       </Main>
     </PostLayout>
   );

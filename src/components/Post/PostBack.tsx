@@ -7,13 +7,14 @@ import CloseIcon from '@mui/icons-material/Close';
 interface PostBackProps {
   color?: string; // 아이콘 색상
   whatShape: string; // 아이콘 모양 (cross 또는 back)
+  onClick?: () => void;
 }
 
-export default function PostBack({ color, whatShape }: PostBackProps) {
+export default function PostBack({ color, whatShape, onClick }: PostBackProps) {
   const navigate = useNavigate();
 
   return (
-    <PostBackLayout onClick={() => navigate(-1)}>
+    <PostBackLayout onClick={onClick ? onClick : () => navigate(-1)}>
       {whatShape === 'cross' ? (
         <CloseIcon sx={{ color }} />
       ) : (
