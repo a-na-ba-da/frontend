@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import MessageOutlinedIcon from '@mui/icons-material/MessageOutlined';
@@ -10,8 +10,9 @@ import Footer from '../../components/Footer';
 import HeaderRight from '../../components/Header/HeaderRight';
 import ContentBuyingItem from '../../components/Content/ContentBuyingItem';
 import ContentKnowingItem from '../../components/Content/ContentKnowingItem';
-import { getBuyingPostList, getKnowingPostList } from '../../api/saving';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { fetchBuyingPostList } from '../../context/reducer/buyingReducer';
+import { fetchKnowingPostList } from '../../context/reducer/knowingReducer';
 import {
   setIsBuyingMenu,
   setScroll,
@@ -21,8 +22,8 @@ export default function SavingBoard() {
   const dispatch = useAppDispatch();
   const isBuyingMenu = useAppSelector((state) => state.saving.isBuyingMenu);
   const scroll = useAppSelector((state) => state.saving.scroll);
-  const [buyingPostList, setBuyingPostList] = useState<buyingPostType[]>([]);
-  const [knowingPostList, setKnowingPostList] = useState<knowingPostType[]>([]);
+  const buyingPostList = useAppSelector((state) => state.buying.data);
+  const knowingPostList = useAppSelector((state) => state.knowing.data);
   const navigate = useNavigate();
 
   const handle = () => {
@@ -39,13 +40,9 @@ export default function SavingBoard() {
 
   useEffect(() => {
     if (isBuyingMenu) {
-      getBuyingPostList().then((res) => {
-        setBuyingPostList(res.data.detail.content);
-      });
+      dispatch(fetchBuyingPostList());
     } else {
-      getKnowingPostList().then((res) => {
-        setKnowingPostList(res.data.detail.content);
-      });
+      dispatch(fetchKnowingPostList());
     }
   }, [isBuyingMenu]);
 
