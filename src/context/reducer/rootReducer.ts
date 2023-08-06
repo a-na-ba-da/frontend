@@ -4,10 +4,16 @@ import buyingEditReducer from './buyingEditReducer';
 import mapReducer from './mapReducer';
 import knowingEditReducer from './knowingEditReducer';
 import savingReducer from './savingReducer';
+import buyingReducer from './buyingReducer';
+import knowingReducer from './knowingReducer';
+import menuReducer from './menuReducer';
 
 const rootReducer = combineReducers({
+  menu: menuReducer,
   saving: savingReducer,
+  buying: buyingReducer,
   buyingEdit: buyingEditReducer,
+  knowing: knowingReducer,
   knowingEdit: knowingEditReducer,
   map: mapReducer,
 });

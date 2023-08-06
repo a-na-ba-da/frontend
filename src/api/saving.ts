@@ -1,6 +1,6 @@
 import axios from './defaultClient';
 
-export const getBuyingPostList = () => {
+export const getBuyingPostList = (keyword?: string) => {
   return axios.get('/saving/buy-together', {
     params: {
       // page: 0,
@@ -10,6 +10,7 @@ export const getBuyingPostList = () => {
       // lat: 0,
       // lng: 0,
       // distance: 0,
+      keyword,
     },
   });
 };
@@ -28,7 +29,7 @@ export const getBuyingPost = (id: string | undefined) => {
   });
 };
 
-export const getKnowingPostList = () => {
+export const getKnowingPostList = (keyword?: string) => {
   return axios.get('/saving/know-together', {
     params: {
       // page: 0,
@@ -38,6 +39,7 @@ export const getKnowingPostList = () => {
       // lat: 0,
       // lng: 0,
       // distance: 0,
+      keyword,
     },
   });
 };

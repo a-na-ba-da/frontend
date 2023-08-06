@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import MessageOutlinedIcon from '@mui/icons-material/MessageOutlined';
@@ -10,19 +10,18 @@ import Footer from '../../components/Footer';
 import HeaderRight from '../../components/Header/HeaderRight';
 import ContentBuyingItem from '../../components/Content/ContentBuyingItem';
 import ContentKnowingItem from '../../components/Content/ContentKnowingItem';
-import { getBuyingPostList, getKnowingPostList } from '../../api/saving';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import {
-  setIsBuyingMenu,
-  setScroll,
-} from '../../context/reducer/savingReducer';
+import { fetchBuyingPostList } from '../../context/reducer/buyingReducer';
+import { fetchKnowingPostList } from '../../context/reducer/knowingReducer';
+import { setScroll } from '../../context/reducer/savingReducer';
+import { setMenuType } from '../../context/reducer/menuReducer';
 
 export default function SavingBoard() {
   const dispatch = useAppDispatch();
-  const isBuyingMenu = useAppSelector((state) => state.saving.isBuyingMenu);
+  const menuType = useAppSelector((state) => state.menu.menuType);
   const scroll = useAppSelector((state) => state.saving.scroll);
-  const [buyingPostList, setBuyingPostList] = useState<buyingPostType[]>([]);
-  const [knowingPostList, setKnowingPostList] = useState<knowingPostType[]>([]);
+  const buyingPostList = useAppSelector((state) => state.buying.data);
+  const knowingPostList = useAppSelector((state) => state.knowing.data);
   const navigate = useNavigate();
 
   const handle = () => {
@@ -31,6 +30,7 @@ export default function SavingBoard() {
   };
 
   useEffect(() => {
+    dispatch(setMenuType('buying'));
     window.addEventListener('scroll', handle);
     return () => {
       window.removeEventListener('scroll', handle);
@@ -38,16 +38,12 @@ export default function SavingBoard() {
   }, []);
 
   useEffect(() => {
-    if (isBuyingMenu) {
-      getBuyingPostList().then((res) => {
-        setBuyingPostList(res.data.detail.content);
-      });
+    if (menuType === 'buying') {
+      dispatch(fetchBuyingPostList());
     } else {
-      getKnowingPostList().then((res) => {
-        setKnowingPostList(res.data.detail.content);
-      });
+      dispatch(fetchKnowingPostList());
     }
-  }, [isBuyingMenu]);
+  }, [menuType]);
 
   useEffect(() => {
     // 게시글 목록 로드가 끝난뒤 저장된 이전 스크롤 수치를 적용
@@ -55,7 +51,7 @@ export default function SavingBoard() {
   }, [buyingPostList, knowingPostList]);
 
   const goWrite = () => {
-    isBuyingMenu
+    menuType === 'buying'
       ? navigate('/saving/buying/write')
       : navigate('/saving/knowing/write');
   };
@@ -63,17 +59,17 @@ export default function SavingBoard() {
   const handleClick = (whatMenu: string) => {
     // 현재 선택된 메뉴를 또 클릭시 smooth한 스크롤로 최상단 이동
     if (
-      (whatMenu === 'buying' && isBuyingMenu) ||
-      (whatMenu === 'knowing' && !isBuyingMenu)
+      (whatMenu === 'buying' && menuType === 'buying') ||
+      (whatMenu === 'knowing' && menuType === 'knowing')
     )
       window.scrollTo({ top: 0, behavior: 'smooth' });
     // 현재 선택되지 않은 메뉴를 클릭시 메뉴 전환 후 스크롤 최상단 이동
     // 전환후 최상단 스크롤 이동이 없을 경우 이전 메뉴의 스크롤이 전환 후 메뉴 스크롤에도 남게됨
     else if (whatMenu === 'buying') {
-      dispatch(setIsBuyingMenu(true));
+      dispatch(setMenuType('buying'));
       window.scrollTo({ top: 0 });
     } else {
-      dispatch(setIsBuyingMenu(false));
+      dispatch(setMenuType('knowing'));
       window.scrollTo({ top: 0 });
     }
   };
@@ -94,20 +90,20 @@ export default function SavingBoard() {
         <Search />
         <MenuCol
           onClick={() => handleClick('buying')}
-          isBuyingMenu={isBuyingMenu}
+          isBuyingMenu={menuType === 'buying'}
         >
           같이 사요
         </MenuCol>
         <MenuCol
           onClick={() => handleClick('knowing')}
-          isBuyingMenu={!isBuyingMenu}
+          isBuyingMenu={menuType === 'knowing'}
         >
           같이 알아요
         </MenuCol>
       </HeaderSection>
       <ContentSection>
         <ContentList>
-          {isBuyingMenu
+          {menuType === 'buying'
             ? buyingPostList.map((post) => (
                 <ContentBuyingItem
                   key={post.id}
