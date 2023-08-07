@@ -30,7 +30,7 @@ export default function SavingBoard() {
   };
 
   useEffect(() => {
-    dispatch(setMenuType('buying'));
+    if (menuType === '') dispatch(setMenuType('buying'));
     window.addEventListener('scroll', handle);
     return () => {
       window.removeEventListener('scroll', handle);
