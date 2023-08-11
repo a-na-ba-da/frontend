@@ -10,13 +10,13 @@ import Footer from '../../components/Footer';
 import HeaderRight from '../../components/Header/HeaderRight';
 import ContentBuyingItem from '../../components/Content/ContentBuyingItem';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { fetchBuyingPostList } from '../../context/reducer/buyingReducer';
-import { setScroll } from '../../context/reducer/savingReducer';
+import { setScroll } from '../../context/reducer/sharingReducer';
+import { fetchSharingPostList } from '../../context/reducer/sharingReducer';
 
 export default function SharingBoard() {
   const dispatch = useAppDispatch();
-  const scroll = useAppSelector((state) => state.saving.scroll);
-  const buyingPostList = useAppSelector((state) => state.buying.data);
+  const scroll = useAppSelector((state) => state.sharing.scroll);
+  const SharingPostList = useAppSelector((state) => state.sharing.data);
   const navigate = useNavigate();
 
   const handle = () => {
@@ -25,7 +25,7 @@ export default function SharingBoard() {
   };
 
   useEffect(() => {
-    dispatch(fetchBuyingPostList());
+    dispatch(fetchSharingPostList());
     window.addEventListener('scroll', handle);
     return () => {
       window.removeEventListener('scroll', handle);
@@ -35,7 +35,7 @@ export default function SharingBoard() {
   useEffect(() => {
     // 게시글 목록 로드가 끝난뒤 저장된 이전 스크롤 수치를 적용
     window.scrollTo(0, scroll);
-  }, [buyingPostList]);
+  }, [SharingPostList]);
 
   const goWrite = () => {
     navigate('/sharing/write');
@@ -58,7 +58,7 @@ export default function SharingBoard() {
       </HeaderSection>
       <ContentSection>
         <ContentList>
-          {buyingPostList.map((post) => (
+          {SharingPostList.map((post) => (
             <ContentBuyingItem
               key={post.id}
               id={post.id}
