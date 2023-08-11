@@ -8,10 +8,10 @@ import Header from '../../components/Header/Header';
 import Search from '../../components/Search';
 import Footer from '../../components/Footer';
 import HeaderRight from '../../components/Header/HeaderRight';
-import ContentBuyingItem from '../../components/Content/ContentBuyingItem';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { setScroll } from '../../context/reducer/sharingReducer';
 import { fetchSharingPostList } from '../../context/reducer/sharingReducer';
+import ContentSharingItem from '../../components/Content/ContentSharingItem';
 
 export default function SharingBoard() {
   const dispatch = useAppDispatch();
@@ -59,13 +59,12 @@ export default function SharingBoard() {
       <ContentSection>
         <ContentList>
           {SharingPostList.map((post) => (
-            <ContentBuyingItem
+            <ContentSharingItem
               key={post.id}
               id={post.id}
               title={post.title}
               thumbnail={post.images.length > 0 && post.images[0]}
               date={post.createdAt}
-              isOnline={post.parcelDelivery}
               price={post.pay}
               commentCount={post.commentCount}
             />

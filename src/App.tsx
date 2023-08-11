@@ -10,6 +10,7 @@ import SavingBoard from './pages/Saving/SavingBoard';
 import KnowingPostEdit from './pages/Saving/KnowingPostEdit';
 import SelectPlace from './pages/Saving/SelectPlace';
 import SharingBoard from './pages/Saving/SharingBoard';
+import SharingPost from './pages/Saving/SharingPost';
 
 export default function App() {
   return (
@@ -23,8 +24,9 @@ export default function App() {
           <Route path="/saving/buying/write" element={<BuyingPostEdit />} />
           <Route path="/saving/knowing/:id" element={<KnowingPost />} />
           <Route path="/saving/Knowing/write" element={<KnowingPostEdit />} />
-          <Route path="/sharing" element={<SharingBoard />} />
           <Route path="/saving/place" element={<SelectPlace />} />
+          <Route path="/sharing" element={<SharingBoard />} />
+          <Route path="/sharing/:id" element={<SharingPost />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
