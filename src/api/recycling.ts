@@ -33,20 +33,12 @@ interface createRecyclingPostProps {
   title: string;
   content: string;
   images: string[];
-  productUrl: string;
-  buyPlaceDetail?: string;
-  buyDate: string;
-  pay: number;
 }
 
 export const createRecyclingPost = ({
   title,
   content,
   images,
-  productUrl,
-  buyPlaceDetail,
-  buyDate,
-  pay,
 }: createRecyclingPostProps) => {
   return axios.post(
     '/saving/buy-together/parcel-delivery',
@@ -54,10 +46,6 @@ export const createRecyclingPost = ({
       title,
       content,
       images,
-      productUrl,
-      buyPlaceDetail,
-      buyDate,
-      pay,
     },
     {
       headers: { Authorization: 'Bearer ' + process.env.AUTH_TOKEN },
