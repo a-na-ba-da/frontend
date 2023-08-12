@@ -28,3 +28,45 @@ export const getSharingPost = (id: string | undefined) => {
     },
   });
 };
+
+interface createSharingPostProps {
+  title: string;
+  content: string;
+  images: string[];
+  productUrl?: string;
+  buyPlaceDetail?: string;
+  buyDate: string;
+  pay: number;
+  buyPlaceLat: number;
+  buyPlaceLng: number;
+}
+
+export const createSharingPost = ({
+  title,
+  content,
+  images,
+  productUrl,
+  buyPlaceDetail,
+  buyDate,
+  pay,
+  buyPlaceLat,
+  buyPlaceLng,
+}: createSharingPostProps) => {
+  return axios.post(
+    '/saving/buy-together/meet-delivery',
+    {
+      title,
+      content,
+      images,
+      productUrl,
+      buyPlaceDetail,
+      buyDate,
+      pay,
+      buyPlaceLat,
+      buyPlaceLng,
+    },
+    {
+      headers: { Authorization: 'Bearer ' + process.env.AUTH_TOKEN },
+    },
+  );
+};

@@ -8,6 +8,7 @@ import buyingReducer from './buyingReducer';
 import knowingReducer from './knowingReducer';
 import menuReducer from './menuReducer';
 import sharingReducer from './sharingReducer';
+import sharingEditReducer from './sharingEditReducer';
 
 const rootReducer = combineReducers({
   menu: menuReducer,
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   knowingEdit: knowingEditReducer,
   map: mapReducer,
   sharing: sharingReducer,
+  sharingEdit: sharingEditReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

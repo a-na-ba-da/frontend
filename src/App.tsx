@@ -11,6 +11,7 @@ import KnowingPostEdit from './pages/Saving/KnowingPostEdit';
 import SelectPlace from './pages/Saving/SelectPlace';
 import SharingBoard from './pages/Saving/SharingBoard';
 import SharingPost from './pages/Saving/SharingPost';
+import SharingPostEdit from './pages/Saving/SharingPostEdit';
 
 export default function App() {
   return (
@@ -27,6 +28,8 @@ export default function App() {
           <Route path="/saving/place" element={<SelectPlace />} />
           <Route path="/sharing" element={<SharingBoard />} />
           <Route path="/sharing/:id" element={<SharingPost />} />
+          <Route path="/sharing/write" element={<SharingPostEdit />} />
+          <Route path="/sharing/place" element={<SelectPlace />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
