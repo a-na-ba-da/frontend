@@ -12,7 +12,6 @@ interface ContentRecyclingItemProps {
   title: string;
   thumbnail: string | boolean;
   date: string;
-  price: number;
   commentCount: number;
 }
 

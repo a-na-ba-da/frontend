@@ -12,7 +12,7 @@ export const fetchgetRecyclingPostList = createAsyncThunk(
 
 interface recyclingState {
   scroll: number;
-  data: buyingPostType[];
+  data: recyclingPostType[];
   loading: boolean;
   error: string | undefined | null;
 }

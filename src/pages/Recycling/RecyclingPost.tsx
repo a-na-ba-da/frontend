@@ -12,7 +12,7 @@ import PostImgSlider from '../../components/Post/PostImgSlider';
 
 export default function RecyclingPost() {
   const { id } = useParams();
-  const [recyclingPost, setRecyclingPost] = useState<buyingPostType>();
+  const [recyclingPost, setRecyclingPost] = useState<recyclingPostType>();
 
   useEffect(() => {
     getRecyclingPost(id).then((res) => {
@@ -36,7 +36,7 @@ export default function RecyclingPost() {
           </DateBox>
           <MainTextBox>{recyclingPost?.content}</MainTextBox>
         </ContentSection>
-        <PostComment postType="buy-together" postId={recyclingPost?.id} />
+        <PostComment postType="recycle" postId={recyclingPost?.id} />
       </Main>
     </PostLayout>
   );
