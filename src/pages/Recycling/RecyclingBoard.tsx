@@ -49,7 +49,7 @@ export default function RecyclingBoard() {
         HeaderLeft로 감싸면 왼쪽에 배치
       */}
       <HeaderSection>
-        <Header title="나눠쓰기">
+        <Header title="다시쓰기">
           <HeaderRight>
             <MessageOutlinedIcon />
           </HeaderRight>
