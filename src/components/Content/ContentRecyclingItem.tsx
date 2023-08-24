@@ -37,8 +37,10 @@ export default function ContentRecyclingItem({
         }
       />
       <S.DescriptionCol>
-        <TitleText>{title}</TitleText>
-        <S.DateText>{moment(date).format('YYYY.MM.DD hh:mm')}</S.DateText>
+        <div>
+          <TitleText>{title}</TitleText>
+          <S.DateText>{moment(date).format('YYYY.MM.DD hh:mm')}</S.DateText>
+        </div>
         <S.ChatBox>
           <SmsOutlinedIcon fontSize="small" />
           <S.ChatCountText>{commentCount}</S.ChatCountText>
@@ -50,4 +52,5 @@ export default function ContentRecyclingItem({
 
 const TitleText = styled.div`
   font-size: 15px;
+  margin-bottom: 5px;
 `;
