@@ -1,7 +1,7 @@
 import axios from './defaultClient';
 
 export const getRecyclingPostList = (keyword?: string) => {
-  return axios.get('/saving/buy-together', {
+  return axios.get('/recycle', {
     params: {
       // page: 0,
       // size: 1,
@@ -16,7 +16,7 @@ export const getRecyclingPostList = (keyword?: string) => {
 };
 
 export const getRecyclingPost = (id: string | undefined) => {
-  return axios.get(`/saving/buy-together/${id}`, {
+  return axios.get(`/recycle/${id}`, {
     params: {
       // page: 0,
       // size: 1,
@@ -41,7 +41,7 @@ export const createRecyclingPost = ({
   images,
 }: createRecyclingPostProps) => {
   return axios.post(
-    '/saving/buy-together/parcel-delivery',
+    '/recycle',
     {
       title,
       content,
