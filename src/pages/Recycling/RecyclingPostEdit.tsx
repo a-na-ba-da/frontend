@@ -28,7 +28,7 @@ export default function SharingPostEdit() {
     if (title.length > 0 && content.length > 0 && images.length > 0) {
       const res = await uploadImages({
         images,
-        type: 'BUY_TOGETHER',
+        type: 'RECYCLE',
       });
       const imageNameList = res.data.detail;
       await createRecyclingPost({
