@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
@@ -7,18 +7,26 @@ import HeaderLeft from '../../components/Header/HeaderLeft';
 import PostBack from '../../components/Post/PostBack';
 import { useAppDispatch } from '../../hooks/redux';
 import { setInit } from '../../context/reducer/buyingEditReducer';
+import { getMessageRoomList } from '../../api/message';
 
 export default function MessageMain() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const [MsgRoomList, setMsgRoomList] = useState<messageRoomSummaryType[]>([]);
 
   const handleCancelClick = () => {
     dispatch(setInit());
     navigate(-1);
   };
 
+  useEffect(() => {
+    getMessageRoomList().then((res) => {
+      setMsgRoomList(res.data.detail);
+    });
+  }, []);
+
   return (
-    <BuyingPostEditLayout>
+    <MessageMainLayout>
       <Header title="쪽지함">
         <HeaderLeft>
           <PostBack
@@ -29,12 +37,24 @@ export default function MessageMain() {
         </HeaderLeft>
       </Header>
       <Line />
-      <Main></Main>
-    </BuyingPostEditLayout>
+      <Main>
+        <MessageRoomList>
+          {MsgRoomList.map((item) => (
+            <MessageRoomItem key={item.messageRoomId}>
+              <ItemHeaderBox>
+                <InterlocutorBox>{item.interlocutor.nickname}</InterlocutorBox>
+                <LastMessageAtBox>{item.lastMessagedAt}</LastMessageAtBox>
+              </ItemHeaderBox>
+              <LastMessageBox>{item.lastMessage}</LastMessageBox>
+            </MessageRoomItem>
+          ))}
+        </MessageRoomList>
+      </Main>
+    </MessageMainLayout>
   );
 }
 
-const BuyingPostEditLayout = styled.div`
+const MessageMainLayout = styled.div`
   width: 100vw;
   height: 100vh;
 `;
@@ -49,3 +69,31 @@ const Line = styled.hr`
 const Main = styled.main`
   padding: 0 15px;
 `;
+
+const MessageRoomList = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin: 0;
+`;
+
+const MessageRoomItem = styled.li`
+  padding: 12px;
+  border-bottom: 1px solid #f3f3f3;
+  font-size: 15px;
+`;
+
+const ItemHeaderBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+`;
+
+const InterlocutorBox = styled.div``;
+
+const LastMessageAtBox = styled.div`
+  font-size: 13px;
+  color: #8f8f8f;
+`;
+
+const LastMessageBox = styled.div``;
