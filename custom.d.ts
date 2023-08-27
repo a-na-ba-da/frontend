@@ -54,3 +54,29 @@ interface knowingPostType {
   writer: writerType;
   commentCount: number;
 }
+
+// 메세지방 요약 타입
+interface messageRoomSummaryType {
+  messageRoomId: number;
+  postType: string;
+  postId: number;
+  interlocutor: writerType;
+  lastMessage: string;
+  lastMessagedAt: string;
+  unreadCount: 0;
+}
+
+// 메세지방 타입
+interface messageRoomType {
+  messages: [
+    {
+      id: number;
+      message: string;
+      sentWho: string;
+      sentAt: Date;
+    },
+  ];
+  messagePostType: string;
+  messageRoomId: number;
+  interlocutor: writerType;
+}
