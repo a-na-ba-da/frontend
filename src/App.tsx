@@ -10,6 +10,7 @@ import SavingBoard from './pages/Saving/SavingBoard';
 import KnowingPostEdit from './pages/Saving/KnowingPostEdit';
 import SelectPlace from './pages/Saving/SelectPlace';
 import MessageMain from './pages/Message/MessageMain';
+import MessageRoom from './pages/Message/MessageRoom';
 
 export default function App() {
   return (
@@ -25,6 +26,7 @@ export default function App() {
           <Route path="/saving/Knowing/write" element={<KnowingPostEdit />} />
           <Route path="/saving/place" element={<SelectPlace />} />
           <Route path="/message" element={<MessageMain />} />
+          <Route path="/message/:id" element={<MessageRoom />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

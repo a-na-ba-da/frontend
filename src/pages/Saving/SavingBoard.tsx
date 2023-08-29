@@ -84,7 +84,7 @@ export default function SavingBoard() {
       <HeaderSection>
         <Header title="아껴쓰기">
           <HeaderRight>
-            <MessageOutlinedIcon />
+            <MessageOutlinedIcon onClick={() => navigate('/message')} />
           </HeaderRight>
         </Header>
         <Search />

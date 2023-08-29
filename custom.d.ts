@@ -66,16 +66,16 @@ interface messageRoomSummaryType {
   unreadCount: 0;
 }
 
+interface messageType {
+  id: number;
+  message: string;
+  sentWho: string;
+  sentAt: string;
+}
+
 // 메세지방 타입
 interface messageRoomType {
-  messages: [
-    {
-      id: number;
-      message: string;
-      sentWho: string;
-      sentAt: Date;
-    },
-  ];
+  messages: messageType[];
   messagePostType: string;
   messageRoomId: number;
   interlocutor: writerType;

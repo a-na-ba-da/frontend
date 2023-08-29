@@ -7,10 +7,8 @@ export const getMessageRoomList = () => {
 };
 
 export const getMessageRoomItem = (messageRoomId: number) => {
-  return axios.get('/message', {
-    params: {
-      messageRoomId,
-    },
+  return axios.get('/message/' + messageRoomId, {
+    params: {},
     headers: { Authorization: 'Bearer ' + process.env.AUTH_TOKEN },
   });
 };

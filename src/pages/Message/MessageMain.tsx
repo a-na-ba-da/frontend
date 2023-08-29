@@ -25,6 +25,10 @@ export default function MessageMain() {
     });
   }, []);
 
+  const hnadleRoomClick = (roomId: number) => {
+    navigate('/message/' + roomId);
+  };
+
   return (
     <MessageMainLayout>
       <Header title="쪽지함">
@@ -40,7 +44,10 @@ export default function MessageMain() {
       <Main>
         <MessageRoomList>
           {MsgRoomList.map((item) => (
-            <MessageRoomItem key={item.messageRoomId}>
+            <MessageRoomItem
+              key={item.messageRoomId}
+              onClick={() => hnadleRoomClick(item.messageRoomId)}
+            >
               <ItemHeaderBox>
                 <InterlocutorBox>{item.interlocutor.nickname}</InterlocutorBox>
                 <LastMessageAtBox>{item.lastMessagedAt}</LastMessageAtBox>
