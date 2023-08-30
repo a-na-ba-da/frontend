@@ -77,6 +77,6 @@ interface messageType {
 interface messageRoomType {
   messages: messageType[];
   messagePostType: string;
-  messageRoomId: number;
+  messagePostId: number;
   interlocutor: writerType;
 }

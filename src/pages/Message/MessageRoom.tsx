@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { KeyboardEvent, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate, useParams } from 'react-router-dom';
+import SearchIcon from '@mui/icons-material/Search';
 
 import Header from '../../components/Header/Header';
 import HeaderLeft from '../../components/Header/HeaderLeft';
@@ -8,16 +9,39 @@ import PostBack from '../../components/Post/PostBack';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { setInit } from '../../context/reducer/buyingEditReducer';
 import { fetchMessageRoomItem } from '../../context/reducer/messageReducer';
+import { createMessage } from '../../api/message';
 
 export default function MessageRoom() {
   const id: number = useParams().id ? Number(useParams().id) : 0;
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const [keyword, setKeyword] = useState<string>('');
+  const [isKeyDown, setIsKeyDown] = useState(false);
+  const postType = useAppSelector((state) => state.message.postType);
+  const postId = useAppSelector((state) => state.message.postId);
   const data = useAppSelector((state) => state.message.data);
 
   const handleCancelClick = () => {
     dispatch(setInit());
     navigate(-1);
+  };
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && !e.nativeEvent.isComposing && !isKeyDown) {
+      setIsKeyDown(true);
+      if (keyword.length > 1) {
+        createMessage(postType, postId, keyword).then(() => {
+          console.log('send');
+          dispatch(fetchMessageRoomItem(id));
+        });
+      }
+    }
+  };
+
+  const handleKeyUp = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      setIsKeyDown(false);
+    }
   };
 
   useEffect(() => {
@@ -52,7 +76,7 @@ export default function MessageRoom() {
     }
   };
 
-  console.log(data);
+  console.log(data, postType, postId);
 
   return (
     <MessageRoomLayout>
@@ -81,11 +105,25 @@ export default function MessageRoom() {
           ))}
         </MessageList>
       </Main>
+      <InputSection>
+        <Input
+          placeholder="쪽지를 입력하세요"
+          onChange={(e) => setKeyword(e.target.value)}
+          value={keyword}
+          onKeyDown={handleKeyDown}
+          onKeyUp={handleKeyUp}
+        />
+        <SendImg>
+          <SearchIcon style={{ verticalAlign: 'middle' }} />
+        </SendImg>
+      </InputSection>
     </MessageRoomLayout>
   );
 }
 
 const MessageRoomLayout = styled.div`
+  display: flex;
+  flex-direction: column;
   width: 100vw;
   height: 100vh;
 `;
@@ -98,6 +136,7 @@ const Line = styled.hr`
 `;
 
 const Main = styled.main`
+  flex-grow: 1;
   padding: 0 15px;
 `;
 
@@ -130,3 +169,29 @@ const SentAtBox = styled.div`
 `;
 
 const ContentBox = styled.div``;
+
+const InputSection = styled.section`
+  display: flex;
+  position: relative;
+  bottom: 0;
+  height: 50px;
+  padding: 0 15px;
+  background-color: #fbfbfb;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Input = styled.input`
+  width: 100%;
+  height: 34px;
+  padding-left: 10px;
+  border: solid 1px #e7e7e7;
+  border-radius: 5px;
+  background-color: white;
+  box-sizing: border-box;
+`;
+
+const SendImg = styled.div`
+  position: absolute;
+  right: 20px;
+`;

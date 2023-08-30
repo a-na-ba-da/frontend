@@ -12,7 +12,6 @@ export const fetchMessageRoomItem = createAsyncThunk(
 interface messageState {
   postType: string;
   postId: number;
-  interlocutorNickname: string;
   data: messageRoomType;
   loading: boolean;
   error: string | undefined | null;
@@ -21,11 +20,10 @@ interface messageState {
 const initialState: messageState = {
   postType: '',
   postId: 0,
-  interlocutorNickname: '',
   data: {
     messages: [],
     messagePostType: 'BUY_TOGETHER',
-    messageRoomId: 0,
+    messagePostId: 0,
     interlocutor: {
       id: 0,
       nickname: '',
@@ -46,9 +44,6 @@ const messageSlice = createSlice({
     setPostId: (state, action) => {
       state.postId = action.payload;
     },
-    setInterlocutorNickname: (state, action) => {
-      state.interlocutorNickname = action.payload;
-    },
   },
   extraReducers: (builder) => {
     builder
@@ -58,6 +53,8 @@ const messageSlice = createSlice({
       .addCase(fetchMessageRoomItem.fulfilled, (state, action) => {
         state.loading = false;
         state.data = action.payload;
+        state.postType = action.payload.messagePostType;
+        state.postId = action.payload.messagePostId; // todo: 성훈 추가 예정?
       })
       .addCase(fetchMessageRoomItem.rejected, (state, action) => {
         state.loading = false;
@@ -66,6 +63,5 @@ const messageSlice = createSlice({
   },
 });
 
-export const { setPostType, setPostId, setInterlocutorNickname } =
-  messageSlice.actions;
+export const { setPostType, setPostId } = messageSlice.actions;
 export default messageSlice.reducer;

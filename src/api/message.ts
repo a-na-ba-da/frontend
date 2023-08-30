@@ -13,12 +13,12 @@ export const getMessageRoomItem = (messageRoomId: number) => {
   });
 };
 
-export const createMessage = (postType: string, postId: number | undefined) => {
-  return axios.post('/message', {
-    params: {
-      postType,
-      postId,
-    },
+export const createMessage = (
+  postType: string,
+  postId: number | undefined,
+  keyword: string,
+) => {
+  return axios.post(`/message/${postType}/${postId}`, keyword, {
     headers: { Authorization: 'Bearer ' + process.env.AUTH_TOKEN },
   });
 };
