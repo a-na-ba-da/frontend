@@ -8,17 +8,23 @@ import HeaderLeft from '../../components/Header/HeaderLeft';
 import PostBack from '../../components/Post/PostBack';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { setInit } from '../../context/reducer/buyingEditReducer';
-import { fetchMessageRoomItem } from '../../context/reducer/messageReducer';
+import {
+  fetchMessageRoomItem,
+  initData,
+} from '../../context/reducer/messageReducer';
 import { createMessage } from '../../api/message';
 
 export default function MessageRoom() {
-  const id: number = useParams().id ? Number(useParams().id) : 0;
+  const id = Number(useParams().id);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [keyword, setKeyword] = useState<string>('');
   const [isKeyDown, setIsKeyDown] = useState(false);
   const postType = useAppSelector((state) => state.message.postType);
   const postId = useAppSelector((state) => state.message.postId);
+  const interlocutorNickname = useAppSelector(
+    (state) => state.message.interlocutorNickname,
+  );
   const data = useAppSelector((state) => state.message.data);
 
   const handleCancelClick = () => {
@@ -48,6 +54,8 @@ export default function MessageRoom() {
     if (id > 0) {
       dispatch(fetchMessageRoomItem(id));
       console.log(id);
+    } else {
+      dispatch(initData());
     }
   }, [id]);
 
@@ -76,11 +84,11 @@ export default function MessageRoom() {
     }
   };
 
-  console.log(data, postType, postId);
+  console.log(data, postType, postId, interlocutorNickname, id);
 
   return (
     <MessageRoomLayout>
-      <Header title={data.interlocutor ? data.interlocutor.nickname : ''}>
+      <Header title={interlocutorNickname}>
         <HeaderLeft>
           <PostBack
             color="#8F00FF"

@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+
 import { getMessageRoomItem } from '../../api/message';
 
 export const fetchMessageRoomItem = createAsyncThunk(
@@ -12,6 +13,7 @@ export const fetchMessageRoomItem = createAsyncThunk(
 interface messageState {
   postType: string;
   postId: number;
+  interlocutorNickname: string;
   data: messageRoomType;
   loading: boolean;
   error: string | undefined | null;
@@ -20,9 +22,10 @@ interface messageState {
 const initialState: messageState = {
   postType: '',
   postId: 0,
+  interlocutorNickname: '',
   data: {
     messages: [],
-    messagePostType: 'BUY_TOGETHER',
+    messagePostType: '',
     messagePostId: 0,
     interlocutor: {
       id: 0,
@@ -44,6 +47,21 @@ const messageSlice = createSlice({
     setPostId: (state, action) => {
       state.postId = action.payload;
     },
+    setInterlocutorNickname: (state, action) => {
+      state.interlocutorNickname = action.payload;
+    },
+    initData: (state) => {
+      state.data = {
+        messages: [],
+        messagePostType: '',
+        messagePostId: 0,
+        interlocutor: {
+          id: 0,
+          nickname: '',
+          activated: false,
+        },
+      };
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -55,6 +73,7 @@ const messageSlice = createSlice({
         state.data = action.payload;
         state.postType = action.payload.messagePostType;
         state.postId = action.payload.messagePostId; // todo: 성훈 추가 예정?
+        state.interlocutorNickname = action.payload.interlocutor.nickname;
       })
       .addCase(fetchMessageRoomItem.rejected, (state, action) => {
         state.loading = false;
@@ -63,5 +82,6 @@ const messageSlice = createSlice({
   },
 });
 
-export const { setPostType, setPostId } = messageSlice.actions;
+export const { setPostType, setPostId, setInterlocutorNickname, initData } =
+  messageSlice.actions;
 export default messageSlice.reducer;

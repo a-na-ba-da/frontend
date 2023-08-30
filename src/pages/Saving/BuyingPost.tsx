@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import moment from 'moment';
 
 import PostBack from '../../components/Post/PostBack';
@@ -9,9 +9,14 @@ import PostComment from '../../components/Post/PostComment';
 import PostHeader from '../../components/Post/PostHeader';
 import { getBuyingPost } from '../../api/saving';
 import PostImgSlider from '../../components/Post/PostImgSlider';
+import { getRoomIdByPostInfo } from '../../api/message';
+import { useDispatch } from 'react-redux';
+import { setInterlocutorNickname } from '../../context/reducer/messageReducer';
 
 export default function BuyingPost() {
   const { id } = useParams();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [buyingPost, setBuyingPost] = useState<buyingPostType>();
   const [address, setAddress] = useState<string>('');
 
@@ -40,6 +45,17 @@ export default function BuyingPost() {
     }
   };
 
+  const handleMsgSendClick = async () => {
+    if (buyingPost) {
+      const messageRoomId = await getRoomIdByPostInfo(
+        'BUY_TOGETHER',
+        buyingPost.id,
+      );
+      dispatch(setInterlocutorNickname(buyingPost?.writer?.nickname));
+      navigate('/message/' + messageRoomId);
+    }
+  };
+
   return (
     <PostLayout>
       <PostBack color="white" whatShape="back" />
@@ -47,7 +63,7 @@ export default function BuyingPost() {
       <Main>
         {/* props.children으로 전달된 Button 컴포넌트를 헤더 내부에서 배치 */}
         <PostHeader userName={buyingPost?.writer?.nickname}>
-          <Button content="쪽지 보내기" />
+          <Button content="쪽지 보내기" onClick={handleMsgSendClick} />
         </PostHeader>
         <ContentSection>
           <TitleBox>{buyingPost?.title}</TitleBox>
