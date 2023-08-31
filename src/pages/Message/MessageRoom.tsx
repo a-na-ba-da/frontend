@@ -7,10 +7,9 @@ import Header from '../../components/Header/Header';
 import HeaderLeft from '../../components/Header/HeaderLeft';
 import PostBack from '../../components/Post/PostBack';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { setInit } from '../../context/reducer/buyingEditReducer';
 import {
   fetchMessageRoomItem,
-  initData,
+  setInit,
 } from '../../context/reducer/messageReducer';
 import { createMessage } from '../../api/message';
 
@@ -54,8 +53,6 @@ export default function MessageRoom() {
     if (id > 0) {
       dispatch(fetchMessageRoomItem(id));
       console.log(id);
-    } else {
-      dispatch(initData());
     }
   }, [id]);
 
@@ -66,8 +63,7 @@ export default function MessageRoom() {
 
   useEffect(() => {
     return () => {
-      dispatch(initData());
-      console.log(123);
+      dispatch(setInit());
     };
   }, []);
 

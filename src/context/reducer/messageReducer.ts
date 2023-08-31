@@ -50,7 +50,10 @@ const messageSlice = createSlice({
     setInterlocutorNickname: (state, action) => {
       state.interlocutorNickname = action.payload;
     },
-    initData: (state) => {
+    setInit: (state) => {
+      state.postType = '';
+      state.postId = 0;
+      state.interlocutorNickname = '';
       state.data = {
         messages: [],
         messagePostType: '',
@@ -61,6 +64,8 @@ const messageSlice = createSlice({
           activated: false,
         },
       };
+      state.loading = false;
+      state.error = null;
     },
   },
   extraReducers: (builder) => {
@@ -82,6 +87,6 @@ const messageSlice = createSlice({
   },
 });
 
-export const { setPostType, setPostId, setInterlocutorNickname, initData } =
+export const { setPostType, setPostId, setInterlocutorNickname, setInit } =
   messageSlice.actions;
 export default messageSlice.reducer;
