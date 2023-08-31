@@ -84,6 +84,14 @@ export default function MessageRoom() {
     }
   };
 
+  const processRawMsg = (raw: string) => {
+    const msg = decodeURI(raw);
+    if (msg.charAt(msg.length - 1) == '=') {
+      return msg.slice(0, msg.length - 1);
+    }
+    return msg;
+  };
+
   console.log(data, postType, postId, interlocutorNickname, id);
 
   return (
@@ -108,7 +116,7 @@ export default function MessageRoom() {
                 </SentWhoBox>
                 <SentAtBox>{item.sentAt}</SentAtBox>
               </ItemHeaderBox>
-              <ContentBox>{item.message}</ContentBox>
+              <ContentBox>{processRawMsg(item.message)}</ContentBox>
             </MessageItem>
           ))}
         </MessageList>
