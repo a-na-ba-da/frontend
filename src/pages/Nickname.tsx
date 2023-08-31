@@ -1,10 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { useAppDispatch, useAppSelector } from '../hooks/redux';
+import { setNickname } from '../context/reducer/nicknameReducer';
+import { getRandNickname } from '../api/nickname';
 import PostBack from '../components/Post/PostBack';
 import IdCard from '../asset/img/idcard.png';
 
 export default function Nickname() {
+  const dispatch = useAppDispatch();
+  const nickname = useAppSelector((state) => state.nickname.nickname);
+
+  const handleRandNicknameClick = () => {
+    getRandNickname(nickname).then((res) => {
+      dispatch(setNickname(res.data.generated_nickname));
+    });
+  };
+
   return (
     <NicknameLayout>
       <HeaderWrapper>
@@ -23,12 +35,18 @@ export default function Nickname() {
       <CreateNicknameText>닉네임을 설정해주세요</CreateNicknameText>
       <CreateRandNicknameBtnSection>
         <CreateRandNicknameBtnWrapper>
-          <CreateRandNicknameBtn>랜덤 닉네임 생성</CreateRandNicknameBtn>
+          <CreateRandNicknameBtn onClick={handleRandNicknameClick}>
+            랜덤 닉네임 생성
+          </CreateRandNicknameBtn>
         </CreateRandNicknameBtnWrapper>
       </CreateRandNicknameBtnSection>
       <NicknameInputSection>
         <NicknameInputWrapper>
-          <NicknameInput placeholder="닉네임을 입력해주세요" />
+          <NicknameInput
+            placeholder="닉네임을 입력해주세요"
+            value={nickname}
+            onChange={(e) => dispatch(setNickname(e.target.value))}
+          />
         </NicknameInputWrapper>
       </NicknameInputSection>
       <ConfirmBtnSection>
@@ -135,6 +153,8 @@ const NicknameInput = styled.input`
   border: 0;
   border-radius: 5px;
   background-color: #efefef;
+  font-size: 16px;
+  text-align: center;
   ::placeholder,
   ::-webkit-input-placeholder {
     font-size: 16px;
