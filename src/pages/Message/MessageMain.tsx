@@ -29,6 +29,14 @@ export default function MessageMain() {
     navigate('/message/' + roomId);
   };
 
+  const processRawMsg = (raw: string) => {
+    const msg = decodeURI(raw);
+    if (msg.charAt(msg.length - 1) == '=') {
+      return msg.slice(0, msg.length - 1);
+    }
+    return msg;
+  };
+
   return (
     <MessageMainLayout>
       <Header title="쪽지함">
@@ -52,7 +60,7 @@ export default function MessageMain() {
                 <InterlocutorBox>{item.interlocutor.nickname}</InterlocutorBox>
                 <LastMessageAtBox>{item.lastMessagedAt}</LastMessageAtBox>
               </ItemHeaderBox>
-              <LastMessageBox>{item.lastMessage}</LastMessageBox>
+              <LastMessageBox>{processRawMsg(item.lastMessage)}</LastMessageBox>
             </MessageRoomItem>
           ))}
         </MessageRoomList>
@@ -103,4 +111,8 @@ const LastMessageAtBox = styled.div`
   color: #8f8f8f;
 `;
 
-const LastMessageBox = styled.div``;
+const LastMessageBox = styled.div`
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
