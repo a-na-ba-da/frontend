@@ -1,4 +1,4 @@
-import React, { KeyboardEvent, useEffect, useState } from 'react';
+import React, { KeyboardEvent, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate, useParams } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
@@ -18,6 +18,7 @@ export default function MessageRoom() {
   const id = Number(useParams().id);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const messageEndRef = useRef<HTMLDivElement | null>(null);
   const [keyword, setKeyword] = useState<string>('');
   const [isKeyDown, setIsKeyDown] = useState(false);
   const postType = useAppSelector((state) => state.message.postType);
@@ -28,7 +29,6 @@ export default function MessageRoom() {
   const data = useAppSelector((state) => state.message.data);
 
   const handleCancelClick = () => {
-    dispatch(setInit());
     navigate(-1);
   };
 
@@ -37,8 +37,8 @@ export default function MessageRoom() {
       setIsKeyDown(true);
       if (keyword.length > 1) {
         createMessage(postType, postId, keyword).then(() => {
-          console.log('send');
           dispatch(fetchMessageRoomItem(id));
+          setKeyword('');
         });
       }
     }
@@ -58,6 +58,18 @@ export default function MessageRoom() {
       dispatch(initData());
     }
   }, [id]);
+
+  useEffect(() => {
+    messageEndRef.current &&
+      messageEndRef.current.scrollIntoView({ behavior: 'instant' });
+  }, [data]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(initData());
+      console.log(123);
+    };
+  }, []);
 
   const convertSentWhoToData = (sentWho: string) => {
     switch (sentWho) {
@@ -96,16 +108,18 @@ export default function MessageRoom() {
 
   return (
     <MessageRoomLayout>
-      <Header title={interlocutorNickname}>
-        <HeaderLeft>
-          <PostBack
-            color="#8F00FF"
-            whatShape="arrow"
-            onClick={handleCancelClick}
-          />
-        </HeaderLeft>
-      </Header>
-      <Line />
+      <HeaderSection>
+        <Header title={interlocutorNickname}>
+          <HeaderLeft>
+            <PostBack
+              color="#8F00FF"
+              whatShape="arrow"
+              onClick={handleCancelClick}
+            />
+          </HeaderLeft>
+        </Header>
+        <Line />
+      </HeaderSection>
       <Main>
         <MessageList>
           {data.messages?.map((item) => (
@@ -120,6 +134,7 @@ export default function MessageRoom() {
             </MessageItem>
           ))}
         </MessageList>
+        <div ref={messageEndRef}></div>
       </Main>
       <InputSection>
         <Input
@@ -138,10 +153,15 @@ export default function MessageRoom() {
 }
 
 const MessageRoomLayout = styled.div`
-  display: flex;
-  flex-direction: column;
   width: 100vw;
   height: 100vh;
+`;
+
+const HeaderSection = styled.section`
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  background-color: white;
 `;
 
 const Line = styled.hr`
@@ -152,8 +172,9 @@ const Line = styled.hr`
 `;
 
 const Main = styled.main`
-  flex-grow: 1;
   padding: 0 15px;
+  padding-top: 78px;
+  padding-bottom: 300px;
 `;
 
 const MessageList = styled.ul`
@@ -188,13 +209,15 @@ const ContentBox = styled.div``;
 
 const InputSection = styled.section`
   display: flex;
-  position: relative;
+  position: fixed;
   bottom: 0;
+  width: 100vw;
   height: 50px;
   padding: 0 15px;
   background-color: #fbfbfb;
   justify-content: center;
   align-items: center;
+  box-sizing: border-box;
 `;
 
 const Input = styled.input`
