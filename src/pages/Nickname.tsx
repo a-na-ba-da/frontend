@@ -1,20 +1,36 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import { setNickname } from '../context/reducer/nicknameReducer';
-import { getRandNickname } from '../api/nickname';
+import { getRandNickname, changeNickname } from '../api/nickname';
 import PostBack from '../components/Post/PostBack';
 import IdCard from '../asset/img/idcard.png';
 
 export default function Nickname() {
   const dispatch = useAppDispatch();
   const nickname = useAppSelector((state) => state.nickname.nickname);
+  const navigate = useNavigate();
 
   const handleRandNicknameClick = () => {
-    getRandNickname(nickname).then((res) => {
-      dispatch(setNickname(res.data.generated_nickname));
-    });
+    getRandNickname()
+      .then((res) => {
+        dispatch(setNickname(res.data.generated_nickname));
+      })
+      .catch(() =>
+        alert(
+          '랜덤 닉네임을 생성하는 중에 문제가 발생했습니다. 잠시 후에 다시 시도해주세요.',
+        ),
+      );
+  };
+
+  const handleConfirmNicknameClick = () => {
+    changeNickname(nickname)
+      .then(() => {
+        navigate('/');
+      })
+      .catch(() => alert('로그인 이후 사용할 수 있는 기능입니다.'));
   };
 
   return (
@@ -51,7 +67,7 @@ export default function Nickname() {
       </NicknameInputSection>
       <ConfirmBtnSection>
         <ConfirmBtnWrapper>
-          <ConfirmBtn>완료</ConfirmBtn>
+          <ConfirmBtn onClick={handleConfirmNicknameClick}>완료</ConfirmBtn>
         </ConfirmBtnWrapper>
       </ConfirmBtnSection>
     </NicknameLayout>
