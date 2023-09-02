@@ -12,6 +12,8 @@ import SelectPlace from './pages/Saving/SelectPlace';
 import RecyclingBoard from './pages/Recycling/RecyclingBoard';
 import RecyclingPost from './pages/Recycling/RecyclingPost';
 import RecyclingPostEdit from './pages/Recycling/RecyclingPostEdit';
+import MessageMain from './pages/Message/MessageMain';
+import MessageRoom from './pages/Message/MessageRoom';
 
 export default function App() {
   return (
@@ -30,6 +32,8 @@ export default function App() {
           <Route path="/recycling/:id" element={<RecyclingPost />} />
           <Route path="/recycling/write" element={<RecyclingPostEdit />} />
           <Route path="/recycling/place" element={<SelectPlace />} />
+          <Route path="/message" element={<MessageMain />} />
+          <Route path="/message/:id" element={<MessageRoom />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

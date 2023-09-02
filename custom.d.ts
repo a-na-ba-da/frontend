@@ -55,6 +55,32 @@ interface knowingPostType {
   commentCount: number;
 }
 
+// 메세지방 요약 타입
+interface messageRoomSummaryType {
+  messageRoomId: number;
+  postType: string;
+  postId: number;
+  interlocutor: writerType;
+  lastMessage: string;
+  lastMessagedAt: string;
+  unreadCount: 0;
+}
+
+interface messageType {
+  id: number;
+  message: string;
+  sentWho: string;
+  sentAt: string;
+}
+
+// 메세지방 타입
+interface messageRoomType {
+  messages: messageType[];
+  messagePostType: string;
+  messagePostId: number;
+  interlocutor: writerType;
+}
+
 // 다시쓰기 게시글 타입
 interface recyclingPostType {
   id: number;

@@ -7,6 +7,7 @@ import savingReducer from './savingReducer';
 import buyingReducer from './buyingReducer';
 import knowingReducer from './knowingReducer';
 import menuReducer from './menuReducer';
+import messageReducer from './messageReducer';
 import recyclingReducer from './recyclingReducer';
 import recyclingEditReducer from './recyclingEditReducer';
 
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   knowing: knowingReducer,
   knowingEdit: knowingEditReducer,
   map: mapReducer,
+  message: messageReducer,
   recycling: recyclingReducer,
   recyclingEdit: recyclingEditReducer,
 });

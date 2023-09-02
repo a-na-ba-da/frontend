@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import moment from 'moment';
 
 import PostBack from '../../components/Post/PostBack';
@@ -9,9 +9,13 @@ import PostComment from '../../components/Post/PostComment';
 import PostHeader from '../../components/Post/PostHeader';
 import { getKnowingPost } from '../../api/saving';
 import PostImgSlider from '../../components/Post/PostImgSlider';
+import { useAppDispatch } from '../../hooks/redux';
+import { handleMsgSendClick } from '../../utils/messageUtils';
 
 export default function KnowingPost() {
   const { id } = useParams();
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const [knowingPost, setKnowingPost] = useState<knowingPostType>();
 
   useEffect(() => {
@@ -34,7 +38,17 @@ export default function KnowingPost() {
       <Main>
         {/* props.children으로 전달된 Button 컴포넌트를 헤더 내부에서 배치 */}
         <PostHeader userName={knowingPost?.writer?.nickname}>
-          <Button content="쪽지 보내기" />
+          <Button
+            content="쪽지 보내기"
+            onClick={() =>
+              handleMsgSendClick(
+                dispatch,
+                navigate,
+                'KNOW_TOGETHER',
+                knowingPost,
+              )
+            }
+          />
         </PostHeader>
         <ContentSection>
           <TitleBox>{knowingPost?.title}</TitleBox>
