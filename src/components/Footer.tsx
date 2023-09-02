@@ -5,6 +5,7 @@ import ViewInArIcon from '@mui/icons-material/ViewInAr';
 import RecyclingIcon from '@mui/icons-material/Recycling';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import SyncAltOutlinedIcon from '@mui/icons-material/SyncAltOutlined';
+import { useNavigate } from 'react-router-dom';
 
 const UNSELECTEDCOLOR = '#a3a1a2';
 const SELECTEDCOLOR = '#8f00ff';
@@ -14,9 +15,11 @@ interface FooterProps {
 }
 
 export default function Footer({ pageName }: FooterProps) {
+  const navigate = useNavigate();
+
   return (
     <FooterLayout>
-      <NavItem>
+      <NavItem onClick={() => navigate('/saving')}>
         <HandshakeOutlinedIcon
           sx={{
             fontSize: 32,
@@ -25,7 +28,7 @@ export default function Footer({ pageName }: FooterProps) {
         />
         <NavText isSelected={pageName === 'saving'}>아껴쓰기</NavText>
       </NavItem>
-      <NavItem>
+      <NavItem onClick={() => navigate('/sharing')}>
         <ViewInArIcon
           sx={{
             fontSize: 32,
@@ -43,7 +46,7 @@ export default function Footer({ pageName }: FooterProps) {
         />
         <NavText isSelected={pageName === 'trading'}>바꿔쓰기</NavText>
       </NavItem>
-      <NavItem>
+      <NavItem onClick={() => navigate('/recycling')}>
         <RecyclingIcon
           sx={{
             fontSize: 32,

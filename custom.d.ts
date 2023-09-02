@@ -54,3 +54,15 @@ interface knowingPostType {
   writer: writerType;
   commentCount: number;
 }
+
+// 다시쓰기 게시글 타입
+interface recyclingPostType {
+  id: number;
+  title: string;
+  content: string;
+  createdAt: string;
+  modifiedAt: string;
+  images: string[];
+  writer: writerType;
+  commentCount: number;
+}
