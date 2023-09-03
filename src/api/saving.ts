@@ -80,7 +80,9 @@ export const createOnlineKnowingPost = ({
       productUrl,
     },
     {
-      headers: { Authorization: 'Bearer ' + process.env.AUTH_TOKEN },
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('access_token'),
+      },
     },
   );
 };
@@ -113,7 +115,9 @@ export const createOfflineKnowingPost = ({
       buyPlaceLng,
     },
     {
-      headers: { Authorization: 'Bearer ' + process.env.AUTH_TOKEN },
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('access_token'),
+      },
     },
   );
 };
@@ -149,7 +153,9 @@ export const createParcelBuyingPost = ({
       pay,
     },
     {
-      headers: { Authorization: 'Bearer ' + process.env.AUTH_TOKEN },
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('access_token'),
+      },
     },
   );
 };
@@ -191,7 +197,9 @@ export const createMeetBuyingPost = ({
       buyPlaceLng,
     },
     {
-      headers: { Authorization: 'Bearer ' + process.env.AUTH_TOKEN },
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('access_token'),
+      },
     },
   );
 };

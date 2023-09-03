@@ -11,6 +11,8 @@ import KnowingPostEdit from './pages/Saving/KnowingPostEdit';
 import SelectPlace from './pages/Saving/SelectPlace';
 import Landing from './pages/Landing';
 import Nickname from './pages/Nickname';
+import PrivateRoute from './PrivateRoute';
+import PublicRoute from './PublicRoute';
 
 export default function App() {
   return (
@@ -18,15 +20,42 @@ export default function App() {
       <BrowserRouter>
         <ScrollTop />
         <Routes>
-          <Route path="/" element={<SavingBoard />} />
-          <Route path="/landing" element={<Landing />} />
-          <Route path="/nickname" element={<Nickname />} />
-          <Route path="/saving" element={<SavingBoard />} />
-          <Route path="/saving/buying/:id" element={<BuyingPost />} />
-          <Route path="/saving/buying/write" element={<BuyingPostEdit />} />
-          <Route path="/saving/knowing/:id" element={<KnowingPost />} />
-          <Route path="/saving/Knowing/write" element={<KnowingPostEdit />} />
-          <Route path="/saving/place" element={<SelectPlace />} />
+          <Route
+            path="/"
+            element={<PrivateRoute component={<SavingBoard />} />}
+          />
+          <Route
+            path="/landing"
+            element={<PublicRoute component={<Landing />} />}
+          />
+          <Route
+            path="/nickname"
+            element={<PrivateRoute component={<Nickname />} />}
+          />
+          <Route
+            path="/saving"
+            element={<PrivateRoute component={<SavingBoard />} />}
+          />
+          <Route
+            path="/saving/buying/:id"
+            element={<PrivateRoute component={<BuyingPost />} />}
+          />
+          <Route
+            path="/saving/buying/write"
+            element={<PrivateRoute component={<BuyingPostEdit />} />}
+          />
+          <Route
+            path="/saving/knowing/:id"
+            element={<PrivateRoute component={<KnowingPost />} />}
+          />
+          <Route
+            path="/saving/Knowing/write"
+            element={<PrivateRoute component={<KnowingPostEdit />} />}
+          />
+          <Route
+            path="/saving/place"
+            element={<PrivateRoute component={<SelectPlace />} />}
+          />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
