@@ -14,6 +14,11 @@ import RecyclingPost from './pages/Recycling/RecyclingPost';
 import RecyclingPostEdit from './pages/Recycling/RecyclingPostEdit';
 import MessageMain from './pages/Message/MessageMain';
 import MessageRoom from './pages/Message/MessageRoom';
+import MyPage from './pages/MyPage';
+import MySavingActivity from './pages/MyPage/MyActivity/Saving';
+import MySharingActivity from './pages/MyPage/MyActivity/Sharing';
+import MyTradingActivity from './pages/MyPage/MyActivity/Trading';
+import MyRecyclingActivity from './pages/MyPage/MyActivity/Recycling';
 
 export default function App() {
   return (
@@ -34,6 +39,11 @@ export default function App() {
           <Route path="/recycling/place" element={<SelectPlace />} />
           <Route path="/message" element={<MessageMain />} />
           <Route path="/message/:id" element={<MessageRoom />} />
+          <Route path="/mypage" element={<MyPage />} />
+          <Route path="/mypage/saving" element={<MySavingActivity />} />
+          <Route path="/mypage/sharing" element={<MySharingActivity />} />
+          <Route path="/mypage/trading" element={<MyTradingActivity />} />
+          <Route path="/mypage/recycling" element={<MyRecyclingActivity />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
