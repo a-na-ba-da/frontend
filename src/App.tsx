@@ -8,7 +8,7 @@ import BuyingPostEdit from './pages/Saving/BuyingPostEdit';
 import KnowingPost from './pages/Saving/KnowingPost';
 import SavingBoard from './pages/Saving/SavingBoard';
 import KnowingPostEdit from './pages/Saving/KnowingPostEdit';
-import SelectPlace from './pages/Saving/SelectPlace';
+import SelectPlace from './pages/SelectPlace';
 import Landing from './pages/Landing';
 import Nickname from './pages/Nickname';
 import PrivateRoute from './PrivateRoute';

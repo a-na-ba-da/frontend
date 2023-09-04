@@ -2,15 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import Header from '../../components/Header/Header';
-import HeaderLeft from '../../components/Header/HeaderLeft';
-import PostBack from '../../components/Post/PostBack';
-import MapSelectPoint from '../../components/Map/MapSelectPoint';
-import HeaderRight from '../../components/Header/HeaderRight';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { setLocation as setBuyingLocation } from '../../context/reducer/buyingEditReducer';
-import { setLocation as setKnowingLocation } from '../../context/reducer/knowingEditReducer';
-import { setInit } from '../../context/reducer/mapReducer';
+import Header from '../components/Header/Header';
+import HeaderLeft from '../components/Header/HeaderLeft';
+import PostBack from '../components/Post/PostBack';
+import MapSelectPoint from '../components/Map/MapSelectPoint';
+import HeaderRight from '../components/Header/HeaderRight';
+import { useAppDispatch, useAppSelector } from '../hooks/redux';
+import { setLocation as setBuyingLocation } from '../context/reducer/buyingEditReducer';
+import { setLocation as setKnowingLocation } from '../context/reducer/knowingEditReducer';
+import { setInit } from '../context/reducer/mapReducer';
 
 export default function SelectPlace() {
   const location = useLocation();
