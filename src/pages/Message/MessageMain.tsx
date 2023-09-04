@@ -30,7 +30,7 @@ export default function MessageMain() {
   };
 
   const processRawMsg = (raw: string) => {
-    const msg = decodeURI(raw);
+    const msg = decodeURIComponent(raw).replace(/\+/g, ' ');
     if (msg.charAt(msg.length - 1) == '=') {
       return msg.slice(0, msg.length - 1);
     }
