@@ -41,11 +41,7 @@ export default function MessageMain() {
     <MessageMainLayout>
       <Header title="쪽지함">
         <HeaderLeft>
-          <PostBack
-            color="#8F00FF"
-            whatShape="arrow"
-            onClick={handleCancelClick}
-          />
+          <PostBack color="#8F00FF" shape="arrow" onClick={handleCancelClick} />
         </HeaderLeft>
       </Header>
       <Line />

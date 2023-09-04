@@ -109,7 +109,7 @@ export default function MessageRoom() {
           <HeaderLeft>
             <PostBack
               color="#8F00FF"
-              whatShape="arrow"
+              shape="arrow"
               onClick={handleCancelClick}
             />
           </HeaderLeft>

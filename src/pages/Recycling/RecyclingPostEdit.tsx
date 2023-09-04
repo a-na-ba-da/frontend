@@ -51,11 +51,7 @@ export default function SharingPostEdit() {
     <BuyingPostEditLayout>
       <Header title="나눠쓰기">
         <HeaderLeft>
-          <PostBack
-            color="#8F00FF"
-            whatShape="cross"
-            onClick={handleCancelClick}
-          />
+          <PostBack color="#8F00FF" shape="cross" onClick={handleCancelClick} />
         </HeaderLeft>
         <HeaderRight>
           <ConfirmText onClick={handleConfirmClick}>확인</ConfirmText>

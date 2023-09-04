@@ -38,7 +38,7 @@ export default function Nickname() {
       <HeaderWrapper>
         <Header>
           <PostBackWrapper>
-            <PostBack color="#8f00ff" whatShape="back" />
+            <PostBack color="#8f00ff" shape="back" />
           </PostBackWrapper>
           닉네임 설정
         </Header>
