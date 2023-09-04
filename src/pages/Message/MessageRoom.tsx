@@ -35,9 +35,14 @@ export default function MessageRoom() {
     if (e.key === 'Enter' && !e.nativeEvent.isComposing && !isKeyDown) {
       setIsKeyDown(true);
       if (keyword.length > 1) {
-        createMessage(postType, postId, keyword).then(() => {
-          dispatch(fetchMessageRoomItem(id));
+        createMessage(postType, postId, keyword).then((res) => {
+          const roomId = res.data.detail.messageRoomId;
           setKeyword('');
+          if (id) {
+            dispatch(fetchMessageRoomItem(roomId));
+          } else {
+            navigate('/message/' + roomId);
+          }
         });
       }
     }
