@@ -13,7 +13,9 @@ export const changeNickname = (nickname?: string) => {
       },
     },
     {
-      headers: { Authorization: 'Bearer ' + process.env.AUTH_TOKEN },
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('access_token'),
+      },
     },
   );
 };

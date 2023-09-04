@@ -61,12 +61,30 @@ export default function App() {
             path="/saving/place"
             element={<PrivateRoute component={<SelectPlace />} />}
           />
-          <Route path="/recycling" element={<RecyclingBoard />} />
-          <Route path="/recycling/:id" element={<RecyclingPost />} />
-          <Route path="/recycling/write" element={<RecyclingPostEdit />} />
-          <Route path="/recycling/place" element={<SelectPlace />} />
-          <Route path="/message" element={<MessageMain />} />
-          <Route path="/message/:id" element={<MessageRoom />} />
+          <Route
+            path="/recycling"
+            element={<PrivateRoute component={<RecyclingBoard />} />}
+          />
+          <Route
+            path="/recycling/:id"
+            element={<PrivateRoute component={<RecyclingPost />} />}
+          />
+          <Route
+            path="/recycling/write"
+            element={<PrivateRoute component={<RecyclingPostEdit />} />}
+          />
+          <Route
+            path="/recycling/place"
+            element={<PrivateRoute component={<SelectPlace />} />}
+          />
+          <Route
+            path="/message"
+            element={<PrivateRoute component={<MessageMain />} />}
+          />
+          <Route
+            path="/message/:id"
+            element={<PrivateRoute component={<MessageRoom />} />}
+          />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

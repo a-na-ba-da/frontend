@@ -48,7 +48,9 @@ export const createRecyclingPost = ({
       images,
     },
     {
-      headers: { Authorization: 'Bearer ' + process.env.AUTH_TOKEN },
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('access_token'),
+      },
     },
   );
 };
