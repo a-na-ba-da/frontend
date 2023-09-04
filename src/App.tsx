@@ -9,6 +9,10 @@ import KnowingPost from './pages/Saving/KnowingPost';
 import SavingBoard from './pages/Saving/SavingBoard';
 import KnowingPostEdit from './pages/Saving/KnowingPostEdit';
 import SelectPlace from './pages/Saving/SelectPlace';
+import Landing from './pages/Landing';
+import Nickname from './pages/Nickname';
+import PrivateRoute from './PrivateRoute';
+import PublicRoute from './PublicRoute';
 import RecyclingBoard from './pages/Recycling/RecyclingBoard';
 import RecyclingPost from './pages/Recycling/RecyclingPost';
 import RecyclingPostEdit from './pages/Recycling/RecyclingPostEdit';
@@ -21,13 +25,42 @@ export default function App() {
       <BrowserRouter>
         <ScrollTop />
         <Routes>
-          <Route path="/" element={<SavingBoard />} />
-          <Route path="/saving" element={<SavingBoard />} />
-          <Route path="/saving/buying/:id" element={<BuyingPost />} />
-          <Route path="/saving/buying/write" element={<BuyingPostEdit />} />
-          <Route path="/saving/knowing/:id" element={<KnowingPost />} />
-          <Route path="/saving/Knowing/write" element={<KnowingPostEdit />} />
-          <Route path="/saving/place" element={<SelectPlace />} />
+          <Route
+            path="/"
+            element={<PrivateRoute component={<SavingBoard />} />}
+          />
+          <Route
+            path="/landing"
+            element={<PublicRoute component={<Landing />} />}
+          />
+          <Route
+            path="/nickname"
+            element={<PrivateRoute component={<Nickname />} />}
+          />
+          <Route
+            path="/saving"
+            element={<PrivateRoute component={<SavingBoard />} />}
+          />
+          <Route
+            path="/saving/buying/:id"
+            element={<PrivateRoute component={<BuyingPost />} />}
+          />
+          <Route
+            path="/saving/buying/write"
+            element={<PrivateRoute component={<BuyingPostEdit />} />}
+          />
+          <Route
+            path="/saving/knowing/:id"
+            element={<PrivateRoute component={<KnowingPost />} />}
+          />
+          <Route
+            path="/saving/Knowing/write"
+            element={<PrivateRoute component={<KnowingPostEdit />} />}
+          />
+          <Route
+            path="/saving/place"
+            element={<PrivateRoute component={<SelectPlace />} />}
+          />
           <Route path="/recycling" element={<RecyclingBoard />} />
           <Route path="/recycling/:id" element={<RecyclingPost />} />
           <Route path="/recycling/write" element={<RecyclingPostEdit />} />
