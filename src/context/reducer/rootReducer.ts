@@ -10,6 +10,7 @@ import menuReducer from './menuReducer';
 import messageReducer from './messageReducer';
 import recyclingReducer from './recyclingReducer';
 import recyclingEditReducer from './recyclingEditReducer';
+import mypageReducer from './mypageReducer';
 
 const rootReducer = combineReducers({
   menu: menuReducer,
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   message: messageReducer,
   recycling: recyclingReducer,
   recyclingEdit: recyclingEditReducer,
+  mypage: mypageReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

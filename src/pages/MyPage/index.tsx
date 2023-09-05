@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import AccountCircleTwoTOutlined from '@mui/icons-material/AccountCircleOutlined';
 import HandshakeOutlinedIcon from '@mui/icons-material/HandshakeOutlined';
@@ -8,8 +8,17 @@ import RecyclingIcon from '@mui/icons-material/Recycling';
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 
 import Footer from '../../components/Footer';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { fetchMyActivity } from '../../context/reducer/mypageReducer';
 
 export default function MyPage() {
+  const dispatch = useAppDispatch();
+  const myActivity = useAppSelector((state) => state.mypage.data);
+
+  useEffect(() => {
+    dispatch(fetchMyActivity());
+  }, []);
+
   return (
     <MyPageLayout>
       <Header>마이 페이지</Header>
