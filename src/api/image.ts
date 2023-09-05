@@ -14,7 +14,7 @@ export const uploadImages = ({ images, type }: uploadImagesProps) => {
   return axios.post('/image?type=' + type, formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
-      Authorization: 'Bearer ' + process.env.AUTH_TOKEN,
+      Authorization: 'Bearer ' + localStorage.getItem('access_token'),
     },
   });
 };

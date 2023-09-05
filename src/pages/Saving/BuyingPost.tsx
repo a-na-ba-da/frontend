@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import moment from 'moment';
 
 import PostBack from '../../components/Post/PostBack';
@@ -9,9 +9,13 @@ import PostComment from '../../components/Post/PostComment';
 import PostHeader from '../../components/Post/PostHeader';
 import { getBuyingPost } from '../../api/saving';
 import PostImgSlider from '../../components/Post/PostImgSlider';
+import { useAppDispatch } from '../../hooks/redux';
+import { handleMsgSendClick } from '../../utils/messageUtils';
 
 export default function BuyingPost() {
   const { id } = useParams();
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const [buyingPost, setBuyingPost] = useState<buyingPostType>();
   const [address, setAddress] = useState<string>('');
 
@@ -42,12 +46,17 @@ export default function BuyingPost() {
 
   return (
     <PostLayout>
-      <PostBack color="white" whatShape="back" />
+      <PostBack color="white" shape="back" />
       <PostImgSlider images={buyingPost?.images} />
       <Main>
         {/* props.children으로 전달된 Button 컴포넌트를 헤더 내부에서 배치 */}
         <PostHeader userName={buyingPost?.writer?.nickname}>
-          <Button content="쪽지 보내기" />
+          <Button
+            content="쪽지 보내기"
+            onClick={() =>
+              handleMsgSendClick(dispatch, navigate, 'BUY_TOGETHER', buyingPost)
+            }
+          />
         </PostHeader>
         <ContentSection>
           <TitleBox>{buyingPost?.title}</TitleBox>

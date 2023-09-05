@@ -170,11 +170,7 @@ export default function BuyingPostEdit() {
     <BuyingPostEditLayout>
       <Header title="같이 사요">
         <HeaderLeft>
-          <PostBack
-            color="#8F00FF"
-            whatShape="cross"
-            onClick={handleCancelClick}
-          />
+          <PostBack color="#8F00FF" shape="cross" onClick={handleCancelClick} />
         </HeaderLeft>
         <HeaderRight>
           <ConfirmText onClick={handleConfirmClick}>확인</ConfirmText>

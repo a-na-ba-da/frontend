@@ -46,7 +46,7 @@ export default function Footer({ pageName }: FooterProps) {
         />
         <NavText isSelected={pageName === 'trading'}>바꿔쓰기</NavText>
       </NavItem>
-      <NavItem>
+      <NavItem onClick={() => navigate('/recycling')}>
         <RecyclingIcon
           sx={{
             fontSize: 32,
