@@ -2,26 +2,26 @@ import { createSlice } from '@reduxjs/toolkit';
 import { ImageListType } from 'react-images-uploading';
 
 interface sharingEditState {
-  images: ImageListType;
   title: string;
-  buyDate: string;
-  pay: number;
-  productUrl?: string;
+  content: string;
+  start: Date;
+  end: Date;
+  images: ImageListType;
+  pricePerDay: number;
   location?: {
     address: string;
     lat: number;
     lng: number;
   };
-  content: string;
 }
 
 const initialState: sharingEditState = {
-  images: [],
   title: '',
-  buyDate: '',
-  pay: 0,
   content: '',
-  productUrl: undefined,
+  start: new Date(),
+  end: new Date(),
+  images: [],
+  pricePerDay: 0,
   location: undefined,
 };
 
@@ -35,14 +35,14 @@ const sharingEditSlice = createSlice({
     setTitle: (state, action) => {
       state.title = action.payload;
     },
-    setBuyDate: (state, action) => {
-      state.buyDate = action.payload;
+    setStart: (state, action) => {
+      state.start = action.payload;
     },
-    setPay: (state, action) => {
-      state.pay = action.payload;
+    setEnd: (state, action) => {
+      state.end = action.payload;
     },
-    setProductUrl: (state, action) => {
-      state.productUrl = action.payload;
+    setPricePerDay: (state, action) => {
+      state.pricePerDay = action.payload;
     },
     setLocation: (state, action) => {
       state.location = { ...state.location, ...action.payload };
@@ -59,9 +59,9 @@ const sharingEditSlice = createSlice({
 export const {
   setImages,
   setTitle,
-  setBuyDate,
-  setPay,
-  setProductUrl,
+  setStart,
+  setEnd,
+  setPricePerDay,
   setLocation,
   setContent,
   setInit,

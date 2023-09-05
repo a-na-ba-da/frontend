@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import SmsOutlinedIcon from '@mui/icons-material/SmsOutlined';
 import { useNavigate } from 'react-router-dom';
-import moment from 'moment';
 
 import * as S from './styles';
 import baseURL from '../../api/basURL';
@@ -11,8 +10,9 @@ interface ContentSharingItemProps {
   id: number;
   title: string;
   thumbnail: string | boolean;
-  date: string;
-  price: number;
+  start: string;
+  end: string;
+  pricePerDay: number;
   commentCount: number;
 }
 
@@ -20,8 +20,9 @@ export default function ContentSharingItem({
   id,
   title,
   thumbnail,
-  date,
-  price,
+  start,
+  end,
+  pricePerDay,
   commentCount,
 }: ContentSharingItemProps) {
   const navigate = useNavigate();
@@ -39,8 +40,12 @@ export default function ContentSharingItem({
       />
       <S.DescriptionCol>
         <TitleText>{title}</TitleText>
-        <S.DateText>{moment(date).format('YYYY.MM.DD hh:mm')}</S.DateText>
-        <PriceText>{price?.toLocaleString('en')}원</PriceText>
+        <S.DateText>
+          {start} ~ {end}
+          {/* {moment(start).format('YYYY.MM.DD hh:mm')} ~{' '}
+          {moment(end).format('YYYY.MM.DD hh:mm')} */}
+        </S.DateText>
+        <PriceText>{pricePerDay?.toLocaleString('en')}원</PriceText>
         <S.ChatBox>
           <SmsOutlinedIcon fontSize="small" />
           <S.ChatCountText>{commentCount}</S.ChatCountText>

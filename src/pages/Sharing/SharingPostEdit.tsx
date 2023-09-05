@@ -1,6 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { ko } from 'date-fns/esm/locale';
+import RemoveIcon from '@mui/icons-material/Remove';
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 
 import Header from '../../components/Header/Header';
 import HeaderLeft from '../../components/Header/HeaderLeft';
@@ -10,11 +15,12 @@ import EditImgUpload from '../../components/Post/Edit/EditImgUpload';
 import Button from '../../components/Button';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import {
-  setBuyDate,
   setContent,
+  setEnd,
   setImages,
   setInit,
-  setPay,
+  setPricePerDay,
+  setStart,
   setTitle,
 } from '../../context/reducer/sharingEditReducer';
 import { uploadImages } from '../../api/image';
@@ -23,10 +29,12 @@ import { createSharingPost } from '../../api/sharing';
 export default function SharingPostEdit() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
   const images = useAppSelector((state) => state.sharingEdit.images);
   const title = useAppSelector((state) => state.sharingEdit.title);
-  const buyDate = useAppSelector((state) => state.sharingEdit.buyDate);
-  const pay = useAppSelector((state) => state.sharingEdit.pay);
+  const start = useAppSelector((state) => state.sharingEdit.start);
+  const end = useAppSelector((state) => state.sharingEdit.end);
+  const pricePerDay = useAppSelector((state) => state.sharingEdit.pricePerDay);
   const location = useAppSelector((state) => state.sharingEdit.location);
   const content = useAppSelector((state) => state.sharingEdit.content);
 
@@ -36,23 +44,24 @@ export default function SharingPostEdit() {
       content.length > 0 &&
       images.length > 0 &&
       location &&
-      buyDate.length > 0 &&
-      pay > 0
+      start &&
+      end &&
+      pricePerDay > 0
     ) {
       const res = await uploadImages({
         images,
-        type: 'BUY_TOGETHER',
+        type: 'LEND',
       });
       const imageNameList = res.data.detail;
       await createSharingPost({
         title,
         content,
         images: imageNameList,
-        buyDate,
-        pay,
-        buyPlaceDetail: location.address,
-        buyPlaceLat: location.lat,
-        buyPlaceLng: location.lng,
+        start,
+        end,
+        pricePerDay,
+        lat: location.lat,
+        lng: location.lng,
       });
       alert('작성에 성공했습니다.');
       dispatch(setInit());
@@ -90,15 +99,40 @@ export default function SharingPostEdit() {
             value={title}
             onChange={(e) => dispatch(setTitle(e.target.value))}
           ></Input>
-          <Input
-            placeholder="대여 기간"
-            value={buyDate}
-            onChange={(e) => dispatch(setBuyDate(e.target.value))}
-          ></Input>
+          <DateBox>
+            대여 기간
+            <DateSelectBox>
+              <Temp>
+                <CalendarImg>
+                  <CalendarTodayIcon sx={{ fontSize: '14px' }} />
+                </CalendarImg>
+                <StyledDatePicker
+                  locale={ko}
+                  dateFormat="yyyy.MM.dd"
+                  selected={start}
+                  closeOnScroll={true}
+                  onChange={(date: Date) => dispatch(setStart(date))}
+                />
+              </Temp>
+              <RemoveIcon sx={{ margin: '0 5px' }} />
+              <Temp>
+                <CalendarImg>
+                  <CalendarTodayIcon sx={{ fontSize: '14px' }} />
+                </CalendarImg>
+                <StyledDatePicker
+                  locale={ko}
+                  dateFormat="yyyy.MM.dd"
+                  selected={end}
+                  closeOnScroll={true}
+                  onChange={(date: Date) => dispatch(setEnd(date))}
+                />
+              </Temp>
+            </DateSelectBox>
+          </DateBox>
           <Input
             placeholder="일일 대여 금액"
-            value={pay}
-            onChange={(e) => dispatch(setPay(e.target.value))}
+            value={pricePerDay}
+            onChange={(e) => dispatch(setPricePerDay(e.target.value))}
             type="number"
             pattern="^[0-9]*"
           ></Input>
@@ -167,6 +201,54 @@ const Input = styled.input`
   &::placeholder {
     color: #d1d3d7;
   }
+`;
+
+const DateBox = styled.div`
+  display: flex;
+  width: 100%;
+  height: 50px;
+  border: 0;
+  outline: none;
+  font-size: 15px;
+  align-items: center;
+  box-sizing: border-box;
+  justify-content: space-between;
+`;
+
+const DateSelectBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const Temp = styled.div`
+  position: relative;
+  display: flex;
+`;
+
+const CalendarImg = styled.div`
+  position: absolute;
+  top: 7px;
+  left: 6px;
+  z-index: 1;
+`;
+
+const StyledDatePicker = styled(DatePicker)`
+  width: 110px;
+  height: 30px;
+  border: none;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 100%;
+  padding: 20px;
+  background-color: #e9e9e9;
+  color: #707070;
+  border-radius: 5px;
+  box-sizing: border-box;
+  text-align: right;
+  padding-right: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 `;
 
 const PlacePositionBox = styled.div`

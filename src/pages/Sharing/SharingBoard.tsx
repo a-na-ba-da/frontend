@@ -64,8 +64,9 @@ export default function SharingBoard() {
               id={post.id}
               title={post.title}
               thumbnail={post.images.length > 0 && post.images[0]}
-              date={post.createdAt}
-              price={post.pay}
+              start={post.start}
+              end={post.end}
+              pricePerDay={post.pricePerDay}
               commentCount={post.commentCount}
             />
           ))}

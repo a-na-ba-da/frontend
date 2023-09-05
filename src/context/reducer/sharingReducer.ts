@@ -12,7 +12,7 @@ export const fetchSharingPostList = createAsyncThunk(
 
 interface sharingState {
   scroll: number;
-  data: buyingPostType[];
+  data: sharingPostType[];
   loading: boolean;
   error: string | undefined | null;
 }

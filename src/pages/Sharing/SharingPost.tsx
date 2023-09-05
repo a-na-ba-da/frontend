@@ -12,17 +12,17 @@ import PostImgSlider from '../../components/Post/PostImgSlider';
 
 export default function SharingPost() {
   const { id } = useParams();
-  const [sharngPost, setSharingPost] = useState<buyingPostType>();
+  const [sharngPost, setSharingPost] = useState<sharingPostType>();
   const [address, setAddress] = useState<string>('');
 
   useEffect(() => {
     getSharingPost(id).then((res) => {
       setSharingPost(res.data.detail);
-      if (res.data.detail.buyPlaceLat && res.data.detail.buyPlaceLng) {
+      if (res.data.detail.lat && res.data.detail.lng) {
         const geocoder = new kakao.maps.services.Geocoder();
         geocoder.coord2Address(
-          res.data.detail.buyPlaceLng,
-          res.data.detail.buyPlaceLat,
+          res.data.detail.lng,
+          res.data.detail.lat,
           (result: { [key: string]: any }, status: any) => {
             if (status === kakao.maps.services.Status.OK) {
               setAddress(result[0].address?.address_name);
@@ -47,15 +47,19 @@ export default function SharingPost() {
           <DateBox>
             {moment(sharngPost?.createdAt).format('YYYY.MM.DD hh:mm')}
           </DateBox>
-          <DescriptionBox>대여 기간 | {sharngPost?.buyDate}</DescriptionBox>
+          <DescriptionBox>
+            대여 기간 | {sharngPost?.start} ~ {sharngPost?.end}
+          </DescriptionBox>
           <DescriptionBox>대여 위치 | {address}</DescriptionBox>
           <DescriptionBox>
             일일 대여 금액 |{' '}
-            <PriceText>{sharngPost?.pay?.toLocaleString('en')}원</PriceText>
+            <PriceText>
+              {sharngPost?.pricePerDay?.toLocaleString('en')}원
+            </PriceText>
           </DescriptionBox>
           <MainTextBox>{sharngPost?.content}</MainTextBox>
         </ContentSection>
-        <PostComment postType="buy-together" postId={sharngPost?.id} />
+        <PostComment postType="lend" postId={sharngPost?.id} />
       </Main>
     </PostLayout>
   );
