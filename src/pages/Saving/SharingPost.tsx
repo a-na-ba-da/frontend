@@ -35,7 +35,7 @@ export default function SharingPost() {
 
   return (
     <PostLayout>
-      <PostBack color="white" whatShape="back" />
+      <PostBack color="white" shape="back" />
       <PostImgSlider images={sharngPost?.images} />
       <Main>
         {/* props.children으로 전달된 Button 컴포넌트를 헤더 내부에서 배치 */}
