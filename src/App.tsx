@@ -129,11 +129,26 @@ export default function App() {
             path="/trading/:id/request/confirm"
             element={<PrivateRoute component={<TradingRequestConfirm />} />}
           />
-          <Route path="/mypage" element={<PrivateRoute component={<MyPage />} />}
-          <Route path="/mypage/saving" element={<PrivateRoute component={<MySavingActivity />} />}
-          <Route path="/mypage/sharing" element={<PrivateRoute component={<MySharingActivity />} />}
-          <Route path="/mypage/trading" element={<PrivateRoute component={<MyTradingActivity />} />}
-          <Route path="/mypage/recycling" element={<PrivateRoute component={<MyRecyclingActivity />} />}
+          <Route
+            path="/mypage"
+            element={<PrivateRoute component={<MyPage />} />}
+          />
+          <Route
+            path="/mypage/saving"
+            element={<PrivateRoute component={<MySavingActivity />} />}
+          />
+          <Route
+            path="/mypage/sharing"
+            element={<PrivateRoute component={<MySharingActivity />} />}
+          />
+          <Route
+            path="/mypage/trading"
+            element={<PrivateRoute component={<MyTradingActivity />} />}
+          />
+          <Route
+            path="/mypage/recycling"
+            element={<PrivateRoute component={<MyRecyclingActivity />} />}
+          />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
