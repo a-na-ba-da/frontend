@@ -100,7 +100,9 @@ const ItemHeaderBox = styled.div`
   margin-bottom: 5px;
 `;
 
-const InterlocutorBox = styled.div``;
+const InterlocutorBox = styled.div`
+  font-weight: bold;
+`;
 
 const LastMessageAtBox = styled.div`
   font-size: 13px;

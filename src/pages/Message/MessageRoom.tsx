@@ -199,6 +199,7 @@ const ItemHeaderBox = styled.div`
 
 const SentWhoBox = styled.div<{ color: string }>`
   color: ${(state) => state.color};
+  font-weight: bold;
 `;
 
 const SentAtBox = styled.div`
