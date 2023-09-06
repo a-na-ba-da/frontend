@@ -39,6 +39,7 @@ export default function SharingPostEdit() {
   const content = useAppSelector((state) => state.sharingEdit.content);
 
   const handleConfirmClick = async () => {
+    const numberPay = parseInt(pricePerDay, 10);
     if (
       title.length > 0 &&
       content.length > 0 &&
@@ -46,7 +47,7 @@ export default function SharingPostEdit() {
       location &&
       start &&
       end &&
-      pricePerDay > 0
+      pricePerDay.length > 0
     ) {
       const res = await uploadImages({
         images,
@@ -59,7 +60,7 @@ export default function SharingPostEdit() {
         images: imageNameList,
         start,
         end,
-        pricePerDay,
+        pricePerDay: numberPay,
         lat: location.lat,
         lng: location.lng,
       });
@@ -78,6 +79,19 @@ export default function SharingPostEdit() {
     navigate('/sharing/place', {
       state: { whatPage: 'sharing' },
     });
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const input = e.target;
+    const value = input.value.replace(/[^0-9]/g, ''); // 숫자 이외의 문자 제거
+    let formattedValue;
+
+    if (value === '') {
+      formattedValue = '';
+    } else {
+      formattedValue = parseInt(value, 10).toLocaleString(); // 콤마 추가
+    }
+    dispatch(setPricePerDay(formattedValue));
   };
 
   return (
@@ -132,9 +146,7 @@ export default function SharingPostEdit() {
           <Input
             placeholder="일일 대여 금액"
             value={pricePerDay}
-            onChange={(e) => dispatch(setPricePerDay(e.target.value))}
-            type="number"
-            pattern="^[0-9]*"
+            onChange={handleInputChange}
           ></Input>
           <PlacePositionBox>
             {location ? <PlaceText>{location.address}</PlaceText> : '대여 위치'}

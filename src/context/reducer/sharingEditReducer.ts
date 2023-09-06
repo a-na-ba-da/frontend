@@ -7,7 +7,7 @@ interface sharingEditState {
   start: Date;
   end: Date;
   images: ImageListType;
-  pricePerDay: number;
+  pricePerDay: string;
   location?: {
     address: string;
     lat: number;
@@ -21,7 +21,7 @@ const initialState: sharingEditState = {
   start: new Date(),
   end: new Date(),
   images: [],
-  pricePerDay: 0,
+  pricePerDay: '',
   location: undefined,
 };
 

@@ -29,7 +29,6 @@ import {
   setPay,
   setProductUrl,
   setTitle,
-  setBuyPlaceDetail,
 } from '../../context/reducer/buyingEditReducer';
 import { uploadImages } from '../../api/image';
 import { createMeetBuyingPost, createParcelBuyingPost } from '../../api/saving';
@@ -46,22 +45,17 @@ export default function BuyingPostEdit() {
     (state) => state.buyingEdit.deliveryMethod,
   );
   const productUrl = useAppSelector((state) => state.buyingEdit.productUrl);
-  const buyPlaceDetail = useAppSelector(
-    (state) => state.buyingEdit.buyPlaceDetail,
-  );
   const location = useAppSelector((state) => state.buyingEdit.location);
   const content = useAppSelector((state) => state.buyingEdit.content);
 
-  // 만약 URL이 "http://" 또는 "https://"로 시작하지 않으면 앞에 붙여줌
-  function addHttpIfNeeded(url: string) {
-    if (!url.startsWith('http://') && !url.startsWith('https://')) {
-      url = 'http://' + url;
-    }
-    return url;
-  }
-
   const handleConfirmClick = async () => {
-    if (title.length > 0 && content.length > 0 && images.length > 0) {
+    if (
+      title.length > 0 &&
+      content.length > 0 &&
+      images.length > 0 &&
+      pay.length > 0
+    ) {
+      const numberPay = parseInt(pay, 10);
       if (buyingMethod === 'online' && productUrl) {
         const res = await uploadImages({
           images,
@@ -73,9 +67,9 @@ export default function BuyingPostEdit() {
             title,
             content,
             images: imageNameList,
-            productUrl: addHttpIfNeeded(productUrl),
+            productUrl,
             buyDate,
-            pay,
+            pay: numberPay,
           });
           alert('작성에 성공했습니다.');
           dispatch(setInit());
@@ -86,8 +80,8 @@ export default function BuyingPostEdit() {
             content,
             images: imageNameList,
             buyDate,
-            pay,
-            productUrl: addHttpIfNeeded(productUrl),
+            pay: numberPay,
+            productUrl,
             deliveryPlaceLat: location.lat,
             deliveryPlaceLng: location.lng,
           });
@@ -95,39 +89,23 @@ export default function BuyingPostEdit() {
           dispatch(setInit());
           navigate(-1);
         } else alert('내용을 작성해주세요.');
-      } else if (buyingMethod === 'offline' && buyPlaceDetail) {
+      } else if (buyingMethod === 'offline' && location) {
         const res = await uploadImages({
           images,
           type: 'BUY_TOGETHER',
         });
         const imageNameList = res.data.detail;
-        if (deliveryMethod === 'online') {
-          await createParcelBuyingPost({
-            title,
-            content,
-            images: imageNameList,
-            buyPlaceDetail,
-            buyDate,
-            pay,
-          });
-          alert('작성에 성공했습니다.');
-          dispatch(setInit());
-          navigate(-1);
-        } else if (deliveryMethod === 'offline' && location) {
-          await createMeetBuyingPost({
-            title,
-            content,
-            images: imageNameList,
-            buyDate,
-            pay,
-            buyPlaceDetail: buyPlaceDetail,
-            deliveryPlaceLat: location.lat,
-            deliveryPlaceLng: location.lng,
-          });
-          alert('작성에 성공했습니다.');
-          dispatch(setInit());
-          navigate(-1);
-        } else alert('내용을 작성해주세요.');
+        await createMeetBuyingPost({
+          title,
+          content,
+          images: imageNameList,
+          buyDate,
+          pay: numberPay,
+          buyPlaceDetail: location.address,
+          deliveryPlaceLat: location.lat,
+          deliveryPlaceLng: location.lng,
+        });
+        alert('작성에 성공했습니다.');
         dispatch(setInit());
         navigate(-1);
       } else alert('내용을 작성해주세요.');
@@ -148,7 +126,7 @@ export default function BuyingPostEdit() {
   const SelctedPlace = () => {
     return (
       <PlacePositionBox>
-        {location ? <PlaceText>{location.address}</PlaceText> : '만날 장소'}
+        {location ? <PlaceText>{location.address}</PlaceText> : '장소'}
         <Button
           content="위치 선택"
           textColor="black"
@@ -160,30 +138,55 @@ export default function BuyingPostEdit() {
     );
   };
 
-  const generateBuyingMethodElement = () => {
+  const generateCheckBox = () => {
     if (buyingMethod === 'offline') {
-      return (
-        <Input
-          placeholder="상품 구매 장소"
-          value={buyPlaceDetail}
-          onChange={(e) => dispatch(setBuyPlaceDetail(e.target.value))}
-        ></Input>
-      );
+      return <SelctedPlace />;
     } else if (buyingMethod === 'online') {
       return (
-        <Input
-          placeholder="상품 URL"
-          value={productUrl}
-          onChange={(e) => dispatch(setProductUrl(e.target.value))}
-        ></Input>
+        <>
+          <Input
+            placeholder="상품 URL"
+            value={productUrl}
+            onChange={(e) => dispatch(setProductUrl(e.target.value))}
+          ></Input>
+          <CheckBox>
+            <div>전달 방법</div>
+            <FormControl>
+              <RadioGroup
+                row
+                value={deliveryMethod}
+                onChange={(e) => dispatch(setDeliveryMethod(e.target.value))}
+              >
+                <FormControlLabel
+                  value="offline"
+                  control={<Radio />}
+                  label="대면"
+                />
+                <FormControlLabel
+                  value="online"
+                  control={<Radio />}
+                  label="비대면"
+                />
+              </RadioGroup>
+            </FormControl>
+          </CheckBox>
+          {deliveryMethod === 'offline' ? <SelctedPlace /> : null}
+        </>
       );
     }
   };
 
-  const generateDeliveryMethodElement = () => {
-    if (deliveryMethod === 'offline') {
-      return <SelctedPlace />;
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const input = e.target;
+    const value = input.value.replace(/[^0-9]/g, ''); // 숫자 이외의 문자 제거
+    let formattedValue;
+
+    if (value === '') {
+      formattedValue = '';
+    } else {
+      formattedValue = parseInt(value, 10).toLocaleString(); // 콤마 추가
     }
+    dispatch(setPay(formattedValue));
   };
 
   return (
@@ -223,8 +226,7 @@ export default function BuyingPostEdit() {
           <Input
             placeholder="상대방이 지불해야하는 돈"
             value={pay}
-            onChange={(e) => dispatch(setPay(e.target.value))}
-            type="number"
+            onChange={handleInputChange}
             pattern="^[0-9]*"
           ></Input>
           <CheckBox>
@@ -248,29 +250,7 @@ export default function BuyingPostEdit() {
               </RadioGroup>
             </FormControl>
           </CheckBox>
-          {generateBuyingMethodElement()}
-          <CheckBox>
-            <div>전달 방법</div>
-            <FormControl>
-              <RadioGroup
-                row
-                value={deliveryMethod}
-                onChange={(e) => dispatch(setDeliveryMethod(e.target.value))}
-              >
-                <FormControlLabel
-                  value="offline"
-                  control={<Radio />}
-                  label="대면"
-                />
-                <FormControlLabel
-                  value="online"
-                  control={<Radio />}
-                  label="비대면"
-                />
-              </RadioGroup>
-            </FormControl>
-          </CheckBox>
-          {generateDeliveryMethodElement()}
+          {generateCheckBox()}
           <TextArea
             placeholder="다른 사람과 같이 구매하고 싶은 상품에 대해&#13;설명해주세요 :)"
             value={content}
