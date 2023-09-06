@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import AccountCircleTwoTOutlined from '@mui/icons-material/AccountCircleOutlined';
 import HandshakeOutlinedIcon from '@mui/icons-material/HandshakeOutlined';
@@ -12,12 +13,17 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { fetchMyActivity } from '../../context/reducer/mypageReducer';
 
 export default function MyPage() {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const myActivity = useAppSelector((state) => state.mypage.data);
 
   useEffect(() => {
     dispatch(fetchMyActivity());
   }, []);
+
+  const handleSavingActivityClick = () => {
+    navigate('/mypage/saving');
+  };
 
   return (
     <MyPageLayout>
@@ -37,7 +43,9 @@ export default function MyPage() {
                 }}
               />
             </MyActivityListItemIcon>
-            <MyActivityListItemText>아껴쓰기</MyActivityListItemText>
+            <MyActivityListItemText onClick={handleSavingActivityClick}>
+              아껴쓰기
+            </MyActivityListItemText>
           </MyActivityListItem>
           <MyActivityListItem>
             <MyActivityListItemIcon>

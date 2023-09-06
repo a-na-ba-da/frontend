@@ -10,7 +10,7 @@ export const fetchMyActivity = createAsyncThunk(
   },
 );
 
-interface myActivitydataState {
+interface myActivityData {
   saves: Array<object>;
   recycles: Array<object>;
   changes: Array<object>;
@@ -18,13 +18,13 @@ interface myActivitydataState {
 }
 
 interface myActivityState {
-  data: Array<myActivitydataState>;
+  data: myActivityData;
   loading: boolean;
   error: string | undefined | null;
 }
 
 const initialState: myActivityState = {
-  data: [],
+  data: { saves: [], recycles: [], changes: [], lends: [] },
   loading: false,
   error: null,
 };
