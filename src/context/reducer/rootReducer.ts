@@ -11,6 +11,8 @@ import nicknameReducer from './nicknameReducer';
 import messageReducer from './messageReducer';
 import recyclingReducer from './recyclingReducer';
 import recyclingEditReducer from './recyclingEditReducer';
+import sharingReducer from './sharingReducer';
+import sharingEditReducer from './sharingEditReducer';
 
 const rootReducer = combineReducers({
   menu: menuReducer,
@@ -24,6 +26,8 @@ const rootReducer = combineReducers({
   message: messageReducer,
   recycling: recyclingReducer,
   recyclingEdit: recyclingEditReducer,
+  sharing: sharingReducer,
+  sharingEdit: sharingEditReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

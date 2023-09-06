@@ -5,6 +5,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import { fetchBuyingPostList } from '../context/reducer/buyingReducer';
 import { fetchKnowingPostList } from '../context/reducer/knowingReducer';
+import { fetchSharingPostList } from '../context/reducer/sharingReducer';
 import { fetchgetRecyclingPostList } from '../context/reducer/recyclingReducer';
 
 export default function Search() {
@@ -25,6 +26,9 @@ export default function Search() {
           case 'knowing':
             dispatch(fetchKnowingPostList());
             break;
+          case 'sharing':
+            dispatch(fetchSharingPostList());
+            break;
           case 'recycling':
             dispatch(fetchgetRecyclingPostList());
             break;
@@ -36,6 +40,9 @@ export default function Search() {
             break;
           case 'knowing':
             dispatch(fetchKnowingPostList(keyword));
+            break;
+          case 'sharing':
+            dispatch(fetchSharingPostList(keyword));
             break;
           case 'recycling':
             dispatch(fetchgetRecyclingPostList(keyword));

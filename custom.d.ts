@@ -92,3 +92,20 @@ interface recyclingPostType {
   writer: writerType;
   commentCount: number;
 }
+
+// 나눠쓰기 게시글 타입
+interface sharingPostType {
+  id: number;
+  title: string;
+  content: string;
+  createdAt: string;
+  modifiedAt: string;
+  images: string[];
+  writer: writerType;
+  start: string;
+  end: string;
+  lat: number;
+  lng: number;
+  pricePerDay: number;
+  commentCount: number;
+}
