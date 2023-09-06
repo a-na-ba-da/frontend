@@ -21,6 +21,11 @@ import MessageRoom from './pages/Message/MessageRoom';
 import SharingBoard from './pages/Sharing/SharingBoard';
 import SharingPost from './pages/Sharing/SharingPost';
 import SharingPostEdit from './pages/Sharing/SharingPostEdit';
+import TradingBoard from './pages/Trading/TradingBoard';
+import TradingPost from './pages/Trading/TradingPost';
+import TradingRequest from './pages/Trading/TradingRequest';
+import TradingRequestAddProdcut from './pages/Trading/TradingRequestAddProduct';
+import TradingRequestConfirm from './pages/Trading/TradingRequestConfirm';
 
 export default function App() {
   return (
@@ -103,6 +108,22 @@ export default function App() {
           <Route
             path="/sharing/place"
             element={<PrivateRoute component={<SelectPlace />} />}
+          />
+          <Route
+            path="/trading"
+            element={<PrivateRoute component={<TradingBoard />} />}
+          />
+          <Route
+            path="/trading/:id/request"
+            element={<PrivateRoute component={<TradingRequest />} />}
+          />
+          <Route
+            path="/trading/:id/request/add"
+            element={<PrivateRoute component={<TradingRequestAddProdcut />} />}
+          />
+          <Route
+            path="/trading/:id/request/confirm"
+            element={<PrivateRoute component={<TradingRequestConfirm />} />}
           />
         </Routes>
       </BrowserRouter>

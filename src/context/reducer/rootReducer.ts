@@ -13,6 +13,7 @@ import recyclingReducer from './recyclingReducer';
 import recyclingEditReducer from './recyclingEditReducer';
 import sharingReducer from './sharingReducer';
 import sharingEditReducer from './sharingEditReducer';
+import tradingReducer from './tradingReducer';
 
 const rootReducer = combineReducers({
   menu: menuReducer,
@@ -28,6 +29,7 @@ const rootReducer = combineReducers({
   recyclingEdit: recyclingEditReducer,
   sharing: sharingReducer,
   sharingEdit: sharingEditReducer,
+  trading: tradingReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

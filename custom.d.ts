@@ -109,3 +109,15 @@ interface sharingPostType {
   pricePerDay: number;
   commentCount: number;
 }
+
+// 바꿔쓰기 게시글 타입
+interface tradingPostType {
+  id: number;
+  name: string;
+  content: string;
+  productUrl: string | null;
+  pay: number;
+  createdAt: string;
+  modifiedAt: string;
+  images: string[];
+}
