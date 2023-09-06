@@ -11,7 +11,12 @@ export const handleMsgSendClick = async (
   dispatch: any,
   navigate: any,
   postType: string,
-  post: undefined | buyingPostType | knowingPostType,
+  post:
+    | undefined
+    | buyingPostType
+    | knowingPostType
+    | sharingPostType
+    | recyclingPostType,
 ) => {
   if (post) {
     const messageRoomId = await getRoomIdByPostInfo(postType, post.id);

@@ -53,7 +53,7 @@ export default function RecyclingBoard() {
       <HeaderSection>
         <Header title="다시쓰기">
           <HeaderRight>
-            <MessageOutlinedIcon />
+            <MessageOutlinedIcon onClick={() => navigate('/message')} />
           </HeaderRight>
         </Header>
         <Search />

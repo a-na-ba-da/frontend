@@ -53,7 +53,7 @@ export default function SharingBoard() {
       <HeaderSection>
         <Header title="나눠쓰기">
           <HeaderRight>
-            <MessageOutlinedIcon />
+            <MessageOutlinedIcon onClick={() => navigate('/message')} />
           </HeaderRight>
         </Header>
         <Search />

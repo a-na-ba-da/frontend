@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import moment from 'moment';
 
 import PostBack from '../../components/Post/PostBack';
@@ -9,9 +9,13 @@ import PostComment from '../../components/Post/PostComment';
 import PostHeader from '../../components/Post/PostHeader';
 import { getRecyclingPost } from '../../api/recycling';
 import PostImgSlider from '../../components/Post/PostImgSlider';
+import { handleMsgSendClick } from '../../utils/messageUtils';
+import { useAppDispatch } from '../../hooks/redux';
 
 export default function RecyclingPost() {
   const { id } = useParams();
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const [recyclingPost, setRecyclingPost] = useState<recyclingPostType>();
 
   useEffect(() => {
@@ -27,7 +31,12 @@ export default function RecyclingPost() {
       <Main>
         {/* props.children으로 전달된 Button 컴포넌트를 헤더 내부에서 배치 */}
         <PostHeader userName={recyclingPost?.writer?.nickname}>
-          <Button content="쪽지 보내기" />
+          <Button
+            content="쪽지 보내기"
+            onClick={() =>
+              handleMsgSendClick(dispatch, navigate, 'RECYCLE', recyclingPost)
+            }
+          />
         </PostHeader>
         <ContentSection>
           <TitleBox>{recyclingPost?.title}</TitleBox>

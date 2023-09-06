@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import moment from 'moment';
 
 import PostBack from '../../components/Post/PostBack';
@@ -9,9 +9,13 @@ import PostComment from '../../components/Post/PostComment';
 import PostHeader from '../../components/Post/PostHeader';
 import { getSharingPost } from '../../api/sharing';
 import PostImgSlider from '../../components/Post/PostImgSlider';
+import { handleMsgSendClick } from '../../utils/messageUtils';
+import { useAppDispatch } from '../../hooks/redux';
 
 export default function SharingPost() {
   const { id } = useParams();
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const [sharngPost, setSharingPost] = useState<sharingPostType>();
   const [address, setAddress] = useState<string>('');
 
@@ -40,7 +44,12 @@ export default function SharingPost() {
       <Main>
         {/* props.children으로 전달된 Button 컴포넌트를 헤더 내부에서 배치 */}
         <PostHeader userName={sharngPost?.writer?.nickname}>
-          <Button content="쪽지 보내기" />
+          <Button
+            content="쪽지 보내기"
+            onClick={() =>
+              handleMsgSendClick(dispatch, navigate, 'LEND', sharngPost)
+            }
+          />
         </PostHeader>
         <ContentSection>
           <TitleBox>{sharngPost?.title}</TitleBox>
