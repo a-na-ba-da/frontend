@@ -5,6 +5,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import { fetchBuyingPostList } from '../context/reducer/buyingReducer';
 import { fetchKnowingPostList } from '../context/reducer/knowingReducer';
+import { fetchSharingPostList } from '../context/reducer/sharingReducer';
 
 export default function Search() {
   const dispatch = useAppDispatch();
@@ -24,6 +25,9 @@ export default function Search() {
           case 'knowing':
             dispatch(fetchKnowingPostList());
             break;
+          case 'sharing':
+            dispatch(fetchSharingPostList());
+            break;
         }
       } else if (keyword.length > 1) {
         switch (menuType) {
@@ -32,6 +36,9 @@ export default function Search() {
             break;
           case 'knowing':
             dispatch(fetchKnowingPostList(keyword));
+            break;
+          case 'sharing':
+            dispatch(fetchSharingPostList(keyword));
             break;
         }
       } else alert('2자 이상부터 검색 가능합니다.');

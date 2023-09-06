@@ -12,6 +12,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { setScroll } from '../../context/reducer/sharingReducer';
 import { fetchSharingPostList } from '../../context/reducer/sharingReducer';
 import ContentSharingItem from '../../components/Content/ContentSharingItem';
+import { setMenuType } from '../../context/reducer/menuReducer';
 
 export default function SharingBoard() {
   const dispatch = useAppDispatch();
@@ -25,6 +26,7 @@ export default function SharingBoard() {
   };
 
   useEffect(() => {
+    dispatch(setMenuType('sharing'));
     dispatch(fetchSharingPostList());
     window.addEventListener('scroll', handle);
     return () => {
