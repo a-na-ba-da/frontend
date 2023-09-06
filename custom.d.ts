@@ -26,6 +26,7 @@ interface buyingPostType {
   title: string;
   content: string;
   productUrl: string | null;
+  buyPlaceDetail: string | null;
   buyPlaceLat: number | null;
   buyPlaceLng: number | null;
   buyDate: string;

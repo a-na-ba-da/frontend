@@ -1,4 +1,5 @@
 import axios from './defaultClient';
+import moment from 'moment';
 
 export const getBuyingPostList = (keyword?: string) => {
   return axios.get('/saving/buy-together', {
@@ -126,7 +127,7 @@ interface createParcelBuyingPostProps {
   title: string;
   content: string;
   images: string[];
-  productUrl: string;
+  productUrl?: string;
   buyPlaceDetail?: string;
   buyDate: Date;
   pay: number;
@@ -149,7 +150,7 @@ export const createParcelBuyingPost = ({
       images,
       productUrl,
       buyPlaceDetail,
-      buyDate,
+      buyDate: moment(buyDate).format('YYYY-MM-DD'),
       pay,
     },
     {
@@ -168,8 +169,8 @@ interface createMeetBuyingPostProps {
   buyPlaceDetail?: string;
   buyDate: Date;
   pay: number;
-  buyPlaceLat: number;
-  buyPlaceLng: number;
+  deliveryPlaceLat: number;
+  deliveryPlaceLng: number;
 }
 
 export const createMeetBuyingPost = ({
@@ -180,8 +181,8 @@ export const createMeetBuyingPost = ({
   buyPlaceDetail,
   buyDate,
   pay,
-  buyPlaceLat,
-  buyPlaceLng,
+  deliveryPlaceLat,
+  deliveryPlaceLng,
 }: createMeetBuyingPostProps) => {
   return axios.post(
     '/saving/buy-together/meet-delivery',
@@ -191,10 +192,10 @@ export const createMeetBuyingPost = ({
       images,
       productUrl,
       buyPlaceDetail,
-      buyDate,
+      buyDate: moment(buyDate).format('YYYY-MM-DD'),
       pay,
-      buyPlaceLat,
-      buyPlaceLng,
+      deliveryPlaceLat,
+      deliveryPlaceLng,
     },
     {
       headers: {
