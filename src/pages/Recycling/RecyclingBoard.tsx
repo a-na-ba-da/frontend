@@ -12,6 +12,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { setScroll } from '../../context/reducer/recyclingReducer';
 import { fetchgetRecyclingPostList } from '../../context/reducer/recyclingReducer';
 import ContentRecyclingItem from '../../components/Content/ContentRecyclingItem';
+import { setMenuType } from '../../context/reducer/menuReducer';
 
 export default function RecyclingBoard() {
   const dispatch = useAppDispatch();
@@ -25,6 +26,7 @@ export default function RecyclingBoard() {
   };
 
   useEffect(() => {
+    dispatch(setMenuType('recycling'));
     dispatch(fetchgetRecyclingPostList());
     window.addEventListener('scroll', handle);
     return () => {
