@@ -10,7 +10,7 @@ export default function TradingRequestAddProdcut() {
     <>
       <Top>
         <PostBackBox>
-          <PostBack color="#8f00ff" whatShape="back" />
+          <PostBack color="#8f00ff" shape="back" />
         </PostBackBox>
         <Title>상품 추가</Title>
       </Top>

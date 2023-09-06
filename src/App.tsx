@@ -22,7 +22,6 @@ import SharingBoard from './pages/Sharing/SharingBoard';
 import SharingPost from './pages/Sharing/SharingPost';
 import SharingPostEdit from './pages/Sharing/SharingPostEdit';
 import TradingBoard from './pages/Trading/TradingBoard';
-import TradingPost from './pages/Trading/TradingPost';
 import TradingRequest from './pages/Trading/TradingRequest';
 import TradingRequestAddProdcut from './pages/Trading/TradingRequestAddProduct';
 import TradingRequestConfirm from './pages/Trading/TradingRequestConfirm';

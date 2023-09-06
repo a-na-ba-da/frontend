@@ -9,7 +9,7 @@ export default function TradingRequestConfirm() {
     <>
       <Top>
         <PostBackBox>
-          <PostBack color="black" whatShape="back" />
+          <PostBack color="black" shape="back" />
         </PostBackBox>
         <Title>바꾸기 확인</Title>
       </Top>

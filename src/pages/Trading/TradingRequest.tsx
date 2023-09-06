@@ -13,7 +13,7 @@ export default function TradingRequest() {
     <>
       <Top>
         <PostBackBox>
-          <PostBack color="black" whatShape="back" />
+          <PostBack color="black" shape="back" />
         </PostBackBox>
         <Title>바꾸기 신청</Title>
       </Top>
