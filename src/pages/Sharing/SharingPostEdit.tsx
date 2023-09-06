@@ -39,7 +39,7 @@ export default function SharingPostEdit() {
   const content = useAppSelector((state) => state.sharingEdit.content);
 
   const handleConfirmClick = async () => {
-    const numberPay = parseInt(pricePerDay, 10);
+    const numberPay = parseInt(pricePerDay.replace(/,/g, ''));
     if (
       title.length > 0 &&
       content.length > 0 &&
