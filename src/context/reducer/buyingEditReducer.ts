@@ -9,6 +9,7 @@ interface buyingEditState {
   buyDate: Date;
   pay: number;
   productUrl?: string;
+  buyPlaceDetail: string;
   location?: {
     address: string;
     lat: number;
@@ -26,6 +27,7 @@ const initialState: buyingEditState = {
   pay: 0,
   content: '',
   productUrl: undefined,
+  buyPlaceDetail: '',
   location: undefined,
 };
 
@@ -40,8 +42,10 @@ const buyingEditSlice = createSlice({
       if (action.payload === 'offline') {
         state.productUrl = undefined;
         state.deliveryMethod = '';
+        state.buyPlaceDetail = '';
         state.location = undefined;
       } else {
+        state.buyPlaceDetail = '';
         state.location = undefined;
       }
       state.buyingMethod = action.payload;
@@ -61,6 +65,9 @@ const buyingEditSlice = createSlice({
     },
     setProductUrl: (state, action) => {
       state.productUrl = action.payload;
+    },
+    setBuyPlaceDetail: (state, action) => {
+      state.buyPlaceDetail = action.payload;
     },
     setLocation: (state, action) => {
       state.location = { ...state.location, ...action.payload };
@@ -82,6 +89,7 @@ export const {
   setBuyingMethod,
   setDeliveryMethod,
   setProductUrl,
+  setBuyPlaceDetail,
   setLocation,
   setContent,
   setInit,

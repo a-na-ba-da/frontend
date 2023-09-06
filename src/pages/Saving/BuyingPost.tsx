@@ -22,11 +22,14 @@ export default function BuyingPost() {
   useEffect(() => {
     getBuyingPost(id).then((res) => {
       setBuyingPost(res.data.detail);
-      if (res.data.detail.buyPlaceLat && res.data.detail.buyPlaceLng) {
+      if (
+        res.data.detail.deliveryPlaceLat &&
+        res.data.detail.deliveryPlaceLng
+      ) {
         const geocoder = new kakao.maps.services.Geocoder();
         geocoder.coord2Address(
-          res.data.detail.buyPlaceLng,
-          res.data.detail.buyPlaceLat,
+          res.data.detail.deliveryPlaceLng,
+          res.data.detail.deliveryPlaceLat,
           (result: { [key: string]: any }, status: any) => {
             if (status === kakao.maps.services.Status.OK) {
               setAddress(result[0].address?.address_name);
@@ -68,13 +71,15 @@ export default function BuyingPost() {
             구매 방식 |{' '}
             {buyingPost?.productUrl === null ? '오프라인 · ' : `온라인 · `}
             {buyingPost?.productUrl === null ? (
-              address
+              buyingPost.buyPlaceDetail
             ) : (
               <span onClick={handleClick}>접속링크</span>
             )}
           </DescriptionBox>
           <DescriptionBox>
-            전달 방법 | {buyingPost?.parcelDelivery ? '택배전달' : '직접전달'}
+            전달 방법 |{' '}
+            {buyingPost?.parcelDelivery ? '택배전달' : '직접전달 · '}
+            {buyingPost?.parcelDelivery ? null : address}
           </DescriptionBox>
           <DescriptionBox>
             내가 내야할 금액 |{' '}

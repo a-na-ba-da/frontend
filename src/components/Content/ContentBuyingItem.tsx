@@ -43,7 +43,7 @@ export default function ContentBuyingItem({
         <TitleText>{title}</TitleText>
         <S.DateText>
           {moment(date).format('YYYY.MM.DD hh:mm')} |
-          {isOnline ? ' 비대면' : ' 대면'}
+          {isOnline ? ' 택배전달' : ' 대면전달'}
         </S.DateText>
         <PriceText>{price?.toLocaleString('en')}원</PriceText>
         <S.ChatBox>
