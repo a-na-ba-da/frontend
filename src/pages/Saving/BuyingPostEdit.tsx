@@ -1,6 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { ko } from 'date-fns/esm/locale';
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import {
   FormControl,
   FormControlLabel,
@@ -185,11 +189,21 @@ export default function BuyingPostEdit() {
             value={title}
             onChange={(e) => dispatch(setTitle(e.target.value))}
           ></Input>
-          <Input
-            placeholder="공구 날짜"
-            value={buyDate}
-            onChange={(e) => dispatch(setBuyDate(e.target.value))}
-          ></Input>
+          <DateBox>
+            공구 날짜
+            <DateInputBox>
+              <CalendarImg>
+                <CalendarTodayIcon sx={{ fontSize: '14px' }} />
+              </CalendarImg>
+              <StyledDatePicker
+                locale={ko}
+                dateFormat="yyyy.MM.dd"
+                selected={buyDate}
+                closeOnScroll={true}
+                onChange={(date: Date) => dispatch(setBuyDate(date))}
+              />
+            </DateInputBox>
+          </DateBox>
           <Input
             placeholder="상대방이 지불해야하는 돈"
             value={pay}
@@ -274,6 +288,47 @@ const Input = styled.input`
   &::placeholder {
     color: #d1d3d7;
   }
+`;
+
+const DateBox = styled.div`
+  display: flex;
+  width: 100%;
+  height: 50px;
+  border: 0;
+  outline: none;
+  font-size: 15px;
+  align-items: center;
+  box-sizing: border-box;
+  justify-content: space-between;
+`;
+
+const DateInputBox = styled.div`
+  position: relative;
+`;
+
+const CalendarImg = styled.div`
+  position: absolute;
+  top: 8px;
+  left: 10px;
+  z-index: 1;
+`;
+
+const StyledDatePicker = styled(DatePicker)`
+  width: 115px;
+  height: 30px;
+  border: none;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 100%;
+  padding: 20px;
+  background-color: #e9e9e9;
+  color: #707070;
+  border-radius: 5px;
+  box-sizing: border-box;
+  text-align: right;
+  padding-right: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 `;
 
 const PlacePositionBox = styled.div`

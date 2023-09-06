@@ -128,7 +128,7 @@ interface createParcelBuyingPostProps {
   images: string[];
   productUrl: string;
   buyPlaceDetail?: string;
-  buyDate: string;
+  buyDate: Date;
   pay: number;
 }
 
@@ -166,7 +166,7 @@ interface createMeetBuyingPostProps {
   images: string[];
   productUrl?: string;
   buyPlaceDetail?: string;
-  buyDate: string;
+  buyDate: Date;
   pay: number;
   buyPlaceLat: number;
   buyPlaceLng: number;

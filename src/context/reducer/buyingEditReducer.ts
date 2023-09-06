@@ -6,7 +6,7 @@ interface buyingEditState {
   buyingMethod: string;
   deliveryMethod: string;
   title: string;
-  buyDate: string;
+  buyDate: Date;
   pay: number;
   productUrl?: string;
   location?: {
@@ -22,7 +22,7 @@ const initialState: buyingEditState = {
   buyingMethod: '',
   deliveryMethod: '',
   title: '',
-  buyDate: '',
+  buyDate: new Date(),
   pay: 0,
   content: '',
   productUrl: undefined,
