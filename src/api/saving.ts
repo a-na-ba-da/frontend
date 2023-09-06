@@ -1,5 +1,4 @@
 import axios from './defaultClient';
-import moment from 'moment';
 
 export const getBuyingPostList = (keyword?: string) => {
   return axios.get('/saving/buy-together', {
@@ -150,7 +149,7 @@ export const createParcelBuyingPost = ({
       images,
       productUrl,
       buyPlaceDetail,
-      buyDate: moment(buyDate).format('YYYY-MM-DD'),
+      buyDate,
       pay,
     },
     {
@@ -192,7 +191,7 @@ export const createMeetBuyingPost = ({
       images,
       productUrl,
       buyPlaceDetail,
-      buyDate: moment(buyDate).format('YYYY-MM-DD'),
+      buyDate,
       pay,
       deliveryPlaceLat,
       deliveryPlaceLng,
