@@ -25,6 +25,11 @@ import TradingBoard from './pages/Trading/TradingBoard';
 import TradingRequest from './pages/Trading/TradingRequest';
 import TradingRequestAddProdcut from './pages/Trading/TradingRequestAddProduct';
 import TradingRequestConfirm from './pages/Trading/TradingRequestConfirm';
+import MyPage from './pages/MyPage';
+import MySavingActivity from './pages/MyPage/MyActivity/Saving';
+import MySharingActivity from './pages/MyPage/MyActivity/Sharing';
+import MyTradingActivity from './pages/MyPage/MyActivity/Trading';
+import MyRecyclingActivity from './pages/MyPage/MyActivity/Recycling';
 
 export default function App() {
   return (
@@ -124,6 +129,11 @@ export default function App() {
             path="/trading/:id/request/confirm"
             element={<PrivateRoute component={<TradingRequestConfirm />} />}
           />
+          <Route path="/mypage" element={<PrivateRoute component={<MyPage />} />}
+          <Route path="/mypage/saving" element={<PrivateRoute component={<MySavingActivity />} />}
+          <Route path="/mypage/sharing" element={<PrivateRoute component={<MySharingActivity />} />}
+          <Route path="/mypage/trading" element={<PrivateRoute component={<MyTradingActivity />} />}
+          <Route path="/mypage/recycling" element={<PrivateRoute component={<MyRecyclingActivity />} />}
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
