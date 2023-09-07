@@ -9,7 +9,7 @@ export default function MyRecyclingActivity() {
       <HeaderWrapper>
         <Header>
           <PostBackWrapper>
-            <PostBack color="#8f00ff" whatShape="back" />
+            <PostBack color="#8f00ff" shape="back" />
           </PostBackWrapper>
           나의 다시쓰기
         </Header>

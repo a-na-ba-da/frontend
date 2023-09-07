@@ -9,7 +9,7 @@ export default function MyTradingActivity() {
       <HeaderWrapper>
         <Header>
           <PostBackWrapper>
-            <PostBack color="#8f00ff" whatShape="back" />
+            <PostBack color="#8f00ff" shape="back" />
           </PostBackWrapper>
           나의 바꿔쓰기
         </Header>
